@@ -15,7 +15,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Hosts", "4. Hosts", "{26
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MVCWeb", "Host\MVCWeb\MVCWeb.csproj", "{0A89A575-3E2D-4E69-8F96-BCC8E2BE3362}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.MyApplication", "Application\DDD.MyApplication\DDD.MyApplication.csproj", "{11005506-0C00-4EE5-889E-DB36CFEC0712}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.Application.Service", "Application\DDD.Application.Service\DDD.Application.Service.csproj", "{11005506-0C00-4EE5-889E-DB36CFEC0712}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.Infrastructure.AutoMapper", "Infrastructure\DDD.Infrastructure.AutoMapper\DDD.Infrastructure.AutoMapper.csproj", "{9D4BB42F-628D-4F8D-871C-C3F01AC37466}"
 EndProject

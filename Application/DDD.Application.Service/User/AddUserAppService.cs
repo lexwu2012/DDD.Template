@@ -1,10 +1,10 @@
 ﻿using DDD.Application.Dto.User;
+using DDD.Application.Service.User.Interfaces;
 using DDD.Domain.Core.Model.Repositories.Interfaces;
 using DDD.Infrastructure.AutoMapper.Extension;
 using DDD.Infrastructure.Web.Application;
-using DDD.MyApplication.User.Interfaces;
 
-namespace DDD.MyApplication.User
+namespace DDD.Application.Service.User
 {
     public class AddUserAppService : AppServiceBase, IAddUserAppService
     {

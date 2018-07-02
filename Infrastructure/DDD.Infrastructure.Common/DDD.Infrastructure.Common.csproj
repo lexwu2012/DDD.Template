@@ -53,6 +53,8 @@
     <Compile Include="Reflection\AssemblyFinder.cs" />
     <Compile Include="Reflection\IAssemblyFinder.cs" />
     <Compile Include="Reflection\ITypeFinder.cs" />
+    <Compile Include="Reflection\MemberInfoExtensions.cs" />
+    <Compile Include="Reflection\ReflectionHelper.cs" />
     <Compile Include="Reflection\TypeFinder.cs" />
     <Compile Include="StringExtensions.cs" />
     <Compile Include="TypeExtensions.cs" />

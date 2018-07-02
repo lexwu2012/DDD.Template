@@ -14,10 +14,10 @@ namespace DDD.Domain.Core.Model
     {
         public string Name { get; set; }
 
-        /// <summary>
-        /// 身份证
-        /// </summary>
-        public long PIdentity { get; set; }
+        ///// <summary>
+        ///// 身份证
+        ///// </summary>
+        //public long PIdentity { get; set; }
 
         public Address Address { get; set; }
     }

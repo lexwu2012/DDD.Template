@@ -4,12 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DDD.Domain.Common.BaseEntities;
-using DDD.Domain.Entities;
 
-namespace DDD.Domain.Auditing
+namespace DDD.Domain.Core
 {
-    public interface IHasDeletionTime : ISoftDelete
+    public interface IDbContextEntityFinder
     {
-        DateTime? DeletionTime { get; set; }
+        IEnumerable<EntityTypeInfo> GetEntityTypeInfos(Type dbContextType);
     }
 }

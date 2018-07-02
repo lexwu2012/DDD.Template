@@ -1,13 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using DDD.Domain.Auditing;
-using DDD.Domain.Core.Model.Repositories;
-using DDD.Domain.Core.Model.Repositories.Interfaces;
-using DDD.Domain.Entities;
+using DDD.Domain.BaseEntities;
 
 namespace DDD.Domain.Core.Model
 {
-    public class Blog : FullAuditedEntity
+    public class Blog : FullAuditedEntity, IAggregateRoot
     {
         public string Name { get; set; }
 

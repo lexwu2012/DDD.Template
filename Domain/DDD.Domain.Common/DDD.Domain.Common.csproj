@@ -50,8 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BaseEntities\EntityHelper.cs" />
+    <Compile Include="BaseEntities\EntityTypeInfo.cs" />
+    <Compile Include="CustomAttributes\AutoRepositoryTypesAttribute.cs" />
     <Compile Include="Auditing\AuditedEntity.cs" />
     <Compile Include="Auditing\CreationAuditedEntity.cs" />
+    <Compile Include="Auditing\EntityAuditingHelper.cs" />
     <Compile Include="Auditing\FullAuditedEntity.cs" />
     <Compile Include="Auditing\IAudited.cs" />
     <Compile Include="Auditing\ICreationAudited.cs" />
@@ -80,6 +84,10 @@
     <Compile Include="Values\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Common\DDD.Infrastructure.Common.csproj">
+      <Project>{27DFCD09-EE71-4506-B64C-86D9226B3C96}</Project>
+      <Name>DDD.Infrastructure.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Ioc\DDD.Infrastructure.Ioc.csproj">
       <Project>{973743A2-FD9A-4FDD-97FF-A25273EE0172}</Project>
       <Name>DDD.Infrastructure.Ioc</Name>

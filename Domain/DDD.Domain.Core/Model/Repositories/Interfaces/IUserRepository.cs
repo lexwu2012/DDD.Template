@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DDD.Domain.Common.Repositories;
+using DDD.Infrastructure.Ioc.Dependency;
 using DDD.Infrastructure.Web.Application;
 
 namespace DDD.Domain.Core.Model.Repositories.Interfaces

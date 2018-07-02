@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
+using DDD.Domain.BaseEntities;
 using DDD.Domain.Common.Repositories;
 using DDD.Domain.Entities;
 using DDD.Domain.Uow;
@@ -10,7 +11,7 @@ using DDD.Domain.Uow;
 namespace DDD.Domain.Core.Repositories
 {
     public class EfRepositoryBase<TDbContext, TEntity, TPrimaryKey> : RepositoryBase<TEntity, TPrimaryKey>, IRepositoryWithDbContext
-        where TEntity : class ,IEntity<TPrimaryKey>
+        where TEntity : class, IAggregateRoot<TPrimaryKey> 
         where TDbContext : DbContext
     {
         public IUnitOfWork UnitOfWork { get; set; }
@@ -49,11 +50,14 @@ namespace DDD.Domain.Core.Repositories
 
         public override TEntity Insert(TEntity entity)
         {
+            //Context.Entry(entity).State = EntityState.Added;
+            //return entity;
             return Table.Add(entity);
         }
 
         public override void Delete(TEntity entity)
         {
+            
             Table.Remove(entity);
         }
 
@@ -87,7 +91,7 @@ namespace DDD.Domain.Core.Repositories
 
     public class EfRepositoryBase<TDbContext, TEntity> : EfRepositoryBase<TDbContext, TEntity, int>,
         IRepositoryWithEntity<TEntity>
-        where TEntity : class, IEntity<int>
+        where TEntity : class, IAggregateRoot
         where TDbContext : DbContext
     {
     }

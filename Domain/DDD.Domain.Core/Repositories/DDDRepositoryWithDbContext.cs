@@ -1,4 +1,5 @@
-﻿using DDD.Domain.Entities;
+﻿using DDD.Domain.BaseEntities;
+using DDD.Domain.Entities;
 
 namespace DDD.Domain.Core.Repositories
 {
@@ -7,17 +8,26 @@ namespace DDD.Domain.Core.Repositories
     /// </summary>
     /// <typeparam name="TEntity"></typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
-    public class DDDRepositoryWithDbContext<TEntity, TPrimaryKey> : EfRepositoryBase<DDDDbContext, TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public class DDDRepositoryWithDbContext<TEntity, TPrimaryKey> : EfRepositoryBase<DDDDbContext, TEntity, TPrimaryKey> 
+        where TEntity : class, IAggregateRoot<TPrimaryKey>
     {
         public DDDRepositoryWithDbContext() 
             : base()
         {
             this.Context = new DDDDbContext();
         }
+
+        public override TEntity Insert(TEntity entity)
+        {
+            base.Insert(entity);
+            Context.SaveChanges();
+
+            return entity;
+        }
     }
 
     public class DDDRepositoryWithDbContext<TEntity> : DDDRepositoryWithDbContext<TEntity, int>
-        where TEntity : class, IEntity<int>
+        where TEntity : class, IAggregateRoot
     {
         #region Constructors
 

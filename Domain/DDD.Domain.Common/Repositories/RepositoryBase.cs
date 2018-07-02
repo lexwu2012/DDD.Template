@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using DDD.Domain.BaseEntities;
 using DDD.Domain.Entities;
 
 namespace DDD.Domain.Common.Repositories
 {
-    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepositoryWithTEntityAndTPrimaryKey<TEntity, TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public abstract class RepositoryBase<TEntity, TPrimaryKey> : IRepositoryWithTEntityAndTPrimaryKey<TEntity, TPrimaryKey> 
+        where TEntity : class, IAggregateRoot<TPrimaryKey>
     {
         public TPrimaryKey Id { get; set; }
 

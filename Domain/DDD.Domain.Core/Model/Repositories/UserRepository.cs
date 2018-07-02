@@ -33,7 +33,7 @@ namespace DDD.Domain.Core.Model.Repositories
             if(null == user)
                 return Result.FromError("用户不能为空");
             
-            if(this.AsNoTracking().Any(m => m.Name == user.Name && m.PIdentity == user.PIdentity))
+            if(this.AsNoTracking().Any(m => m.Name == user.Name))
                 return Result.FromError("已存在相同用户");
 
             this.Insert(user);

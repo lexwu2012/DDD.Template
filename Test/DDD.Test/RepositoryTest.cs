@@ -1,22 +1,32 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using DDD.Application.Service;
+using DDD.Domain.Common.Repositories;
 using DDD.Domain.Core.Model;
 using DDD.Domain.Core.Model.Repositories.Interfaces;
 using DDD.Domain.Core.Model.ValueObj;
+using DDD.DomainService;
+using DDD.Infrastructure.Ioc;
+using DDD.Infrastructure.Ioc.Dependency.Registrar;
+using DDD.Infrastructure.Ioc.Installer;
 using Shouldly;
 using Xunit;
 
 namespace DDD.Test
 {
-    public class RepositoryTest : TestBaseWithLocalIocManager
+    public class RepositoryTest //: TestBaseWithLocalIocManager
     {
         private readonly IUserRepository _userRepository;
-        public RepositoryTest(IUserRepository userRepository)
+
+        public readonly IIocManager LocalIocManager;
+
+        public RepositoryTest()
         {
-            _userRepository = userRepository;
+            //_userRepository = userRepository;
         }
 
         [Fact]

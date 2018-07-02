@@ -7,8 +7,8 @@
     <ProjectGuid>{11005506-0C00-4EE5-889E-DB36CFEC0712}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>DDD.MyApplication</RootNamespace>
-    <AssemblyName>DDD.MyApplication</AssemblyName>
+    <RootNamespace>DDD.Application.Service</RootNamespace>
+    <AssemblyName>DDD.Application.Service</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>

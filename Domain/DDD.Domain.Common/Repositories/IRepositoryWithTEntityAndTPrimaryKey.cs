@@ -11,9 +11,10 @@ namespace DDD.Domain.Common.Repositories
     /// <summary>
     /// 针对泛型所有的方法
     /// </summary>
-    /// <typeparam name="TEntity"></typeparam>
+    /// <typeparam name="TEntity">仓储是管理聚合根的，所以我们需要限制泛型参数为实现IAggregateRoot的类</typeparam>
     /// <typeparam name="TPrimaryKey"></typeparam>
-    public interface IRepositoryWithTEntityAndTPrimaryKey<TEntity, TPrimaryKey> : IRepository, IAggregateRoot<TPrimaryKey> where TEntity : class, IEntity<TPrimaryKey>
+    public interface IRepositoryWithTEntityAndTPrimaryKey<TEntity, TPrimaryKey> : IRepository 
+        where TEntity : class, IEntity<TPrimaryKey>, IAggregateRoot<TPrimaryKey>
     {
         #region Select/Get/Query
 
