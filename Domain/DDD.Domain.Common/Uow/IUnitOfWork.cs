@@ -1,17 +1,18 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DDD.Domain.Uow;
 
-namespace DDD.Domain.Uow
+namespace DDD.Domain.Common.Uow
 {
-    public interface IUnitOfWork
+    public interface IUnitOfWork : IDisposable
     {
         bool IsCommitted { get; }
 
         int Commit();
 
         void Rollback();
+
+        void Begin(UnitOfWorkOptions options);
+
+        void Complete();
     }
 }

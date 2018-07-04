@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using DDD.Domain.Common.Uow;
+using DDD.Domain.Uow;
 
-namespace DDD.Domain.Uow
+namespace DDD.Domain.Core.Uow
 {
-    public class EfUnitOfWork: UnitOfWorkBase
+    public class EfUnitOfWork : UnitOfWorkBase
     {
         public DbContext DbContext { get; set; }
 
@@ -16,7 +13,7 @@ namespace DDD.Domain.Uow
         {
             DbContext.SaveChanges();
         }
-        
+
         public override int Commit()
         {
             if (IsCommitted)
@@ -38,6 +35,11 @@ namespace DDD.Domain.Uow
         public override void Rollback()
         {
             IsCommitted = false;
+        }
+
+        protected override void CompleteUow()
+        {
+            throw new System.NotImplementedException();
         }
     }
 }

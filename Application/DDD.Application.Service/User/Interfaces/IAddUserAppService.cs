@@ -6,5 +6,6 @@ namespace DDD.Application.Service.User.Interfaces
     public interface IAddUserAppService : IApplicationService
     {
         Result AddUser(AddUserInput input);
+
     }
 }

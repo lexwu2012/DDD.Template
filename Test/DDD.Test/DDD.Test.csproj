@@ -140,6 +140,7 @@
     <Compile Include="SampleDbContext.cs" />
     <Compile Include="TestBaseWithLocalIocManager.cs" />
     <Compile Include="Tester.cs" />
+    <Compile Include="Uow\UowTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -30,6 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.4.3.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
       <Private>True</Private>
@@ -40,8 +48,11 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Remoting" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -77,10 +88,16 @@
     <Compile Include="Repositories\IRepositoryWithTEntityAndTPrimaryKey.cs" />
     <Compile Include="Repositories\RepositoryBase.cs" />
     <Compile Include="Uow\DataFilterConfiguration.cs" />
-    <Compile Include="Uow\EfUnitOfWork.cs" />
     <Compile Include="Uow\IUnitOfWork.cs" />
+    <Compile Include="Uow\IUnitOfWorkDefaultOptions.cs" />
+    <Compile Include="Uow\IUnitOfWorkManager.cs" />
+    <Compile Include="Uow\UnitOfWorkAttribute.cs" />
     <Compile Include="Uow\UnitOfWorkBase.cs" />
+    <Compile Include="Uow\UnitOfWorkDefaultOptionsExtensions.cs" />
+    <Compile Include="Uow\UnitOfWorkHelper.cs" />
+    <Compile Include="Uow\UnitOfWorkInterceptor.cs" />
     <Compile Include="Uow\UnitOfWorkOptions.cs" />
+    <Compile Include="Uow\UnitOfWorkRegistrar.cs" />
     <Compile Include="Values\ValueObject.cs" />
   </ItemGroup>
   <ItemGroup>

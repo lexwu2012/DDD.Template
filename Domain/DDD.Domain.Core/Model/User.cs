@@ -18,7 +18,7 @@ namespace DDD.Domain.Core.Model
         ///// 身份证
         ///// </summary>
         //public long PIdentity { get; set; }
-
+        
         public Address Address { get; set; }
     }
 }

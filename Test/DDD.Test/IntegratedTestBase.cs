@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DDD.Application.Service;
 using DDD.Domain.Common.Repositories;
+using DDD.Domain.Common.Uow;
 using DDD.Domain.Core;
 using DDD.DomainService;
 using DDD.Infrastructure.Ioc;
@@ -27,11 +28,15 @@ namespace DDD.Test
             LocalIocManager.RegisterAssemblyByConvention(typeof(IRepository).Assembly);
             LocalIocManager.RegisterAssemblyByConvention(typeof(DomainServiceBase).Assembly);
             LocalIocManager.RegisterAssemblyByConvention(typeof(IApplicationService).Assembly);
-            //LocalIocManager.RegisterAssemblyByConvention(typeof(TestBaseWithLocalIocManager).Assembly);
+
+            LocalIocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
             LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Common"));
             LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Core"));
             LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.DomainService"));
+
+
+            UnitOfWorkRegistrar.Initialize(LocalIocManager);
         }
 
         protected T Resolve<T>()

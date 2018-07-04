@@ -75,10 +75,6 @@
     <Compile Include="Migrations\201806220849238_InitialTables.Designer.cs">
       <DependentUpon>201806220849238_InitialTables.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201806291123193_UnknowError.cs" />
-    <Compile Include="Migrations\201806291123193_UnknowError.Designer.cs">
-      <DependentUpon>201806291123193_UnknowError.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Migrations\SeedData\DefaultCreator.cs" />
     <Compile Include="Model\Blog.cs" />
@@ -102,6 +98,7 @@
     <Compile Include="Repositories\IEfGenericRepositoryRegistrar.cs" />
     <Compile Include="Repositories\IRepositoryWithDbContext.cs" />
     <Compile Include="Repositories\RepositoryExtension.cs" />
+    <Compile Include="Uow\EfUnitOfWork.cs" />
     <Compile Include="Uow\UnitOfWorkDbContextProvider.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -129,9 +126,6 @@
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201806220849238_InitialTables.resx">
       <DependentUpon>201806220849238_InitialTables.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201806291123193_UnknowError.resx">
-      <DependentUpon>201806291123193_UnknowError.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

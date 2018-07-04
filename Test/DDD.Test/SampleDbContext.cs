@@ -9,6 +9,7 @@ using DDD.Domain.Common.CustomAttributes;
 using DDD.Domain.Common.Repositories;
 using DDD.Domain.Core;
 using DDD.Domain.Core.Repositories;
+using DDD.Infrastructure.Ioc.Dependency;
 
 namespace DDD.Test
 {

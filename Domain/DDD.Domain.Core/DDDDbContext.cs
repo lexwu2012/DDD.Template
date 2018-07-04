@@ -44,18 +44,18 @@ namespace DDD.Domain.Core
 
         public DDDDbContext() : base("DefaultConnection")
         {
-            //InitializeDbContext();
+            InitializeDbContext();
         }
 
         public DDDDbContext(string connectionStr) : base(connectionStr)
         {
-            //InitializeDbContext();
+            InitializeDbContext();
         }
 
         public DDDDbContext(DbConnection connection, bool contextOwnsConnection)
             : base(connection, false)
         {
-
+            InitializeDbContext();
         }
 
 
@@ -112,7 +112,7 @@ namespace DDD.Domain.Core
             }
         }
 
-        protected virtual void InitializeDbContext()
+        protected void InitializeDbContext()
         {
             ((IObjectContextAdapter)this)
                 .ObjectContext

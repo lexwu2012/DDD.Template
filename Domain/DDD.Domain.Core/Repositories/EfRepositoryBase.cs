@@ -5,6 +5,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using DDD.Domain.BaseEntities;
 using DDD.Domain.Common.Repositories;
+using DDD.Domain.Common.Uow;
 using DDD.Domain.Entities;
 using DDD.Domain.Uow;
 
@@ -57,7 +58,7 @@ namespace DDD.Domain.Core.Repositories
 
         public override void Delete(TEntity entity)
         {
-            
+            AttachIfNot(entity);
             Table.Remove(entity);
         }
 
@@ -86,6 +87,14 @@ namespace DDD.Domain.Core.Repositories
         }
 
         #endregion
+
+        protected virtual void AttachIfNot(TEntity entity)
+        {
+            if (!Table.Local.Contains(entity))
+            {
+                Table.Attach(entity);
+            }
+        }
 
     }
 
