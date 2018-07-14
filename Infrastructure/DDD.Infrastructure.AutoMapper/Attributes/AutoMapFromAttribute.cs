@@ -1,6 +1,7 @@
 ﻿using System;
 using AutoMapper;
 using DDD.Infrastructure.Common;
+using DDD.Infrastructure.Common.Extensions;
 
 namespace DDD.Infrastructure.AutoMapper.Attributes
 {

@@ -17,8 +17,9 @@ namespace DDD.Infrastructure.Common.Reflection
             //    assemblies.AddRange(module.Instance.GetAdditionalAssemblies());
             //}
 
+            //todo: not to hardcode
             assemblies.Add(Assembly.Load("DDD.Application.Dto"));
-            assemblies.Add(Assembly.Load("DDD.MyApplication"));
+            assemblies.Add(Assembly.Load("DDD.Application.Service"));
 
             return assemblies.Distinct().ToList();
         }

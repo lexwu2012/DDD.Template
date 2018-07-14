@@ -13,6 +13,11 @@ namespace DDD.Domain.Core.Model.Repositories
 {
     public class UserRepository: DDDRepositoryWithDbContext<User,long>, IUserRepository
     {
+        public UserRepository(IDbContextProvider<DDDDbContext> dbContextProvider) : base(dbContextProvider)
+        {
+
+        }
+
         public IQueryable<User> GetAllUsers()
         {
             return GetAll();

@@ -17,5 +17,7 @@ namespace DDD.Domain.Common.BaseEntities
         {
             
         }
+
+        public string Remark { get; set; }
     }
 }

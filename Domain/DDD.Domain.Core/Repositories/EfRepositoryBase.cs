@@ -19,16 +19,16 @@ namespace DDD.Domain.Core.Repositories
 
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;
 
-        public virtual TDbContext Context { get; set; }
+        //public virtual TDbContext Context { get; set; }
 
         public virtual DbSet<TEntity> Table => Context.Set<TEntity>();
 
-        //public virtual TDbContext Context => _dbContextProvider.GetDbContext();
+        public virtual TDbContext Context => _dbContextProvider.GetDbContext();
 
-        //public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider)
-        //{
-        //    _dbContextProvider = dbContextProvider;
-        //}
+        public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider)
+        {
+            _dbContextProvider = dbContextProvider;
+        }
 
         public DbContext GetDbContext()
         {
@@ -44,7 +44,7 @@ namespace DDD.Domain.Core.Repositories
 
         public override TEntity Update(TEntity entity)
         {
-            //AttachIfNot(entity);
+            AttachIfNot(entity);
             Context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
@@ -103,6 +103,9 @@ namespace DDD.Domain.Core.Repositories
         where TEntity : class, IAggregateRoot
         where TDbContext : DbContext
     {
+        public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider) : base(dbContextProvider)
+        {
+        }
     }
     
 }

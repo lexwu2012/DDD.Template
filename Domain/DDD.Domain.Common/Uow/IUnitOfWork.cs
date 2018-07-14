@@ -1,9 +1,10 @@
 ﻿using System;
 using DDD.Domain.Uow;
+using DDD.Infrastructure.Ioc.Dependency;
 
 namespace DDD.Domain.Common.Uow
 {
-    public interface IUnitOfWork : IDisposable
+    public interface IUnitOfWork : IUnitOfWorkCompleteHandle, IActiveUnitOfWork
     {
         bool IsCommitted { get; }
 
@@ -13,6 +14,6 @@ namespace DDD.Domain.Common.Uow
 
         void Begin(UnitOfWorkOptions options);
 
-        void Complete();
+        IUnitOfWork Outer { get; set; }
     }
 }

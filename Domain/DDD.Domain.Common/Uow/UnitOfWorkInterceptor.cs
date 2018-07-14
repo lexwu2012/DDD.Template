@@ -13,15 +13,13 @@ namespace DDD.Domain.Common.Uow
 {
     public class UnitOfWorkInterceptor: IInterceptor
     {
-
-        private readonly IIocResolver _iocResolver;
+        private readonly IUnitOfWorkManager _unitOfWorkManager;
         private readonly IUnitOfWorkDefaultOptions _unitOfWorkOptions;
 
-        public UnitOfWorkInterceptor(IUnitOfWorkDefaultOptions unitOfWorkOptions,
-            IIocResolver iocResolver)
+        public UnitOfWorkInterceptor(IUnitOfWorkDefaultOptions unitOfWorkOptions, IUnitOfWorkManager unitOfWorkManager)
         {
-            _iocResolver = iocResolver;
             _unitOfWorkOptions = unitOfWorkOptions;
+            _unitOfWorkManager = unitOfWorkManager;
         }
 
         public void Intercept(IInvocation invocation)
@@ -44,7 +42,7 @@ namespace DDD.Domain.Common.Uow
             }
 
             var options = unitOfWorkAttr.CreateOptions();
-            using (var uow = CreateUow(options))
+            using (var uow = _unitOfWorkManager.Begin(options))
             {
                 invocation.Proceed();
                 uow.Complete();
@@ -55,15 +53,6 @@ namespace DDD.Domain.Common.Uow
             //    invocation.Proceed();//执行被拦截的方法
             //    ts.Complete();//事务完成
             //}
-        }
-
-        private IUnitOfWork CreateUow(UnitOfWorkOptions options)
-        {
-            var uow = _iocResolver.Resolve<IUnitOfWork>();
-
-            uow.Begin(options);
-
-            return uow;
         }
     }
 }

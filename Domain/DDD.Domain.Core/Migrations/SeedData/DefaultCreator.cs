@@ -26,20 +26,20 @@ namespace DDD.Domain.Core.Migrations.SeedData
 
         private void AddUserIfNotExists(string name)
         {
-            if (_dbContext.Users.Any(s => s.Name == name))
-            {
-                return;
-            }
+            //if (_dbContext.Users.Any(s => s.Name == name))
+            //{
+            //    return;
+            //}
 
-            _dbContext.Users.Add(new User
-            {
-                Name = name,
-                Address = new Address
-                {
-                    Street = "OverSky"
-                }
-            });
-            _dbContext.SaveChanges();
+            //_dbContext.Users.Add(new User
+            //{
+            //    Name = name,
+            //    Address = new Address
+            //    {
+            //        Street = "OverSky"
+            //    }
+            //});
+            //_dbContext.SaveChanges();
         }
     }
 }

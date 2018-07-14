@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Transactions;
 using DDD.Domain.Uow;
 
 namespace DDD.Domain.Common.Uow
@@ -10,9 +11,30 @@ namespace DDD.Domain.Common.Uow
 
         private Exception _exception;
 
-        public abstract void SaveChanges();
+        protected IUnitOfWorkDefaultOptions DefaultOptions { get; }
+
+        protected ICurrentUnitOfWorkProvider CurrentUnitOfWorkProvider { get; }
+
+        protected IConnectionStringResolver ConnectionStringResolver { get; }
+
+        public UnitOfWorkOptions Options { get; private set; }
+
+        private bool _isBeginCalledBefore;
 
         public bool IsCommitted { get; set; }
+
+        public bool IsDisposed { get; private set; }
+
+        public IUnitOfWork Outer { get; set; }
+
+        protected UnitOfWorkBase(
+            IUnitOfWorkDefaultOptions defaultOptions, ICurrentUnitOfWorkProvider currentUnitOfWorkProvider, IConnectionStringResolver connectionStringResolver)
+        {
+            DefaultOptions = defaultOptions;
+            CurrentUnitOfWorkProvider = currentUnitOfWorkProvider;
+            ConnectionStringResolver = connectionStringResolver;
+        }
+
 
         public virtual int Commit()
         {
@@ -34,9 +56,14 @@ namespace DDD.Domain.Common.Uow
             IsCommitted = false;
         }
 
-        public void Begin(UnitOfWorkOptions options)
+        public virtual void Begin(UnitOfWorkOptions options)
         {
-            throw new NotImplementedException();
+            //告知已经进入事务中，且对释放有影响
+            PreventMultipleBegin();
+
+            Options = options; 
+            
+            BeginUow();
         }
 
         public void Complete()
@@ -52,12 +79,59 @@ namespace DDD.Domain.Common.Uow
                 throw;
             }
         }
-
-        protected abstract void CompleteUow();
-
         public void Dispose()
         {
-            throw new NotImplementedException();
+            if (!_isBeginCalledBefore || IsDisposed)
+            {
+                return;
+            }
+
+            IsDisposed = true;
+
+            if (!_succeed)
+            {
+                throw _exception;
+            }
+            
+
+            DisposeUow();
         }
+
+        protected virtual string ResolveConnectionString(ref string schema)
+        {
+            return ConnectionStringResolver.GetNameOrConnectionString(schema);
+        }
+
+
+        private void PreventMultipleBegin()
+        {
+            if (_isBeginCalledBefore)
+            {
+                throw new Exception("This unit of work has started before. Can not call Start method more than once.");
+            }
+
+            _isBeginCalledBefore = true;
+        }
+
+        /// <summary>
+        /// 让子类实现自己的完成动作
+        /// </summary>
+        protected abstract void BeginUow();
+
+        /// <summary>
+        /// 让子类实现自己的完成动作
+        /// </summary>
+        protected abstract void CompleteUow();
+
+        /// <summary>
+        /// 让子类实现自己的完成动作
+        /// </summary>
+        protected abstract void DisposeUow();
+
+        /// <summary>
+        /// 让子类实现自己的完成动作
+        /// </summary>
+        public abstract void SaveChanges();
+
     }
 }

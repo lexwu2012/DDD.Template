@@ -14,7 +14,11 @@ namespace DDD.Domain.Entities
 
     public interface IEntity<TPrimaryKey>
     {        
+        /// <summary>
+        /// 每个实体的主键（不包括值类型）
+        /// </summary>
         TPrimaryKey Id { get; set; }
+
 
         bool IsTransient();
     }

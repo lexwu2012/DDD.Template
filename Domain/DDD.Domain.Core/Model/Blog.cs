@@ -12,6 +12,7 @@ namespace DDD.Domain.Core.Model
 
         public ICollection<Post> Posts { get; set; }
 
+        public string Remark { get; set; }
         ///// <summary>
         ///// use IOC for injection
         ///// </summary>

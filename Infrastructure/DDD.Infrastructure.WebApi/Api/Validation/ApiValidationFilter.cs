@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Filters;
 using DDD.Infrastructure.Common;
+using DDD.Infrastructure.Common.Extensions;
 using DDD.Infrastructure.Ioc.Dependency;
 using DDD.Infrastructure.Web.Application;
 using DDD.Infrastructure.Web.CustomAttributes;

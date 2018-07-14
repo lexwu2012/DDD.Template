@@ -10,6 +10,9 @@ namespace DDD.Domain.Core.Model.Repositories
 {
     public class BookRepository: DDDRepositoryWithDbContext<Book,string>, IBookRepository
     {
+        public BookRepository(IDbContextProvider<DDDDbContext> dbContextProvider) : base(dbContextProvider)
+        {
 
+        }
     }
 }

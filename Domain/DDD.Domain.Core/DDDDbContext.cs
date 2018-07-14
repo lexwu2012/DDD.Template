@@ -30,17 +30,23 @@ namespace DDD.Domain.Core
             typeof(DDDRepositoryWithDbContext<>),
             typeof(DDDRepositoryWithDbContext<,>)
             )]//注册泛型仓储
+    [DbConfigurationType(typeof(DDDDbConfiguration))]
     public class DDDDbContext : DbContext, ITransientDependency
     {
         #region Tables
 
         public virtual DbSet<User> Users { get; set; }
+
+        //public virtual DbSet<CheckoffAutoAcp> CheckoffAutoAcp { get; set; }
+
         //public virtual DbSet<Blog> Blogs { get; set; }
         //public virtual DbSet<Post> Posts { get; set; }
         //public virtual DbSet<Book> Books { get; set; }
         #endregion
 
         public ILogger Logger { get; set; }
+
+        private static string Schema { get; set; }
 
         public DDDDbContext() : base("DefaultConnection")
         {
@@ -49,6 +55,12 @@ namespace DDD.Domain.Core
 
         public DDDDbContext(string connectionStr) : base(connectionStr)
         {
+            InitializeDbContext();
+        }
+
+        public DDDDbContext(string connectionStr, string schema) : base(connectionStr)
+        {
+            Schema = schema;
             InitializeDbContext();
         }
 
@@ -64,7 +76,10 @@ namespace DDD.Domain.Core
 
             Database.SetInitializer<DDDDbContext>(null);
 
-            modelBuilder.Filter("SoftDelete", (ISoftDelete d) => d.IsDeleted, false);
+            //Schema = Schema ?? "DAFY_SALES2";
+            //modelBuilder.HasDefaultSchema(Schema);
+
+            //modelBuilder.Filter("SoftDelete", (ISoftDelete d) => d.IsDeleted, false);
 
             modelBuilder.Configurations.AddFromAssembly(typeof(DDDDbContext).Assembly);
         }

@@ -1,5 +1,6 @@
 ﻿using System;
 using DDD.Domain.Auditing;
+using DDD.Domain.Common.BaseEntities;
 using DDD.Domain.Entities;
 
 namespace DDD.Domain.Common.Auditing

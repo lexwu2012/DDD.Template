@@ -15,6 +15,7 @@ namespace DDD.Domain.Core.Model
         /// 书的状态
         /// </summary>
         public RegistrationStatus RegistrationStatus { get; set; }
+        public string Remark { get ; set; }
 
         #region Methods
 

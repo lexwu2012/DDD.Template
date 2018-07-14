@@ -21,10 +21,10 @@ namespace DDD.Domain.Core.Mapping
             {
                 throw new ArgumentNullException(nameof(table));
             }
+            
+            ToTable(table);
 
-            this.ToTable(table);
-
-            this.HasKey(o => o.Id);
+            HasKey(o => o.Id);
 
             var primaryType = typeof (TPrimaryKey);
             if (primaryType.IsValueType)

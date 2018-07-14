@@ -1,13 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
+using DDD.Domain.Uow;
 using IsolationLevel = System.Transactions.IsolationLevel;
 
-namespace DDD.Domain.Uow
+namespace DDD.Domain.Common.Uow
 {
     public class UnitOfWorkOptions
     {
@@ -27,7 +24,28 @@ namespace DDD.Domain.Uow
         public TransactionScopeAsyncFlowOption? AsyncFlowOption { get; set; }
         
         public List<DataFilterConfiguration> FilterOverrides { get; }
-        
-        
+
+        internal void FillDefaultsForNonProvidedOptions(IUnitOfWorkDefaultOptions defaultOptions)
+        {
+            if (!IsTransactional.HasValue)
+            {
+                IsTransactional = defaultOptions.IsTransactional;
+            }
+
+            if (!Scope.HasValue)
+            {
+                Scope = defaultOptions.Scope;
+            }
+
+            if (!Timeout.HasValue && defaultOptions.Timeout.HasValue)
+            {
+                Timeout = defaultOptions.Timeout.Value;
+            }
+
+            if (!IsolationLevel.HasValue && defaultOptions.IsolationLevel.HasValue)
+            {
+                IsolationLevel = defaultOptions.IsolationLevel.Value;
+            }
+        }
     }
 }

@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DDD.Application.Service</RootNamespace>
     <AssemblyName>DDD.Application.Service</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -32,7 +33,6 @@
   <ItemGroup>
     <Reference Include="AutoMapper, Version=7.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
       <HintPath>..\..\packages\AutoMapper.7.0.1\lib\net45\AutoMapper.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -42,8 +42,7 @@
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\System.ValueTuple.4.5.0\lib\net461\System.ValueTuple.dll</HintPath>
     </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -54,10 +53,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppServiceBase.cs" />
-    <Compile Include="IApplicationService.cs" />
+    <Compile Include="CheckoffAutoAcp\CheckoffAutoAcpAppService.cs" />
+    <Compile Include="CheckoffAutoAcp\CheckoffAutoAcpEmailAppService.cs" />
+    <Compile Include="CheckoffAutoAcp\Interfaces\ICheckoffAutoAcpAppService.cs" />
+    <Compile Include="CheckoffAutoAcp\Interfaces\ICheckoffAutoAcpEmailAppService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\AddUserAppService.cs" />
     <Compile Include="User\Interfaces\IAddUserAppService.cs" />
+    <Compile Include="Wechat\Interfaces\IWechatRepayService.cs" />
+    <Compile Include="Wechat\WechatRepayService.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -72,6 +76,10 @@
       <Project>{3079a3b6-c723-4147-aaa6-5239343a164b}</Project>
       <Name>DDD.Domain.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Domain\DDD.Domain.Service\DDD.Domain.Service.csproj">
+      <Project>{A9D232A7-7579-410F-8503-B6006871BCB6}</Project>
+      <Name>DDD.Domain.Service</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.AutoMapper\DDD.Infrastructure.AutoMapper.csproj">
       <Project>{9D4BB42F-628D-4F8D-871C-C3F01AC37466}</Project>
       <Name>DDD.Infrastructure.AutoMapper</Name>
@@ -79,6 +87,10 @@
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Ioc\DDD.Infrastructure.Ioc.csproj">
       <Project>{973743A2-FD9A-4FDD-97FF-A25273EE0172}</Project>
       <Name>DDD.Infrastructure.Ioc</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Logger\DDD.Infrastructure.Logger.csproj">
+      <Project>{194732D4-482E-461E-8697-5679C54E6EF8}</Project>
+      <Name>DDD.Infrastructure.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Web\DDD.Infrastructure.Web.csproj">
       <Project>{808D7042-E3C1-430D-ACD4-9ACCABE96303}</Project>

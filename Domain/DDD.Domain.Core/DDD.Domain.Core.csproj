@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DDD.Domain.Core</RootNamespace>
     <AssemblyName>DDD.Domain.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -31,30 +32,36 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Castle.Core.4.3.0\lib\net45\Castle.Core.dll</HintPath>
-      <Private>True</Private>
+      <HintPath>..\..\packages\Castle.Core.4.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.DynamicFilters, Version=3.0.1.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.DynamicFilters.3.0.1\lib\net40\EntityFramework.DynamicFilters.dll</HintPath>
-      <Private>True</Private>
     </Reference>
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
-      <Private>True</Private>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess, Version=4.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.12.2.1100\lib\net40\Oracle.ManagedDataAccess.dll</HintPath>
+    </Reference>
+    <Reference Include="Oracle.ManagedDataAccess.EntityFramework, Version=6.122.1.0, Culture=neutral, PublicKeyToken=89b483f429c47342, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Oracle.ManagedDataAccess.EntityFramework.12.2.1100\lib\net45\Oracle.ManagedDataAccess.EntityFramework.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.5.0\lib\netstandard2.0\System.Collections.Immutable.dll</HintPath>
+    </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
@@ -64,11 +71,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DbConnectionHelper.cs" />
+    <Compile Include="DbContextTypeMatcher.cs" />
+    <Compile Include="DDDDbConfiguration.cs" />
     <Compile Include="DDDDbContext.cs" />
     <Compile Include="EfDbContextEntityFinder.cs" />
     <Compile Include="IDbContextEntityFinder.cs" />
     <Compile Include="IDbContextProvider.cs" />
     <Compile Include="Mapping\BaseMap.cs" />
+    <Compile Include="Mapping\CheckoffAutoAcpMap.cs" />
+    <Compile Include="Mapping\CheckoffCommandMap.cs" />
+    <Compile Include="Mapping\CheckoffMonitorMap.cs" />
     <Compile Include="Mapping\ReplyMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Migrations\201806220849238_InitialTables.cs" />
@@ -79,13 +92,18 @@
     <Compile Include="Migrations\SeedData\DefaultCreator.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\CheckoffAutoAcp.cs" />
+    <Compile Include="Model\CheckoffCommand.cs" />
+    <Compile Include="Model\CheckoffMonitor.cs" />
     <Compile Include="Model\Reader.cs" />
     <Compile Include="Model\Reply.cs" />
     <Compile Include="Model\Repositories\BookRepository.cs" />
+    <Compile Include="Model\Repositories\CheckoffAutoAcpRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IBookRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IBlogRepository.cs" />
     <Compile Include="Model\Post.cs" />
     <Compile Include="Model\Repositories\BlogRepository.cs" />
+    <Compile Include="Model\Repositories\Interfaces\ICheckoffAutoAcpRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IUserRepository.cs" />
     <Compile Include="Model\Repositories\UserRepository.cs" />
     <Compile Include="Model\User.cs" />
@@ -95,11 +113,22 @@
     <Compile Include="Repositories\EfAutoRepositoryTypes.cs" />
     <Compile Include="Repositories\EfGenericRepositoryRegistrar.cs" />
     <Compile Include="Repositories\EfRepositoryBase.cs" />
+    <Compile Include="Repositories\EfRepositoryExtensions.cs" />
+    <Compile Include="Repositories\IDDDRepository.cs" />
     <Compile Include="Repositories\IEfGenericRepositoryRegistrar.cs" />
     <Compile Include="Repositories\IRepositoryWithDbContext.cs" />
     <Compile Include="Repositories\RepositoryExtension.cs" />
+    <Compile Include="Uow\ActiveTransactionInfo.cs" />
+    <Compile Include="Uow\DbContextEfTransactionStrategy.cs" />
+    <Compile Include="Uow\DbContextTypeMatcher.cs" />
+    <Compile Include="Uow\DefaultDbContextResolver.cs" />
     <Compile Include="Uow\EfUnitOfWork.cs" />
+    <Compile Include="Uow\IDbContextResolver.cs" />
+    <Compile Include="Uow\IDbContextTypeMatcher.cs" />
+    <Compile Include="Uow\IEfTransactionStrategy.cs" />
+    <Compile Include="Uow\TransactionScopeEfTransactionStrategy.cs" />
     <Compile Include="Uow\UnitOfWorkDbContextProvider.cs" />
+    <Compile Include="Uow\UnitOfWorkExtensions.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

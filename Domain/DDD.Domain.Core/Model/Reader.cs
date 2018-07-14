@@ -12,6 +12,8 @@ namespace DDD.Domain.Core.Model
 {
     public class Reader : FullAuditedEntity, IAggregateRoot
     {
+        public string Remark { get; set; }
+
         public void Borrow(Book book)
         {
             if(book.RegistrationStatus == RegistrationStatus.Lend)

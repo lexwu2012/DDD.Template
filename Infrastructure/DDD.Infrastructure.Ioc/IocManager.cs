@@ -31,8 +31,9 @@ namespace DDD.Infrastructure.Ioc
 
             _conventionalRegistrars = new List<IConventionalDependencyRegistrar>();
 
+            //给IIocManager, IIocRegistrar, IIocResolver注册实现类为IocManager
             IocContainer.Register(
-                Component.For<IocManager, IIocManager>().UsingFactoryMethod(() => this)
+                Component.For<IocManager, IIocManager, IIocRegistrar, IIocResolver>().UsingFactoryMethod(() => this)
             );
         }
 

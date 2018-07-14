@@ -20,5 +20,7 @@ namespace DDD.Domain.Core.Model
         //public long PIdentity { get; set; }
         
         public Address Address { get; set; }
+
+        public string Remark { get; set; }
     }
 }
