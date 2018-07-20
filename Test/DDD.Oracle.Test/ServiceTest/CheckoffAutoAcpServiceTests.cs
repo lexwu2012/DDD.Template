@@ -21,8 +21,8 @@ namespace DDD.Oracle.Test.ServiceTest
 {
     public class CheckoffAutoAcpServiceTests: OracleTestBaseWithLocalIocManager
     {
-        private readonly ICheckoffAutoAcpAppService _checkoffAutoAcpAppService;
         private readonly IAutoMapperInitializer _autoMapperInitializer;
+        private readonly ICheckoffAutoAcpAppService _checkoffAutoAcpAppService;
 
         public CheckoffAutoAcpServiceTests()
         {
@@ -41,15 +41,32 @@ namespace DDD.Oracle.Test.ServiceTest
         [Fact]
         public void UpdateSpecifyData()
         {
-            var result = _checkoffAutoAcpAppService.UpdateCheckoffAutoAcp("KFT_XY_SINGLEACP_18921770");
+            var result = _checkoffAutoAcpAppService.UpdateCheckoffAutoAcp(1196780);
 
             result.Success.ShouldBeTrue();
         }
 
         [Fact]
-        public async void GetpecifyData()
+        public async void GetSpecifyAutoAcpData()
         {
-            var result = await _checkoffAutoAcpAppService.GetCheckoffAutoAcpAsync<CheckoffAutoAcpDto>(new Query<CheckoffAutoAcp> (m => m.Batno == "KFT_XY_SINGLEACP_18921770"));
+            try
+            {
+                var result = await _checkoffAutoAcpAppService.GetCheckoffAutoAcpAsync<CheckoffAutoAcpDto>(new Query<CheckoffAutoAcp>(m => m.Id == 1196780));
+
+                result.ShouldNotBeNull();
+            }
+            catch (Exception exception)
+            {
+                
+                throw exception;
+            }
+            
+        }
+
+        [Fact]
+        public async void GetListAutoAcpData()
+        {
+            var result = await _checkoffAutoAcpAppService.GetCheckoffAutoAcpListAsync<CheckoffAutoAcpDto>(new Query<CheckoffAutoAcp>(m => m.Id == 1196780));
 
             result.ShouldNotBeNull();
         }

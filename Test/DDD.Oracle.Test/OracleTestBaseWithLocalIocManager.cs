@@ -7,6 +7,7 @@ using DDD.Domain.Core.DbContextRelate;
 using DDD.Domain.Core.Uow;
 using DDD.Domain.Service;
 using DDD.Infrastructure.AutoMapper;
+using DDD.Infrastructure.Domain;
 using DDD.Infrastructure.Domain.Repositories;
 using DDD.Infrastructure.Domain.Uow;
 using DDD.Infrastructure.Ioc;
@@ -38,8 +39,8 @@ namespace DDD.Oracle.Test
               Component.For(typeof(IDbContextProvider<>)).ImplementedBy(typeof(UnitOfWorkDbContextProvider<>)).LifestyleTransient(),
               Component.For<IUnitOfWorkDefaultOptions, UnitOfWorkDefaultOptions>().ImplementedBy<UnitOfWorkDefaultOptions>().LifestyleSingleton(),
               Component.For<IIocResolver, IocManager>().ImplementedBy<IocManager>().LifestyleSingleton(),
-              Component.For<IUnitOfWorkManager>().ImplementedBy<UnitOfWorkManager>().LifestyleSingleton(),
-               Component.For<IAutoMapperInitializer, AutoMapperInitializer>().ImplementedBy<AutoMapperInitializer>().LifestyleSingleton()
+              Component.For<IUnitOfWorkManager>().ImplementedBy<UnitOfWorkManager>().LifestyleSingleton()
+               //Component.For<IAutoMapperInitializer, AutoMapperInitializer>().ImplementedBy<AutoMapperInitializer>().LifestyleSingleton()
               );
 
 
@@ -51,17 +52,12 @@ namespace DDD.Oracle.Test
             LocalIocManager.IocContainer.Install(new FinderInstaller());
             LocalIocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
 
-            LocalIocManager.RegisterAssemblyByConvention(typeof(IRepository).Assembly);
-            LocalIocManager.RegisterAssemblyByConvention(typeof(DomainServiceBase).Assembly);
-            LocalIocManager.RegisterAssemblyByConvention(typeof(AppServiceBase).Assembly);
-            //LocalIocManager.RegisterAssemblyByConvention(typeof(TestBaseWithLocalIocManager).Assembly);
-
-            //LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Common"));
-            LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Core"));
-            LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Service"));
-            //IocManager.Register<IBlogRepository>();
-            //IocManager.Register<IUserRepository>();
-
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IAutoMapperModule).Assembly);
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IInfrastructureDomainModule).Assembly);
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IDomainCoreModule).Assembly);
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IDomainServiceModule).Assembly);
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IAppServiceModule).Assembly);
+            
         }
 
         public void Dispose()

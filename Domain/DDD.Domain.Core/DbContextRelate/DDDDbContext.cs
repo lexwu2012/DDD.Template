@@ -117,6 +117,10 @@ namespace DDD.Domain.Core.DbContextRelate
                 LogDbEntityValidationException(ex);
                 throw;
             }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
         }
 
 

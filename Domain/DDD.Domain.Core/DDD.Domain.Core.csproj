@@ -83,6 +83,7 @@
     <Compile Include="DbContextRelate\EfDbContextEntityFinder.cs" />
     <Compile Include="DbContextRelate\IDbContextEntityFinder.cs" />
     <Compile Include="DbContextRelate\IDbContextProvider.cs" />
+    <Compile Include="IDomainCoreModule.cs" />
     <Compile Include="Mapping\BaseMap.cs" />
     <Compile Include="Mapping\CheckoffAutoAcpMap.cs" />
     <Compile Include="Mapping\CheckoffCommandMap.cs" />

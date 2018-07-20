@@ -15,6 +15,7 @@ namespace DDD.Application.Service.CheckoffAutoAcp
     public class CheckoffAutoAcpAppService : AppServiceBase, ICheckoffAutoAcpAppService
     {
         private readonly IRepositoryWithEntity<Domain.Core.Model.CheckoffAutoAcp> _checkoffAutoAcpRepository;
+
         public CheckoffAutoAcpAppService(IRepositoryWithEntity<Domain.Core.Model.CheckoffAutoAcp> checkoffAutoAcpRepository)
         {
             _checkoffAutoAcpRepository = checkoffAutoAcpRepository;
@@ -23,12 +24,12 @@ namespace DDD.Application.Service.CheckoffAutoAcp
         /// <summary>
         /// 
         /// </summary>
-        /// <param name="batno"></param>
+        /// <param name="id"></param>
         /// <returns></returns>
-        public Result UpdateCheckoffAutoAcp(string batno)
+        public Result UpdateCheckoffAutoAcp(int id)
         {
-            var entity = _checkoffAutoAcpRepository.GetAll().FirstOrDefault(m => m.Batno == batno);
-            if(null == entity)
+            var entity = _checkoffAutoAcpRepository.GetAll().FirstOrDefault(m => m.Id == id);
+            if (null == entity)
                 return Result.FromError("没有该记录");
             entity.SendTime = DateTime.Now;
 
@@ -39,7 +40,7 @@ namespace DDD.Application.Service.CheckoffAutoAcp
         {
             var obj = _checkoffAutoAcpRepository.GetAll()
                 .Where(m => DbFunctions.DiffDays(m.CreationTime, DateTime.Now) > 0);
-               
+
             return Result.FromData(obj);
         }
 
@@ -48,7 +49,7 @@ namespace DDD.Application.Service.CheckoffAutoAcp
         /// </summary>
         public async Task<TDto> GetCheckoffAutoAcpAsync<TDto>(IQuery<Domain.Core.Model.CheckoffAutoAcp> query)
         {
-            return await _checkoffAutoAcpRepository.AsNoTracking().FirstOrDefaultAsync<Domain.Core.Model.CheckoffAutoAcp, TDto >(query);
+            return await _checkoffAutoAcpRepository.AsNoTracking().FirstOrDefaultAsync<Domain.Core.Model.CheckoffAutoAcp, TDto>(query);
         }
 
         /// <summary>

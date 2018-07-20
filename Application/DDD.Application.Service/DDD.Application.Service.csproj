@@ -66,6 +66,7 @@
     <Compile Include="CheckoffAutoAcp\CheckoffAutoAcpEmailAppService.cs" />
     <Compile Include="CheckoffAutoAcp\Interfaces\ICheckoffAutoAcpAppService.cs" />
     <Compile Include="CheckoffAutoAcp\Interfaces\ICheckoffAutoAcpEmailAppService.cs" />
+    <Compile Include="IAppServiceModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="User\UserAppService.cs" />
     <Compile Include="User\Interfaces\IUserAppService.cs" />

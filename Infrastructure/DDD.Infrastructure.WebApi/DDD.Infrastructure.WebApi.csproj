@@ -99,6 +99,7 @@
     <Compile Include="Api\Log\HttpMessageLogHandler.cs" />
     <Compile Include="Api\MediaTypeConstant.cs" />
     <Compile Include="Api\MediaTypeHeaderValueExtensions.cs" />
+    <Compile Include="IInfrastructureWebApiModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

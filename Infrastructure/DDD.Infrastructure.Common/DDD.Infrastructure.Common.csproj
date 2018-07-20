@@ -59,6 +59,7 @@
     <Compile Include="Extensions\LockExtensions.cs" />
     <Compile Include="Extensions\ObjectExtensions.cs" />
     <Compile Include="Extensions\QueryableExtensions.cs" />
+    <Compile Include="IInfrastructureCommonModule.cs" />
     <Compile Include="NullDisposable.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Reflection\AssemblyFinder.cs" />

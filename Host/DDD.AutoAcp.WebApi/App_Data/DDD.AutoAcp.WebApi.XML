@@ -481,6 +481,17 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="M:DDD.AutoAcp.WebApi.Controllers.CheckoffAutoAcpController.#ctor(DDD.Application.Service.CheckoffAutoAcp.Interfaces.ICheckoffAutoAcpAppService)">
+            <summary>
+            构造函数
+            </summary>
+        </member>
+        <member name="M:DDD.AutoAcp.WebApi.Controllers.CheckoffAutoAcpController.GetSpecifyCheckoffAutoAcpAsync(System.Int32)">
+            <summary>
+            获取指定的代扣数据
+            </summary>
+            <returns></returns>
+        </member>
         <member name="T:DDD.AutoAcp.WebApi.Controllers.WechatRepayController">
             <summary>
             还款相关接口

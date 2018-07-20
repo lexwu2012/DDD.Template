@@ -11,7 +11,7 @@ namespace DDD.Application.Service.CheckoffAutoAcp.Interfaces
 {
     public interface ICheckoffAutoAcpAppService : IApplicationService
     {
-        Result UpdateCheckoffAutoAcp(string batno);
+        Result UpdateCheckoffAutoAcp(int id);
 
         Result<IQueryable<Domain.Core.Model.CheckoffAutoAcp>> GetTodayCheckoffAutoAcp();
 

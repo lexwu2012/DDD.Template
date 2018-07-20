@@ -11,11 +11,14 @@ using DDD.Domain.Core.DbContextRelate;
 using DDD.Domain.Core.Repositories;
 using DDD.Domain.Core.Uow;
 using DDD.Domain.Service;
+using DDD.Infrastructure.AutoMapper;
+using DDD.Infrastructure.Domain;
 using DDD.Infrastructure.Domain.Repositories;
 using DDD.Infrastructure.Domain.Uow;
 using DDD.Infrastructure.Ioc;
 using DDD.Infrastructure.Ioc.Dependency;
 using DDD.Infrastructure.Ioc.Dependency.Registrar;
+using DDD.Infrastructure.WebApi;
 using DDD.Infrastructure.WebApi.Api;
 using DDD.Infrastructure.WebApi.Api.Controller;
 using DDD.Infrastructure.WebApi.Api.Exceptions;
@@ -55,18 +58,18 @@ namespace DDD.AutoAcp.WebApi
             //注册
             iocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
             iocManager.AddConventionalRegistrar(new ApiControllerConventionalRegistrar());
-
-            iocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Infrastructure.WebApi"));
+            
             iocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
-            //注册service
-            iocManager.RegisterAssemblyByConvention(typeof(IRepository).Assembly);
-            iocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Core"));
-            iocManager.RegisterAssemblyByConvention(typeof(DomainServiceBase).Assembly);
-            iocManager.RegisterAssemblyByConvention(typeof(AppServiceBase).Assembly);
+            //注册service 
+            iocManager.RegisterAssemblyByConvention(typeof(IAutoMapperModule).Assembly);
+            iocManager.RegisterAssemblyByConvention(typeof(IInfrastructureWebApiModule).Assembly);
+            iocManager.RegisterAssemblyByConvention(typeof(IInfrastructureDomainModule).Assembly);
+            iocManager.RegisterAssemblyByConvention(typeof(IDomainCoreModule).Assembly);
+            iocManager.RegisterAssemblyByConvention(typeof(IDomainServiceModule).Assembly);
+            iocManager.RegisterAssemblyByConvention(typeof(IAppServiceModule).Assembly);
             iocManager.RegisterAssemblyByConvention(typeof(IocManager).Assembly);
-
-
+            
 
             //注册泛型仓储
             using (var repositoryRegistrar = iocManager.ResolveAsDisposable<EfGenericRepositoryRegistrar>())
@@ -85,11 +88,12 @@ namespace DDD.AutoAcp.WebApi
 
             //注册helppage
             //iocManager.Register<HelpController>(DependencyLifeStyle.Transient);
-
+            
+            //初始化automapper
+            InitialAutoMapper(iocManager.IocContainer.Resolve<IAutoMapperInitializer>());
 
             //注册过滤器
             InitializeFilters(iocManager, config);
-
 
             config.EnsureInitialized();
         }
@@ -98,6 +102,11 @@ namespace DDD.AutoAcp.WebApi
         {
             config.Filters.Add(iocManager.Resolve<ApiValidationFilter>(iocManager));
             config.Filters.Add(iocManager.Resolve<ApiExceptionFilter>(iocManager));
+        }
+
+        private void InitialAutoMapper(IAutoMapperInitializer autoMapperInitializer)
+        {
+            autoMapperInitializer.Initial();
         }
     }
 }

@@ -61,6 +61,7 @@
     <Compile Include="Attributes\MapFromAttribute.cs" />
     <Compile Include="AutoMapperHelper.cs" />
     <Compile Include="AutoMapperInitializer.cs" />
+    <Compile Include="IAutoMapperModule.cs" />
     <Compile Include="Extension\AutoMapExtensions.cs" />
     <Compile Include="Extension\AutoMapperConfigurationExtensions.cs" />
     <Compile Include="IAutoMapperInitializer.cs" />
@@ -73,6 +74,10 @@
     <ProjectReference Include="..\DDD.Infrastructure.Common\DDD.Infrastructure.Common.csproj">
       <Project>{27DFCD09-EE71-4506-B64C-86D9226B3C96}</Project>
       <Name>DDD.Infrastructure.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DDD.Infrastructure.Ioc\DDD.Infrastructure.Ioc.csproj">
+      <Project>{973743A2-FD9A-4FDD-97FF-A25273EE0172}</Project>
+      <Name>DDD.Infrastructure.Ioc</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

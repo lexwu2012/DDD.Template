@@ -59,6 +59,7 @@
     <Compile Include="CheckoffAutoAcp\CheckoffAutoAcpDomainService.cs" />
     <Compile Include="CheckoffAutoAcp\Interfaces\ICheckoffAutoAcpDomainService.cs" />
     <Compile Include="DomainServiceBase.cs" />
+    <Compile Include="IDomainServiceModule.cs" />
     <Compile Include="User\Interfaces\IUserDomainService.cs" />
     <Compile Include="User\UserDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

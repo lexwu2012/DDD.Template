@@ -130,6 +130,7 @@
     <Compile Include="Events\IEventData.cs" />
     <Compile Include="Events\Handlers\IEventHandler.cs" />
     <Compile Include="Events\NullEventBus.cs" />
+    <Compile Include="IInfrastructureDomainModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\IRepository.cs" />
     <Compile Include="Repositories\IRepositoryWithEntity.cs" />

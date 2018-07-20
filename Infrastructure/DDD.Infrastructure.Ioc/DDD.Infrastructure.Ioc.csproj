@@ -76,6 +76,7 @@
     <Compile Include="Dependency\ITransientDependency.cs" />
     <Compile Include="IConventionalDependencyRegistrar.cs" />
     <Compile Include="IConventionalRegistrationContext.cs" />
+    <Compile Include="IInfrastructureIocModule.cs" />
     <Compile Include="IIocManager.cs" />
     <Compile Include="Dependency\Registrar\BasicConventionalRegistrar.cs" />
     <Compile Include="Installer\FinderInstaller.cs" />

@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DDD.Infrastructure.Ioc.Dependency;
 
 namespace DDD.Infrastructure.AutoMapper
 {
-    public interface IAutoMapperInitializer : ISingletonDependency
+    /// <summary>
+    /// 作为模块标志
+    /// </summary>
+    public interface IAutoMapperModule
     {
-        void Initial();
     }
 }

@@ -49,6 +49,11 @@ namespace DDD.Domain.Core.Uow
             });
         }
 
+        /// <summary>
+        /// 获取正确的dbcontext类型
+        /// </summary>
+        /// <typeparam name="TDbContext"></typeparam>
+        /// <returns></returns>
         protected virtual Type GetConcreteType<TDbContext>()
         {
             var dbContextType = typeof(TDbContext);

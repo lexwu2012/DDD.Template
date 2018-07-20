@@ -293,6 +293,7 @@
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApiControllerBase.cs" />
+    <Compile Include="Controllers\CheckoffAutoAcpController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Controllers\WechatRepayController.cs" />
@@ -375,6 +376,10 @@
     <ProjectReference Include="..\..\Application\DDD.Application.Service\DDD.Application.Service.csproj">
       <Project>{11005506-0C00-4EE5-889E-DB36CFEC0712}</Project>
       <Name>DDD.Application.Service</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.AutoMapper\DDD.Infrastructure.AutoMapper.csproj">
+      <Project>{9D4BB42F-628D-4F8D-871C-C3F01AC37466}</Project>
+      <Name>DDD.Infrastructure.AutoMapper</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Domain\DDD.Infrastructure.Domain.csproj">
       <Project>{7C5E4721-D51A-49F8-8A5B-D03CF4BA32E1}</Project>
