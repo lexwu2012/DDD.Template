@@ -7,6 +7,8 @@ using System.Threading.Tasks;
 using System.Web.Http.Filters;
 using Castle.Core.Logging;
 using DDD.Infrastructure.Common.Extensions;
+using DDD.Infrastructure.Domain.Events;
+using DDD.Infrastructure.Domain.Events.Exceptions;
 using DDD.Infrastructure.Ioc.Dependency;
 using DDD.Infrastructure.Web.Application;
 
@@ -16,10 +18,12 @@ namespace DDD.Infrastructure.WebApi.Api.Exceptions
     {
         public ILogger Logger { get; set; }
 
+        public IEventBus EventBus { get; set; }
 
         public ApiExceptionFilter()
         {
             Logger = NullLogger.Instance;
+            EventBus = NullEventBus.Instance;
         }
 
         public override void OnException(HttpActionExecutedContext context)
@@ -34,12 +38,10 @@ namespace DDD.Infrastructure.WebApi.Api.Exceptions
             var resultCode = GetResultCode(context);
 
             var exp = context.Exception;
-            StringBuilder builder = new StringBuilder();
+            var builder = new StringBuilder();
             builder.AppendLine(exp.Message);
 
-
             exp.GetAllExceptionMessage().ForEach(o => builder.AppendLine(o));
-
 
             var message = builder.ToString();
             var result = Result.FromCode(resultCode, message);
@@ -50,6 +52,9 @@ namespace DDD.Infrastructure.WebApi.Api.Exceptions
                          $"堆栈信息：\r\n{exception.StackTrace}");
 
             context.Response = context.Request.CreateResponse(HttpStatusCode.OK, result);
+
+            //触发领域事件
+            EventBus.Trigger(this, new HandledExceptionData(context.Exception));
         }
 
         private ResultCode GetResultCode(HttpActionExecutedContext context)

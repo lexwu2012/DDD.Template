@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using DDD.Domain.Auditing;
-using DDD.Domain.BaseEntities;
+using DDD.Infrastructure.Domain.Auditing;
+using DDD.Infrastructure.Domain.BaseEntities;
 
 namespace DDD.Domain.Core.Model
 {
@@ -12,6 +12,7 @@ namespace DDD.Domain.Core.Model
 
         public ICollection<Post> Posts { get; set; }
 
+        public string Remark { get; set; }
         ///// <summary>
         ///// use IOC for injection
         ///// </summary>

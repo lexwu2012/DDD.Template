@@ -4,6 +4,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using DDD.Domain.Core.DbContextRelate;
 using DDD.Domain.Core.Model.Repositories.Interfaces;
 using DDD.Domain.Core.Model.ValueObj;
 using DDD.Domain.Core.Repositories;
@@ -13,6 +14,11 @@ namespace DDD.Domain.Core.Model.Repositories
 {
     public class UserRepository: DDDRepositoryWithDbContext<User,long>, IUserRepository
     {
+        public UserRepository(IDbContextProvider<DDDDbContext> dbContextProvider) : base(dbContextProvider)
+        {
+
+        }
+
         public IQueryable<User> GetAllUsers()
         {
             return GetAll();

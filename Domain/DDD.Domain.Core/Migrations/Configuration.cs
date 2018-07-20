@@ -3,6 +3,7 @@ using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations;
 using System.Linq;
+using DDD.Domain.Core.DbContextRelate;
 
 
 namespace DDD.Domain.Core.Migrations

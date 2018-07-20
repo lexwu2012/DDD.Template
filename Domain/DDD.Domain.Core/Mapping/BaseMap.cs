@@ -7,8 +7,8 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
-using DDD.Domain.Entities;
 using DDD.Infrastructure.Common;
+using DDD.Infrastructure.Domain.BaseEntities;
 
 namespace DDD.Domain.Core.Mapping
 {
@@ -21,10 +21,10 @@ namespace DDD.Domain.Core.Mapping
             {
                 throw new ArgumentNullException(nameof(table));
             }
+            
+            ToTable(table);
 
-            this.ToTable(table);
-
-            this.HasKey(o => o.Id);
+            HasKey(o => o.Id);
 
             var primaryType = typeof (TPrimaryKey);
             if (primaryType.IsValueType)

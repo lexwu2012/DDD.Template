@@ -2,9 +2,10 @@
 using System.Reflection;
 using Castle.Core.Logging;
 using Castle.MicroKernel.Registration;
-using DDD.Domain.Common.BaseEntities;
-using DDD.Domain.Common.CustomAttributes;
+using DDD.Domain.Core.DbContextRelate;
 using DDD.Infrastructure.Common.Reflection;
+using DDD.Infrastructure.Domain.BaseEntities;
+using DDD.Infrastructure.Domain.CustomAttributes;
 using DDD.Infrastructure.Ioc;
 using DDD.Infrastructure.Ioc.Dependency;
 

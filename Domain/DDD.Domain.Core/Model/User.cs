@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DDD.Domain.Auditing;
-using DDD.Domain.BaseEntities;
 using DDD.Domain.Core.Model.ValueObj;
-using DDD.Domain.Entities;
+using DDD.Infrastructure.Domain.Auditing;
+using DDD.Infrastructure.Domain.BaseEntities;
 
 namespace DDD.Domain.Core.Model
 {
@@ -20,5 +19,7 @@ namespace DDD.Domain.Core.Model
         //public long PIdentity { get; set; }
         
         public Address Address { get; set; }
+
+        public string Remark { get; set; }
     }
 }

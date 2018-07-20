@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using DDD.Infrastructure.Common.Extensions;
 
 namespace DDD.Infrastructure.Common.Reflection
 {

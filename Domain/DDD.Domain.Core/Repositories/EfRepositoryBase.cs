@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
-using DDD.Domain.BaseEntities;
-using DDD.Domain.Common.Repositories;
-using DDD.Domain.Common.Uow;
-using DDD.Domain.Entities;
-using DDD.Domain.Uow;
+using DDD.Domain.Core.DbContextRelate;
+using DDD.Infrastructure.Domain.BaseEntities;
+using DDD.Infrastructure.Domain.Repositories;
+using DDD.Infrastructure.Domain.Uow;
 
 namespace DDD.Domain.Core.Repositories
 {
@@ -19,16 +18,16 @@ namespace DDD.Domain.Core.Repositories
 
         private readonly IDbContextProvider<TDbContext> _dbContextProvider;
 
-        public virtual TDbContext Context { get; set; }
+        //public virtual TDbContext Context { get; set; }
 
         public virtual DbSet<TEntity> Table => Context.Set<TEntity>();
 
-        //public virtual TDbContext Context => _dbContextProvider.GetDbContext();
+        public virtual TDbContext Context => _dbContextProvider.GetDbContext();
 
-        //public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider)
-        //{
-        //    _dbContextProvider = dbContextProvider;
-        //}
+        public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider)
+        {
+            _dbContextProvider = dbContextProvider;
+        }
 
         public DbContext GetDbContext()
         {
@@ -44,7 +43,7 @@ namespace DDD.Domain.Core.Repositories
 
         public override TEntity Update(TEntity entity)
         {
-            //AttachIfNot(entity);
+            AttachIfNot(entity);
             Context.Entry(entity).State = EntityState.Modified;
             return entity;
         }
@@ -103,6 +102,9 @@ namespace DDD.Domain.Core.Repositories
         where TEntity : class, IAggregateRoot
         where TDbContext : DbContext
     {
+        public EfRepositoryBase(IDbContextProvider<TDbContext> dbContextProvider) : base(dbContextProvider)
+        {
+        }
     }
     
 }

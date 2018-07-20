@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using Castle.MicroKernel.Registration;
 using Castle.Windsor;
@@ -31,8 +32,9 @@ namespace DDD.Infrastructure.Ioc
 
             _conventionalRegistrars = new List<IConventionalDependencyRegistrar>();
 
+            //给IIocManager, IIocRegistrar, IIocResolver注册实现类为IocManager
             IocContainer.Register(
-                Component.For<IocManager, IIocManager>().UsingFactoryMethod(() => this)
+                Component.For<IocManager, IIocManager, IIocRegistrar, IIocResolver>().UsingFactoryMethod(() => this)
             );
         }
 
@@ -72,14 +74,14 @@ namespace DDD.Infrastructure.Ioc
 
         public void Register(Type type, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
         {
-            throw new NotImplementedException();
+            IocContainer.Register(ApplyLifestyle(Component.For(type), lifeStyle));
         }
 
         public void Register<TType, TImpl>(DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
             where TType : class
             where TImpl : class, TType
         {
-            throw new NotImplementedException();
+            IocContainer.Register(ApplyLifestyle(Component.For<TType, TImpl>().ImplementedBy<TImpl>(), lifeStyle));
         }
 
         public void Register(Type type, Type impl, DependencyLifeStyle lifeStyle = DependencyLifeStyle.Singleton)
@@ -128,12 +130,12 @@ namespace DDD.Infrastructure.Ioc
 
         public object[] ResolveAll(Type type)
         {
-            throw new NotImplementedException();
+            return IocContainer.ResolveAll(type).Cast<object>().ToArray();
         }
 
         public object[] ResolveAll(Type type, object argumentsAsAnonymousType)
         {
-            throw new NotImplementedException();
+            return IocContainer.ResolveAll(type, argumentsAsAnonymousType).Cast<object>().ToArray();
         }
 
         public void Release(object obj)

@@ -17,9 +17,15 @@ namespace DDD.Infrastructure.WebApi.Api
 
         public IHttpController Create(HttpRequestMessage request, HttpControllerDescriptor controllerDescriptor, Type controllerType)
         {
-            var controllerWrapper = _iocResolver.ResolveAsDisposable<IHttpController>(controllerType);
-            request.RegisterForDispose(controllerWrapper);
-            return controllerWrapper.Object;
+            using (var controllerWrapper = _iocResolver.ResolveAsDisposable<IHttpController>(controllerType) )
+            {
+                request.RegisterForDispose(controllerWrapper);
+                return controllerWrapper.Object;
+            }
+
+            //var controllerWrapper = _iocResolver.ResolveAsDisposable<IHttpController>(controllerType);
+            //request.RegisterForDispose(controllerWrapper);
+            //return controllerWrapper.Object;
         }
     }
 }

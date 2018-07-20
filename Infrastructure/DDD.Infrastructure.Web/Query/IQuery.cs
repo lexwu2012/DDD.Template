@@ -1,14 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DDD.Infrastructure.Query
+namespace DDD.Infrastructure.Web.Query
 {
     public interface IQuery<TEntity> where TEntity : class
     {
+
+        /// <summary>
+        /// 获取查询条件
+        /// </summary>
         Expression<Func<TEntity, bool>> GetFilter();
     }
 }

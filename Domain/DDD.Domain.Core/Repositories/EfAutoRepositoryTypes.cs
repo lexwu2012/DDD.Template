@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DDD.Domain.Common.CustomAttributes;
-using DDD.Domain.Common.Repositories;
+using DDD.Infrastructure.Domain.CustomAttributes;
+using DDD.Infrastructure.Domain.Repositories;
 
 namespace DDD.Domain.Core.Repositories
 {

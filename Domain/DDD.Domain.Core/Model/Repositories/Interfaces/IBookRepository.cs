@@ -1,4 +1,4 @@
-﻿using DDD.Domain.Common.Repositories;
+﻿using DDD.Infrastructure.Domain.Repositories;
 using DDD.Infrastructure.Ioc.Dependency;
 
 namespace DDD.Domain.Core.Model.Repositories.Interfaces

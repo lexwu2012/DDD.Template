@@ -9,8 +9,9 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>DDD.Application.Dto</RootNamespace>
     <AssemblyName>DDD.Application.Dto</AssemblyName>
-    <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -49,13 +50,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="User\AddUserInput.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Domain\DDD.Domain.Common\DDD.Domain.Common.csproj">
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Domain\DDD.Infrastructure.Domain.csproj">
       <Project>{7C5E4721-D51A-49F8-8A5B-D03CF4BA32E1}</Project>
-      <Name>DDD.Domain.Common</Name>
+      <Name>DDD.Infrastructure.Domain</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Domain\DDD.Domain.Core\DDD.Domain.Core.csproj">
       <Project>{3079a3b6-c723-4147-aaa6-5239343a164b}</Project>
@@ -69,6 +69,10 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="UserDto\" />
+    <Folder Include="Wechat\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

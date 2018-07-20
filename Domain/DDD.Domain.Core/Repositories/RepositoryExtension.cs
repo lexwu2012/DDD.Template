@@ -4,10 +4,9 @@ using System.Data.Entity;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using DDD.Domain.BaseEntities;
-using DDD.Domain.Entities;
-using DDD.Domain.Common.Repositories;
 using DDD.Infrastructure.Common.Extensions;
+using DDD.Infrastructure.Domain.BaseEntities;
+using DDD.Infrastructure.Domain.Repositories;
 
 namespace DDD.Domain.Core.Repositories
 {
