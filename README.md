@@ -12,20 +12,26 @@ Secondly, this is for those architects who want to built common architecture.
 
 Notes
 ---
-This is based on .net framework 4.6.2, not the .net core. This is not a CQRS architecture, but will coming soon later.
+This is based on .net framework 4.6.2, not the .net core. Be aware of this is not a CQRS architecture, but it will coming soon later.
 
 Architecture overview
 -------
-
+This architecture base on the DDD recommended classic layer.
+#
+1. Architecture Layers
 ##
-二级标题
+  1) Documents  
+  Your documents related to the solution.
+  2) Infrastructure Layer
+  Your common infrastructure project that should be shared to all projects.
+  3) Domain Layer
+  4) Applicaiton Layer
+  5) Hosts
+  6) Test
+#
+2. Features
+######
+AOP,DI,TDD
 
-###
-三级标题
-
-####
-四级标题
-#####
-五级标题
 ######
 六级标题
