@@ -48,6 +48,20 @@ namespace DDD.Infrastructure.Web.Query
         }
 
         /// <summary>
+        /// 查询指定条件的数据
+        /// </summary>
+        /// <typeparam name="TEntity">查询的实体</typeparam>
+        /// <typeparam name="TDto">返回的类型</typeparam>
+        /// <param name="source"></param>
+        /// <param name="query">查询条件</param>
+        /// <returns></returns>
+        public static TDto FirstOrDefault<TEntity, TDto>(this IQueryable<TEntity> source, IQuery<TEntity> query) where TEntity : class
+        {
+            var data = source.Where(query).ProjectTo<TDto>();
+            return data.FirstOrDefault();
+        }
+
+        /// <summary>
         /// 查询指定条件的数据并返回列表
         /// </summary>
         /// <typeparam name="TEntity">查询的实体</typeparam>

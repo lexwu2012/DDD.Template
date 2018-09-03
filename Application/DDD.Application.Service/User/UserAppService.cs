@@ -1,11 +1,15 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using DDD.Application.Service.User.Interfaces;
 using DDD.Domain.Core.Model.Repositories.Interfaces;
 using DDD.Infrastructure.AutoMapper.Extension;
 using DDD.Infrastructure.Web.Application;
 using DDD.Domain.Core.Model;
 using DDD.Domain.Core.Model.Repositories.Dto;
+using DDD.Domain.Core.Repositories;
 using DDD.Infrastructure.Domain.Repositories;
+using DDD.Infrastructure.Web.Query;
 
 namespace DDD.Application.Service.User
 {
@@ -38,6 +42,32 @@ namespace DDD.Application.Service.User
             var result = _userRepository.GetAll().Count();
 
             return Result.FromData(result);
+        }
+
+        public Result<UserDto> UpdateSpecifyUser(int id)
+        {
+            var user = _userRepository.GetAll().FirstOrDefault(m => m.Id == id);
+
+            if (null == user)
+                return Result.FromError<UserDto>("没有该用户");
+            
+            return Result.FromData<UserDto>(user.MapTo<UserDto>());
+        }
+
+        /// <summary>
+        /// 获取单个用户信息
+        /// </summary>
+        public async Task<TDto> GetUserAsync<TDto>(IQuery<Domain.Core.Model.User> query)
+        {
+            return await _userRepository.AsNoTracking().FirstOrDefaultAsync<Domain.Core.Model.User, TDto>(query);            
+        }
+
+        /// <summary>
+        /// 获取用户信息列表
+        /// </summary>
+        public async Task<IList<TDto>> GetAgencySaleTicketClassListAsync<TDto>(IQuery<Domain.Core.Model.User> query)
+        {
+            return await _userRepository.GetAll().ToListAsync<Domain.Core.Model.User, TDto>(query);
         }
     }
 }

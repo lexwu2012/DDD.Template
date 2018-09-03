@@ -60,6 +60,9 @@
     <Compile Include="CheckoffAutoAcp\Interfaces\ICheckoffAutoAcpDomainService.cs" />
     <Compile Include="DomainServiceBase.cs" />
     <Compile Include="IDomainServiceModule.cs" />
+    <Compile Include="Reader\Dto\BookHistoryDto.cs" />
+    <Compile Include="Reader\Interfaces\IReaderDomainService.cs" />
+    <Compile Include="Reader\ReaderDomainService.cs" />
     <Compile Include="User\Interfaces\IUserDomainService.cs" />
     <Compile Include="User\UserDomainService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

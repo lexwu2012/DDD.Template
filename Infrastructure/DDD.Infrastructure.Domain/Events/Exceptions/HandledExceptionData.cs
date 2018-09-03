@@ -12,7 +12,7 @@ namespace DDD.Infrastructure.Domain.Events.Exceptions
         public HandledExceptionData(Exception exception)
             : base(exception)
         {
-
+            //发送邮件
         }
     }
 }

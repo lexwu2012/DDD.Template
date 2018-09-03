@@ -7,7 +7,7 @@ using DDD.Infrastructure.AutoMapper.Attributes;
 
 namespace DDD.Domain.Core.Model.Repositories.Dto
 {
-    [AutoMapFrom(typeof(CheckoffAutoAcp))]
+    [AutoMap(typeof(CheckoffAutoAcp))]
     public class CheckoffAutoAcpDto
     {
         public int IdCredit { get; set; }

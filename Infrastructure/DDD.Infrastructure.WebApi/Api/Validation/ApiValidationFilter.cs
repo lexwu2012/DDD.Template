@@ -14,6 +14,9 @@ using DDD.Infrastructure.WebApi.Api.Extension;
 
 namespace DDD.Infrastructure.WebApi.Api.Validation
 {
+    /// <summary>
+    /// api参数验证过滤器
+    /// </summary>
     public class ApiValidationFilter : IActionFilter, ITransientDependency
     {
         public bool AllowMultiple => false;
@@ -24,8 +27,14 @@ namespace DDD.Infrastructure.WebApi.Api.Validation
         //{
         //    _iocResolver = iocResolver;
         //}
-        
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="actionContext"></param>
+        /// <param name="cancellationToken"></param>
+        /// <param name="continuation"></param>
+        /// <returns></returns>
         public async Task<HttpResponseMessage> ExecuteActionFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
         {
             var method = actionContext.ActionDescriptor.GetMethodInfoOrNull();
@@ -39,6 +48,7 @@ namespace DDD.Infrastructure.WebApi.Api.Validation
                 return await continuation();
             }
 
+            //有参数没通过验证
             if (!actionContext.ModelState.IsValid)
             {
                 var error = actionContext.ModelState.GetValidationSummary();

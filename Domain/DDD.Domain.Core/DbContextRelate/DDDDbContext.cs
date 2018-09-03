@@ -17,6 +17,7 @@ using DDD.Infrastructure.Domain.CustomAttributes;
 using DDD.Infrastructure.Domain.DbHelper;
 using DDD.Infrastructure.Domain.Repositories;
 using DDD.Infrastructure.Ioc.Dependency;
+using Oracle.ManagedDataAccess.Client;
 
 namespace DDD.Domain.Core.DbContextRelate
 {
@@ -59,9 +60,15 @@ namespace DDD.Domain.Core.DbContextRelate
             InitializeDbContext();
         }
 
-        public DDDDbContext(string nameOrConnectionString, string schema) : base(nameOrConnectionString)
+        public DDDDbContext(string nameOrConnectionString, string schema) : base("Data Source=(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=FTdevdb02.dafycredit.com)(PORT=1521))(CONNECT_DATA=(SERVER=dedicated)(SERVICE_NAME=devdb02)));User ID=dafy_sales2;Password=Test$20150508;Connect Timeout=60;")
         {
             Schema = schema;
+            InitializeDbContext();
+        }
+
+      
+        protected DDDDbContext(DbCompiledModel model) : base(model)
+        {
             InitializeDbContext();
         }
 

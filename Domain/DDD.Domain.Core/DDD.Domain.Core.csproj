@@ -85,8 +85,10 @@
     <Compile Include="DbContextRelate\IDbContextProvider.cs" />
     <Compile Include="IDomainCoreModule.cs" />
     <Compile Include="Mapping\BaseMap.cs" />
+    <Compile Include="Mapping\BookMap.cs" />
     <Compile Include="Mapping\CheckoffAutoAcpMap.cs" />
     <Compile Include="Mapping\CheckoffCommandMap.cs" />
+    <Compile Include="Mapping\ReaderMap.cs" />
     <Compile Include="Mapping\ReplyMap.cs" />
     <Compile Include="Mapping\UserMap.cs" />
     <Compile Include="Migrations\201806220849238_InitialTables.cs" />
@@ -97,6 +99,7 @@
     <Compile Include="Migrations\SeedData\DefaultCreator.cs" />
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Book.cs" />
+    <Compile Include="Model\BookHistory.cs" />
     <Compile Include="Model\CheckoffAutoAcp.cs" />
     <Compile Include="Model\CheckoffMonitor.cs" />
     <Compile Include="Model\CheckoffCommand.cs" />
@@ -106,6 +109,7 @@
     <Compile Include="Model\Repositories\CheckoffAutoAcpRepository.cs" />
     <Compile Include="Model\Repositories\Dto\AddUserInput.cs" />
     <Compile Include="Model\Repositories\Dto\CheckoffAutoAcpDto.cs" />
+    <Compile Include="Model\Repositories\Dto\UserDto.cs" />
     <Compile Include="Model\Repositories\Interfaces\IBookRepository.cs" />
     <Compile Include="Model\Repositories\Interfaces\IBlogRepository.cs" />
     <Compile Include="Model\Post.cs" />

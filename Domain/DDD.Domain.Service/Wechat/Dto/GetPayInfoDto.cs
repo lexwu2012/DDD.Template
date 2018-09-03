@@ -1,11 +1,20 @@
-﻿namespace DDD.Domain.Service.Wechat.Dto
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace DDD.Domain.Service.Wechat.Dto
 {
     public class GetPayInfoDto
     {
         /// <summary>
         /// 用户ID
         /// </summary>
-        public int? IdPerson { get; set; }
+        [Required]
+        public int IdPerson { get; set; }
+
+        /// <summary>
+        /// 金额还款
+        /// </summary>
+        [Required]
+        public decimal Amount { get; set; }
 
         /// <summary>
         /// 系统编码
@@ -16,5 +25,7 @@
         /// 平台渠道
         /// </summary>
         public string Channel { get; set; }
+
+     
     }
 }

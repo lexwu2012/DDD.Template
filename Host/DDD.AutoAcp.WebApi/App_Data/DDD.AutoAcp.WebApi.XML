@@ -481,6 +481,11 @@
             </summary>
             <param name="documentPath">The physical path to XML document.</param>
         </member>
+        <member name="T:DDD.AutoAcp.WebApi.Controllers.CheckoffAutoAcpController">
+            <summary>
+            
+            </summary>
+        </member>
         <member name="M:DDD.AutoAcp.WebApi.Controllers.CheckoffAutoAcpController.#ctor(DDD.Application.Service.CheckoffAutoAcp.Interfaces.ICheckoffAutoAcpAppService)">
             <summary>
             构造函数
@@ -489,6 +494,12 @@
         <member name="M:DDD.AutoAcp.WebApi.Controllers.CheckoffAutoAcpController.GetSpecifyCheckoffAutoAcpAsync(System.Int32)">
             <summary>
             获取指定的代扣数据
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DDD.AutoAcp.WebApi.Controllers.CheckoffAutoAcpController.UpdateSpecifyCheckoffAutoAcpSendTimeAsync(System.Int32)">
+            <summary>
+            更新指定的代扣数据并返回dto
             </summary>
             <returns></returns>
         </member>
@@ -502,9 +513,15 @@
             构造函数
             </summary>
         </member>
-        <member name="M:DDD.AutoAcp.WebApi.Controllers.WechatRepayController.PayInfo(DDD.Domain.Service.Wechat.Dto.GetPayInfoDto)">
+        <member name="M:DDD.AutoAcp.WebApi.Controllers.WechatRepayController.GetPayInfo(DDD.Domain.Service.Wechat.Dto.GetPayInfoDto)">
             <summary>
             获取还款信息
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:DDD.AutoAcp.WebApi.Controllers.WechatRepayController.Repay(DDD.Domain.Service.Wechat.Dto.GetPayInfoDto)">
+            <summary>
+            还款接口
             </summary>
             <returns></returns>
         </member>

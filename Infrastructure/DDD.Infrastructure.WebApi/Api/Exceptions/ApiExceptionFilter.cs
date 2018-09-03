@@ -53,7 +53,7 @@ namespace DDD.Infrastructure.WebApi.Api.Exceptions
 
             context.Response = context.Request.CreateResponse(HttpStatusCode.OK, result);
 
-            //触发领域事件
+            //触发领域事件，发送邮件
             EventBus.Trigger(this, new HandledExceptionData(context.Exception));
         }
 

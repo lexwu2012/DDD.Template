@@ -5,6 +5,7 @@ using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Transactions;
+using DDD.Domain.Core.DbContextRelate;
 using DDD.Infrastructure.Domain.DbHelper;
 using DDD.Infrastructure.Domain.Uow;
 using DDD.Infrastructure.Ioc.Dependency;
@@ -164,6 +165,7 @@ namespace DDD.Domain.Core.Uow
             if (DbConnectionHelper.DbCatagory == DBType.Oracle.ToString())
             {
                 connectionString = ResolveConnectionString(ref schema);
+                connectionString = "Oracle";
             }
             else
             {

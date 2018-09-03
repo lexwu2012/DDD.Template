@@ -1,4 +1,8 @@
-﻿namespace DDD.Domain.Core.DbContextRelate
+﻿using System.Data.Entity;
+using Oracle.ManagedDataAccess.Client;
+using Oracle.ManagedDataAccess.EntityFramework;
+
+namespace DDD.Domain.Core.DbContextRelate
 {
     ///// <summary>
     ///// 

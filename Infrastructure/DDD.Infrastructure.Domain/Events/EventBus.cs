@@ -12,6 +12,9 @@ using DDD.Infrastructure.Web.Threading;
 
 namespace DDD.Infrastructure.Domain.Events
 {
+    /// <summary>
+    /// 事件总线
+    /// </summary>
     public class EventBus : IEventBus
     {
         public static EventBus Default { get; } = new EventBus();
@@ -31,6 +34,7 @@ namespace DDD.Infrastructure.Domain.Events
 
 
         #region  Register
+
         public IDisposable Register<TEventData>(Action<TEventData> action) where TEventData : IEventData
         {
             return Register(typeof(TEventData), new ActionEventHandler<TEventData>(action));
@@ -136,19 +140,26 @@ namespace DDD.Infrastructure.Domain.Events
         {
             GetOrCreateHandlerFactories(eventType).Locking(factories => factories.Clear());
         }
-
-
         #endregion
 
         #region Trigger
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// 触发的eventData对应的IEventHandler实现（这在EventBusInstaller里面已经进行了eventData 对应的IEventHandler实现的注册）
+        /// </summary>
+        /// <typeparam name="TEventData"></typeparam>
+        /// <param name="eventData"></param>
         public void Trigger<TEventData>(TEventData eventData) where TEventData : IEventData
         {
             Trigger((object)null, eventData);
         }
 
-        /// <inheritdoc/>
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <typeparam name="TEventData"></typeparam>
+        /// <param name="eventSource">IEventHandler的实现类</param>
+        /// <param name="eventData">IEventHandler的参数</param>
         public void Trigger<TEventData>(object eventSource, TEventData eventData) where TEventData : IEventData
         {
             Trigger(typeof(TEventData), eventSource, eventData);
@@ -159,8 +170,13 @@ namespace DDD.Infrastructure.Domain.Events
         {
             Trigger(eventType, null, eventData);
         }
-
-        /// <inheritdoc/>
+        
+        /// <summary>
+        /// 利用反射触发excute方法
+        /// </summary>
+        /// <param name="eventType"></param>
+        /// <param name="eventSource"></param>
+        /// <param name="eventData"></param>
         public void Trigger(Type eventType, object eventSource, IEventData eventData)
         {
             var exceptions = new List<Exception>();
@@ -200,10 +216,17 @@ namespace DDD.Infrastructure.Domain.Events
             }
         }
 
-       
+
         #endregion
 
-
+        /// <summary>
+        /// 同步方法，利用反射，执行EventHandler里面的HandleEvent方法
+        /// </summary>
+        /// <param name="handlerFactory"></param>
+        /// <param name="eventType"></param>
+        /// <param name="eventData"></param>
+        /// <param name="exceptions"></param>
+        /// <returns></returns>
         private void TriggerHandlingException(IEventHandlerFactory handlerFactory, Type eventType, IEventData eventData, List<Exception> exceptions)
         {
             var eventHandler = handlerFactory.GetHandler();
@@ -238,7 +261,7 @@ namespace DDD.Infrastructure.Domain.Events
         }
 
         /// <summary>
-        /// 利用反射，执行EventHandler里面的HandleEventAsync方法
+        /// 异步方法，利用反射，执行EventHandler里面的HandleEventAsync方法
         /// </summary>
         /// <param name="asyncHandlerFactory"></param>
         /// <param name="eventType"></param>
@@ -307,13 +330,11 @@ namespace DDD.Infrastructure.Domain.Events
 
         private static bool ShouldTriggerEventForHandler(Type eventType, Type handlerType)
         {
-            //Should trigger same type
             if (handlerType == eventType)
             {
                 return true;
             }
-
-            //Should trigger for inherited types
+            
             if (handlerType.IsAssignableFrom(eventType))
             {
                 return true;

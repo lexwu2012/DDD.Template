@@ -34,7 +34,17 @@ namespace DDD.AutoAcp.WebApi.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpPost, Route("PayInfo")]
-        public Result<PayInfoDto> PayInfo(GetPayInfoDto payInfo)
+        public Result<PayInfoDto> GetPayInfo(GetPayInfoDto payInfo)
+        {
+            return _wechatRepayService.GetPayInfoAsync(payInfo);
+        }
+
+        /// <summary>
+        /// 还款接口
+        /// </summary>
+        /// <returns></returns>
+        [HttpPost, Route("Repay")]
+        public Result<PayInfoDto> Repay(GetPayInfoDto payInfo)
         {
             return _wechatRepayService.GetPayInfoAsync(payInfo);
         }

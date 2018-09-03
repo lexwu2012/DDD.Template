@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DDD.Domain.Core.Model.Repositories.Dto;
 using DDD.Infrastructure.Domain.Application;
 using DDD.Infrastructure.Web.Application;
 using DDD.Infrastructure.Web.Query;
@@ -11,7 +12,7 @@ namespace DDD.Application.Service.CheckoffAutoAcp.Interfaces
 {
     public interface ICheckoffAutoAcpAppService : IApplicationService
     {
-        Result UpdateCheckoffAutoAcp(int id);
+        Result<CheckoffAutoAcpDto> UpdateCheckoffAutoAcp(int id);
 
         Result<IQueryable<Domain.Core.Model.CheckoffAutoAcp>> GetTodayCheckoffAutoAcp();
 

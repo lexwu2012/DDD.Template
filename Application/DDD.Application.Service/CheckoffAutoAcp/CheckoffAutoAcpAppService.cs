@@ -5,7 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DDD.Application.Service.CheckoffAutoAcp.Interfaces;
+using DDD.Domain.Core.Model.Repositories.Dto;
 using DDD.Domain.Core.Repositories;
+using DDD.Infrastructure.AutoMapper.Extension;
 using DDD.Infrastructure.Domain.Repositories;
 using DDD.Infrastructure.Web.Application;
 using DDD.Infrastructure.Web.Query;
@@ -26,14 +28,17 @@ namespace DDD.Application.Service.CheckoffAutoAcp
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Result UpdateCheckoffAutoAcp(int id)
+        public Result<CheckoffAutoAcpDto> UpdateCheckoffAutoAcp(int id)
         {
             var entity = _checkoffAutoAcpRepository.GetAll().FirstOrDefault(m => m.Id == id);
             if (null == entity)
-                return Result.FromError("没有该记录");
+                return Result.FromError<CheckoffAutoAcpDto>("没有该记录");
+
             entity.SendTime = DateTime.Now;
 
-            return Result.Ok();
+            var dto = entity.MapTo<CheckoffAutoAcpDto>();
+
+            return Result.FromData(dto);
         }
 
         public Result<IQueryable<Domain.Core.Model.CheckoffAutoAcp>> GetTodayCheckoffAutoAcp()

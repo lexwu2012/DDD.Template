@@ -44,6 +44,7 @@ namespace DDD.Application.Service.Wechat
 
             return result;
         }
+        
 
         public async Task<Result<int>> GetTodayAutoCheckoffTotalAsync()
         {

@@ -35,12 +35,13 @@ namespace DDD.Oracle.Test.ServiceTest
 
             _autoMapperInitializer = LocalIocManager.IocContainer.Resolve<IAutoMapperInitializer>();
 
-            _autoMapperInitializer.Initial();
+            
         }
 
         [Fact]
         public void UpdateSpecifyData()
         {
+            _autoMapperInitializer.Initial();
             var result = _checkoffAutoAcpAppService.UpdateCheckoffAutoAcp(1196780);
 
             result.Success.ShouldBeTrue();
@@ -51,6 +52,7 @@ namespace DDD.Oracle.Test.ServiceTest
         {
             try
             {
+                _autoMapperInitializer.Initial();
                 var result = await _checkoffAutoAcpAppService.GetCheckoffAutoAcpAsync<CheckoffAutoAcpDto>(new Query<CheckoffAutoAcp>(m => m.Id == 1196780));
 
                 result.ShouldNotBeNull();
@@ -66,6 +68,7 @@ namespace DDD.Oracle.Test.ServiceTest
         [Fact]
         public async void GetListAutoAcpData()
         {
+            _autoMapperInitializer.Initial();
             var result = await _checkoffAutoAcpAppService.GetCheckoffAutoAcpListAsync<CheckoffAutoAcpDto>(new Query<CheckoffAutoAcp>(m => m.Id == 1196780));
 
             result.ShouldNotBeNull();

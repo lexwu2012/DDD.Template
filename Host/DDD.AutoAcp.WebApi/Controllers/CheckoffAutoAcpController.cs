@@ -16,6 +16,9 @@ using DDD.Infrastructure.Web.Query;
 
 namespace DDD.AutoAcp.WebApi.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public class CheckoffAutoAcpController : ApiControllerBase
     {
         private readonly ILogger _logger;
@@ -42,7 +45,15 @@ namespace DDD.AutoAcp.WebApi.Controllers
             return await _checkoffAutoAcpAppService.GetCheckoffAutoAcpAsync<CheckoffAutoAcpDto>(new Query<CheckoffAutoAcp>(m => m.Id == id));
         }
 
-    
+        /// <summary>
+        /// 更新指定的代扣数据并返回dto
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet, Route("UpdateSpecifyCheckoffAutoAcpSendTimeAsync")]
+        public Result<CheckoffAutoAcpDto> UpdateSpecifyCheckoffAutoAcpSendTimeAsync(int id)
+        {
+            return _checkoffAutoAcpAppService.UpdateCheckoffAutoAcp(id);
+        }
         #endregion
     }
 }

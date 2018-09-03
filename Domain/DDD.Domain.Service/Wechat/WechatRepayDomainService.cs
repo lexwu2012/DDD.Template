@@ -27,7 +27,7 @@ namespace DDD.Domain.Service.Wechat
 
         public Result<PayInfoDto> GetPayInfo(GetPayInfoDto payInfoDto)
         {
-            var personId = payInfoDto.IdPerson ?? 0;
+            var personId = payInfoDto.IdPerson;
             //todo: set the static constanct
             string creditChannel = string.IsNullOrWhiteSpace(payInfoDto.Channel) ? "Constant" : payInfoDto.Channel.ToUpper();
 

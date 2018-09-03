@@ -9,51 +9,53 @@ using DDD.Infrastructure.Ioc.Dependency;
 
 namespace DDD.Infrastructure.Domain.Events
 {
-    //public class EventBusInstaller : IWindsorInstaller
-    //{
-    //    private readonly IIocResolver _iocResolver;
-    //    private IEventBus _eventBus;
+    public class EventBusInstaller : IWindsorInstaller
+    {
+        private readonly IIocResolver _iocResolver;
+        private IEventBus _eventBus;
 
-    //    public EventBusInstaller(IIocResolver iocResolver)
-    //    {
-    //        _iocResolver = iocResolver;
-    //    }
+        public EventBusInstaller(IIocResolver iocResolver)
+        {
+            _iocResolver = iocResolver;
+        }
 
-    //    public void Install(IWindsorContainer container, IConfigurationStore store)
-    //    {
-    //        container.Register(
-    //                Component.For<IEventBus>().UsingFactoryMethod(() => EventBus.Default).LifestyleSingleton()
-    //                );
-            
-    //        _eventBus = container.Resolve<IEventBus>();
+        /// <summary>
+        /// 领域事件拦截器
+        /// </summary>
+        /// <param name="container"></param>
+        /// <param name="store"></param>
+        public void Install(IWindsorContainer container, IConfigurationStore store)
+        {
+            container.Register(
+                    Component.For<IEventBus>().UsingFactoryMethod(() => EventBus.Default).LifestyleSingleton()
+                    );
 
-    //        container.Kernel.ComponentRegistered += Kernel_ComponentRegistered;
-    //    }
+            _eventBus = container.Resolve<IEventBus>();
 
-    //    private void Kernel_ComponentRegistered(string key, IHandler handler)
-    //    {
-    //        /* This code checks if registering component implements any IEventHandler<TEventData> interface, if yes,
-    //         * gets all event handler interfaces and registers type to Event Bus for each handling event.
-    //         */
-    //        if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(handler.ComponentModel.Implementation))
-    //        {
-    //            return;
-    //        }
+            container.Kernel.ComponentRegistered += Kernel_ComponentRegistered;
+        }
 
-    //        var interfaces = handler.ComponentModel.Implementation.GetTypeInfo().GetInterfaces();
-    //        foreach (var @interface in interfaces)
-    //        {
-    //            if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(@interface))
-    //            {
-    //                continue;
-    //            }
+        private void Kernel_ComponentRegistered(string key, IHandler handler)
+        {
+            if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(handler.ComponentModel.Implementation))
+            {
+                return;
+            }
 
-    //            var genericArgs = @interface.GetGenericArguments();
-    //            if (genericArgs.Length == 1)
-    //            {
-    //                _eventBus.Register(genericArgs[0], new IocHandlerFactory(_iocResolver, handler.ComponentModel.Implementation));
-    //            }
-    //        }
-    //    }
-    //}
+            var interfaces = handler.ComponentModel.Implementation.GetTypeInfo().GetInterfaces();
+            foreach (var @interface in interfaces)
+            {
+                if (!typeof(IEventHandler).GetTypeInfo().IsAssignableFrom(@interface))
+                {
+                    continue;
+                }
+
+                var genericArgs = @interface.GetGenericArguments();
+                if (genericArgs.Length == 1)
+                {
+                    _eventBus.Register(genericArgs[0], new IocHandlerFactory(_iocResolver, handler.ComponentModel.Implementation));
+                }
+            }
+        }
+    }
 }

@@ -32,5 +32,13 @@ namespace DDD.SqlServer.Test.UserService
 
             userService.GetAllUsers().Data.ShouldBeGreaterThanOrEqualTo(4);
         }
+
+        [Fact]
+        public void User_Should_Be_Update_Correctly()
+        {
+            var userService = LocalIocManager.IocContainer.Resolve<IUserAppService>();
+
+            userService.GetAllUsers().Data.ShouldBeGreaterThanOrEqualTo(4);
+        }
     }
 }
