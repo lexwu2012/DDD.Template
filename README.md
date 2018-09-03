@@ -20,14 +20,14 @@ This architecture base on the DDD recommended classic layer.
 #
 1. Architecture Layers
 ##
-  1) Documents  
-  Your documents related to the solution.
-  2) Infrastructure Layer
-  Your common infrastructure project that should be shared to all projects.
-  3) Domain Layer
-  4) Applicaiton Layer
-  5) Hosts
-  6) Test
+1) Documents
+Your documents related to the solution.
+2) Infrastructure Layer
+Your common infrastructure projects that should be shared to all projects.
+3) Domain Layer
+4) Applicaiton Layer
+5) Hosts Layer
+6) Test
 #
 2. Features
 ######
