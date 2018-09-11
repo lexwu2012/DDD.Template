@@ -1,6 +1,6 @@
 Summary
 =====
-Sample of .NET reference applicationThis helps to understand what are those basic concept in Domain Driven Design better and this is also kind of common architecture which help to solve those common problems which we will meet when we start a project. 
+Sample of .NET reference application. This helps to understand what are those basic concept in Domain Driven Design better and this is also kind of common architecture which help to solve those common problems which we will meet when we start a project. 
 
 
 
@@ -17,12 +17,4 @@ Architecture overview
 ##
 二级标题
 
-###
-三级标题
 
-####
-四级标题
-#####
-五级标题
-######
-六级标题
