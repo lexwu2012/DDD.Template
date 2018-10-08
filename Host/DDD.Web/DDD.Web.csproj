@@ -295,7 +295,7 @@
       <Project>{3079A3B6-C723-4147-AAA6-5239343A164B}</Project>
       <Name>DDD.Domain.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Domain\DDD.Domain.Common\DDD.Domain.Common.csproj">
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Domain\DDD.Infrastructure.Domain.csproj">
       <Project>{7C5E4721-D51A-49F8-8A5B-D03CF4BA32E1}</Project>
       <Name>DDD.Domain.Common</Name>
     </ProjectReference>
