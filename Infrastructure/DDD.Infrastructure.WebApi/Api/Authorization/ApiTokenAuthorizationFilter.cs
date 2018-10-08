@@ -15,7 +15,8 @@ namespace DDD.Infrastructure.WebApi.Api.Authorization
         public bool AllowMultiple => true;
         
 
-        public async Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, Func<Task<HttpResponseMessage>> continuation)
+        public async Task<HttpResponseMessage> ExecuteAuthorizationFilterAsync(HttpActionContext actionContext, CancellationToken cancellationToken, 
+            Func<Task<HttpResponseMessage>> continuation)
         {
             
             return await continuation();

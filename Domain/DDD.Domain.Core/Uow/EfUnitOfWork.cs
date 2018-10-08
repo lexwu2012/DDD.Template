@@ -4,6 +4,7 @@ using System.Collections.Immutable;
 using System.Data.Entity;
 using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
+using System.Threading.Tasks;
 using System.Transactions;
 using DDD.Domain.Core.DbContextRelate;
 using DDD.Infrastructure.Domain.DbHelper;
@@ -142,12 +143,30 @@ namespace DDD.Domain.Core.Uow
             CurrentTransaction = null;
         }
 
+        protected override async Task CompleteUowAsync()
+        {
+            await SaveChangesAsync();
+
+            if (Options.IsTransactional == true)
+            {
+                _transactionStrategy.Commit();
+            }
+        }
+
         public override void SaveChanges()
         {
             //DbContext.SaveChanges();
             foreach (var dbContext in ActiveDbContexts.Values.ToImmutableList())
             {
                 dbContext.SaveChanges();
+            }
+        }
+
+        public override async Task SaveChangesAsync()
+        {
+            foreach (var dbContext in ActiveDbContexts.Values.ToImmutableList())
+            {
+                await SaveChangesInDbContextAsync(dbContext);
             }
         }
 
@@ -246,6 +265,11 @@ namespace DDD.Domain.Core.Uow
             ActiveDbContexts.Clear();
         }
 
+        protected virtual async Task SaveChangesInDbContextAsync(DbContext dbContext)
+        {
+            await dbContext.SaveChangesAsync();
+        }
+
         private static void ObjectContext_ObjectMaterialized(DbContext dbContext, ObjectMaterializedEventArgs e)
         {
             var entityType = ObjectContext.GetObjectType(e.Entity.GetType());
@@ -262,5 +286,7 @@ namespace DDD.Domain.Core.Uow
             dbContext.Dispose();
             IocResolver.Release(dbContext);
         }
+
+        
     }
 }

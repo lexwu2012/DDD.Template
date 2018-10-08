@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Web.Http.Controllers;
 using System.Web.Http.Dependencies;
 using DDD.Infrastructure.Common.Extensions;
+using DDD.Infrastructure.Domain.Uow;
 
 namespace DDD.Infrastructure.WebApi.Api.Extension
 {
@@ -43,6 +44,19 @@ namespace DDD.Infrastructure.WebApi.Api.Extension
         {
             return (TService)dependencyResolver.GetService(typeof(TService));
         }
-        
+
+        /// <summary>
+        /// 创建工作单元选项
+        /// </summary>
+        internal static UnitOfWorkOptions CreateOptions(this UnitOfWorkAttribute uow)
+        {
+            return new UnitOfWorkOptions()
+            {
+                IsTransactional = uow.IsTransactional,
+                IsolationLevel = uow.IsolationLevel,
+                Timeout = uow.Timeout,
+                Scope = uow.Scope
+            };
+        }
     }
 }

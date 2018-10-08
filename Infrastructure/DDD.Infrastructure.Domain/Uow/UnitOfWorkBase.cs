@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DDD.Infrastructure.Domain.Events.Extensions;
+using System;
+using System.Threading.Tasks;
 
 namespace DDD.Infrastructure.Domain.Uow
 {
@@ -11,6 +13,8 @@ namespace DDD.Infrastructure.Domain.Uow
         private bool _succeed;
 
         private Exception _exception;
+
+        public event EventHandler Completed;
 
         protected IUnitOfWorkDefaultOptions DefaultOptions { get; }
 
@@ -35,7 +39,6 @@ namespace DDD.Infrastructure.Domain.Uow
             CurrentUnitOfWorkProvider = currentUnitOfWorkProvider;
             ConnectionStringResolver = connectionStringResolver;
         }
-
 
         public virtual int Commit()
         {
@@ -80,6 +83,22 @@ namespace DDD.Infrastructure.Domain.Uow
                 throw;
             }
         }
+
+        public async Task CompleteAsync()
+        {
+            try
+            {
+                await CompleteUowAsync();
+                _succeed = true;
+                OnCompleted();
+            }
+            catch (Exception ex)
+            {
+                _exception = ex;
+                throw;
+            }
+        }
+
         public void Dispose()
         {
             if (!_isBeginCalledBefore || IsDisposed)
@@ -108,6 +127,10 @@ namespace DDD.Infrastructure.Domain.Uow
             return ConnectionStringResolver.GetNameOrConnectionString(ref schema);
         }
 
+        protected virtual void OnCompleted()
+        {
+            Completed.InvokeSafely(this);
+        }
 
         private void PreventMultipleBegin()
         {
@@ -132,6 +155,11 @@ namespace DDD.Infrastructure.Domain.Uow
         /// <summary>
         /// 让子类实现自己的完成动作
         /// </summary>
+        protected abstract Task CompleteUowAsync();
+
+        /// <summary>
+        /// 让子类实现自己的完成动作
+        /// </summary>
         protected abstract void DisposeUow();
 
         /// <summary>
@@ -139,5 +167,9 @@ namespace DDD.Infrastructure.Domain.Uow
         /// </summary>
         public abstract void SaveChanges();
 
+        /// <summary>
+        /// 让子类实现自己的完成动作
+        /// </summary>
+        public abstract Task SaveChangesAsync();
     }
 }

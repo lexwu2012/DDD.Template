@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace DDD.Infrastructure.Domain.Uow
 {
@@ -8,5 +9,7 @@ namespace DDD.Infrastructure.Domain.Uow
     public interface IUnitOfWorkCompleteHandle : IDisposable
     {
         void Complete();
+
+        Task CompleteAsync();
     }
 }

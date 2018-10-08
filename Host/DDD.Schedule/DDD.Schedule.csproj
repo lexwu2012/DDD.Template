@@ -96,7 +96,7 @@
       <Project>{11005506-0C00-4EE5-889E-DB36CFEC0712}</Project>
       <Name>DDD.Application.Service</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Domain\DDD.Domain.Common\DDD.Domain.Common.csproj">
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Domain\DDD.Infrastructure.Domain.csproj">
       <Project>{7C5E4721-D51A-49F8-8A5B-D03CF4BA32E1}</Project>
       <Name>DDD.Domain.Common</Name>
     </ProjectReference>
