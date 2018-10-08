@@ -1,24 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Web;
-using System.Net.Http;
+﻿using System.Reflection;
 using System.Web.Http;
 using System.Web.Http.Dispatcher;
 using System.Web.Routing;
 using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using DDD.Application.Service;
-using DDD.Domain.Common.Repositories;
-using DDD.Domain.Common.Uow;
 using DDD.Domain.Core;
+using DDD.Domain.Core.DbContextRelate;
 using DDD.Domain.Core.Repositories;
 using DDD.Domain.Core.Uow;
 using DDD.Domain.Service;
+using DDD.Infrastructure.Domain.Repositories;
+using DDD.Infrastructure.Domain.Uow;
 using DDD.Infrastructure.Ioc;
 using DDD.Infrastructure.Ioc.Dependency;
 using DDD.Infrastructure.Ioc.Dependency.Registrar;
+using DDD.Infrastructure.WebApi;
 using DDD.Infrastructure.WebApi.Api;
 using DDD.Infrastructure.WebApi.Api.Controller;
 using DDD.Infrastructure.WebApi.Api.Exceptions;
@@ -60,12 +57,12 @@ namespace DDD.WebApi
             iocManager.AddConventionalRegistrar(new BasicConventionalRegistrar());
             iocManager.AddConventionalRegistrar(new ApiControllerConventionalRegistrar());
 
-            iocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Infrastructure.WebApi"));
+            iocManager.RegisterAssemblyByConvention(typeof(IInfrastructureWebApiModule).Assembly);
             iocManager.RegisterAssemblyByConvention(Assembly.GetExecutingAssembly());
 
             //注册service
             iocManager.RegisterAssemblyByConvention(typeof(IRepository).Assembly);
-            iocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Core"));
+            iocManager.RegisterAssemblyByConvention(typeof(IDomainCoreModule).Assembly);
             iocManager.RegisterAssemblyByConvention(typeof(DomainServiceBase).Assembly);
             iocManager.RegisterAssemblyByConvention(typeof(AppServiceBase).Assembly);
             iocManager.RegisterAssemblyByConvention(typeof(IocManager).Assembly);

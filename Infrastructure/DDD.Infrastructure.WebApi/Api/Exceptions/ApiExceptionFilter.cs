@@ -53,6 +53,8 @@ namespace DDD.Infrastructure.WebApi.Api.Exceptions
 
             context.Response = context.Request.CreateResponse(HttpStatusCode.OK, result);
 
+            //BusinessEvent();
+
             //触发领域事件，发送邮件
             EventBus.Trigger(this, new HandledExceptionData(context.Exception));
         }
@@ -60,6 +62,11 @@ namespace DDD.Infrastructure.WebApi.Api.Exceptions
         private ResultCode GetResultCode(HttpActionExecutedContext context)
         {
             return ResultCode.ServerError;
+        }
+
+        protected virtual void BusinessEvent()
+        {
+
         }
     }
 }

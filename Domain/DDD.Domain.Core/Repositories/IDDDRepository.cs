@@ -8,7 +8,8 @@ using DDD.Infrastructure.Domain.Repositories;
 
 namespace DDD.Domain.Core.Repositories
 {
-    public interface IDDDRepository<TEntity, TPrimaryKey> : IRepositoryWithTEntityAndTPrimaryKey<TEntity, TPrimaryKey> where TEntity : class, IAggregateRoot<TPrimaryKey>
+    public interface IDDDRepository<TEntity, TPrimaryKey> : IRepositoryWithTEntityAndTPrimaryKey<TEntity, TPrimaryKey> 
+        where TEntity : class, IAggregateRoot<TPrimaryKey>
     {
         /// <summary>
         /// 批量添加

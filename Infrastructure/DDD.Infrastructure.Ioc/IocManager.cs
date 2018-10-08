@@ -40,11 +40,19 @@ namespace DDD.Infrastructure.Ioc
 
         #region Rigister
 
+        /// <summary>
+        /// 添加通用注册规则
+        /// </summary>
+        /// <param name="registrar"></param>
         public void AddConventionalRegistrar(IConventionalDependencyRegistrar registrar)
         {
             _conventionalRegistrars.Add(registrar);
         }
 
+        /// <summary>
+        /// 通过程序集在通用注册规则下正式注册
+        /// </summary>
+        /// <param name="assembly"></param>
         public void RegisterAssemblyByConvention(Assembly assembly)
         {
             var context = new ConventionalRegistrationContext(assembly, this);

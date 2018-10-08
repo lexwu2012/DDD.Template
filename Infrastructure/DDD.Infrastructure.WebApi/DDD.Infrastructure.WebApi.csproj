@@ -101,6 +101,7 @@
     <Compile Include="Api\MediaTypeHeaderValueExtensions.cs" />
     <Compile Include="IInfrastructureWebApiModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Uow\ApiUowFilter.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />

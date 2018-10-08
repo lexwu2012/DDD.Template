@@ -1,21 +1,16 @@
 ﻿using Castle.Facilities.Logging;
 using Castle.MicroKernel.Registration;
 using DDD.Application.Service;
-using DDD.Domain.Common.Repositories;
-using DDD.Domain.Common.Uow;
-using DDD.Domain.Core;
+using DDD.Domain.Core.DbContextRelate;
 using DDD.Domain.Core.Uow;
 using DDD.Domain.Service;
+using DDD.Infrastructure.Domain.Repositories;
+using DDD.Infrastructure.Domain.Uow;
 using DDD.Infrastructure.Ioc;
 using DDD.Infrastructure.Ioc.Dependency;
 using DDD.Infrastructure.Ioc.Dependency.Registrar;
 using DDD.Infrastructure.Ioc.Installer;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DDD.Schedule.App_Start
 {

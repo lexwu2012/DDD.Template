@@ -13,6 +13,11 @@ namespace DDD.Infrastructure.Domain.Uow
         public TimeSpan? Timeout { get; set; }
 
         /// <summary>
+        /// Scope option.
+        /// </summary>
+        public TransactionScopeOption? Scope { get; set; }
+
+        /// <summary>
         /// 事务隔离标志
         /// </summary>
         public IsolationLevel? IsolationLevel { get; set; }
@@ -45,7 +50,8 @@ namespace DDD.Infrastructure.Domain.Uow
             {
                 IsTransactional = IsTransactional,
                 IsolationLevel = IsolationLevel,
-                Timeout = Timeout
+                Timeout = Timeout,
+                Scope = Scope
             };
         }
 

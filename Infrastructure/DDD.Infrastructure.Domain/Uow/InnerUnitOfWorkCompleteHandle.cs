@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 
 namespace DDD.Infrastructure.Domain.Uow
 {
@@ -12,6 +13,12 @@ namespace DDD.Infrastructure.Domain.Uow
         public void Complete()
         {
             _isCompleteCalled = true;
+        }
+
+        public Task CompleteAsync()
+        {
+            _isCompleteCalled = true;
+            return Task.FromResult(0);
         }
 
         public void Dispose()
@@ -44,6 +51,6 @@ namespace DDD.Infrastructure.Domain.Uow
             {
                 return false;
             }
-        }
+        }        
     }
 }

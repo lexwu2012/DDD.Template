@@ -119,6 +119,7 @@
     <Compile Include="Events\EventData.cs" />
     <Compile Include="Events\Exceptions\ExceptionData.cs" />
     <Compile Include="Events\Exceptions\HandledExceptionData.cs" />
+    <Compile Include="Events\Extensions\EventHandlerExtensions.cs" />
     <Compile Include="Events\Factories\FactoryUnregistrar.cs" />
     <Compile Include="Events\Factories\IEventHandlerFactory.cs" />
     <Compile Include="Events\Factories\IocHandlerFactory.cs" />
