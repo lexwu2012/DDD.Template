@@ -107,9 +107,9 @@
     <Compile Include="Api\Exceptions\ApiExceptionFilter.cs" />
     <Compile Include="Api\Extension\ModelStateExtensions.cs" />
     <Compile Include="Api\Extension\WebApiExtensions.cs" />
+    <Compile Include="Api\Log\HttpMessageLogHandler.cs" />
     <Compile Include="Api\Validation\ApiValidationFilter.cs" />
     <Compile Include="Api\WindsorDependencyResolver.cs" />
-    <Compile Include="Api\Log\HttpMessageLogHandler.cs" />
     <Compile Include="Api\MediaTypeConstant.cs" />
     <Compile Include="Api\MediaTypeHeaderValueExtensions.cs" />
     <Compile Include="IInfrastructureWebApiModule.cs" />
