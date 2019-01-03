@@ -85,44 +85,50 @@ namespace DDD.Domain.Core.Uow
         {
             if (Options.IsTransactional == true)
             {
-                if (CurrentTransaction != null)
-                {
-                    return;
-                }
-                TransactionOptions transactionOptions;
-
-                //oracle只支持ReadCommitted和Serializable
-                if (DbConnectionHelper.DbCatagory == DBType.Oracle.ToString())
-                {
-                    transactionOptions = new TransactionOptions
-                    {
-                        IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadCommitted),
-                    };                    
-                }
-                else
-                {
-                    transactionOptions = new TransactionOptions
-                    {
-                        IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadUncommitted),
-                    };
-                }
-                
-
-                if (Options.Timeout.HasValue)
-                {
-                    transactionOptions.Timeout = Options.Timeout.Value;
-                }
-
-                CurrentTransaction = new TransactionScope(
-                    Options.Scope.GetValueOrDefault(TransactionScopeOption.Required),
-                    transactionOptions,
-                    Options.AsyncFlowOption.GetValueOrDefault(TransactionScopeAsyncFlowOption.Enabled)
-                );
-
-                //这里应该解析出来的是TransactionScopeEfTransactionStrategy
-                //_transactionStrategy.InitOptions(Options);
+                //初始化TransactionScopeEfTransactionStrategy的事务
+                _transactionStrategy.InitOptions(Options);
             }
-            
+
+            //if (Options.IsTransactional == true)
+            //{
+            //    if (CurrentTransaction != null)
+            //    {
+            //        return;
+            //    }
+            //    TransactionOptions transactionOptions;
+
+            //    //oracle只支持ReadCommitted和Serializable
+            //    if (DbConnectionHelper.DbCatagory == DBType.Oracle.ToString())
+            //    {
+            //        transactionOptions = new TransactionOptions
+            //        {
+            //            IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadCommitted),
+            //        };                    
+            //    }
+            //    else
+            //    {
+            //        transactionOptions = new TransactionOptions
+            //        {
+            //            IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadUncommitted),
+            //        };
+            //    }
+
+
+            //    if (Options.Timeout.HasValue)
+            //    {
+            //        transactionOptions.Timeout = Options.Timeout.Value;
+            //    }
+
+            //    CurrentTransaction = new TransactionScope(
+            //        Options.Scope.GetValueOrDefault(TransactionScopeOption.Required),
+            //        transactionOptions,
+            //        Options.AsyncFlowOption.GetValueOrDefault(TransactionScopeAsyncFlowOption.Enabled)
+            //    );
+
+            //    //这里应该解析出来的是TransactionScopeEfTransactionStrategy
+            //    //_transactionStrategy.InitOptions(Options);
+            //}
+
         }
 
         /// <summary>

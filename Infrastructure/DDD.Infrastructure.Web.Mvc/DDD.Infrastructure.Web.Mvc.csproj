@@ -68,6 +68,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Fliter\Action\MvcStatisticsTrackerActionFilter.cs" />
+    <Compile Include="Fliter\Authorize\MvcAuthenticationAttribute.cs" />
     <Compile Include="Fliter\Exceptions\MvcExceptionFilter.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

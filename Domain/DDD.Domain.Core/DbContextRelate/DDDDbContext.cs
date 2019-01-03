@@ -7,6 +7,8 @@ using System.Data.Entity.Core.Objects;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using System.Linq;
+using System.Threading;
+using System.Threading.Tasks;
 using Castle.Core.Logging;
 using DDD.Domain.Core.Model;
 using DDD.Domain.Core.Repositories;
@@ -127,6 +129,37 @@ namespace DDD.Domain.Core.DbContextRelate
             catch(Exception ex)
             {
                 throw ex;
+            }
+        }
+
+        public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken)
+        {
+            try
+            {
+                var userId = GetAuditUserId();
+                foreach (var entry in ChangeTracker.Entries().ToList())
+                {
+                    switch (entry.State)
+                    {
+                        case EntityState.Added:
+                            Apply4AddedEntity(entry, userId);
+                            break;
+                        case EntityState.Modified:
+                            Apply4ModifiedEntity(entry, userId);
+                            break;
+                        case EntityState.Deleted:
+                            Apply4DeletedEntity(entry, userId);
+                            break;
+                    }
+                }
+
+                var result = await base.SaveChangesAsync(cancellationToken);
+                return result;
+            }
+            catch (DbEntityValidationException ex)
+            {
+                LogDbEntityValidationException(ex);
+                throw;
             }
         }
 
