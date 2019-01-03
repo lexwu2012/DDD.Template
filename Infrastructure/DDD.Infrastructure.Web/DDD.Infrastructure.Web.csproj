@@ -106,6 +106,7 @@
     <Compile Include="Query\Query.cs" />
     <Compile Include="Query\QueryHelper.cs" />
     <Compile Include="Threading\AsyncHelper.cs" />
+    <Compile Include="Threading\InternalAsyncHelper.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DDD.Infrastructure.Common\DDD.Infrastructure.Common.csproj">
