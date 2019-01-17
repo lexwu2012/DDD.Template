@@ -118,6 +118,10 @@
       <Project>{973743A2-FD9A-4FDD-97FF-A25273EE0172}</Project>
       <Name>DDD.Infrastructure.Ioc</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DDD.Infrastructure.Logger\DDD.Infrastructure.Logger.csproj">
+      <Project>{194732D4-482E-461E-8697-5679C54E6EF8}</Project>
+      <Name>DDD.Infrastructure.Logger</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

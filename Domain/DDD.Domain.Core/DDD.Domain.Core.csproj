@@ -158,6 +158,10 @@
       <Project>{973743A2-FD9A-4FDD-97FF-A25273EE0172}</Project>
       <Name>DDD.Infrastructure.Ioc</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Logger\DDD.Infrastructure.Logger.csproj">
+      <Project>{194732D4-482E-461E-8697-5679C54E6EF8}</Project>
+      <Name>DDD.Infrastructure.Logger</Name>
+    </ProjectReference>
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Web\DDD.Infrastructure.Web.csproj">
       <Project>{808D7042-E3C1-430D-ACD4-9ACCABE96303}</Project>
       <Name>DDD.Infrastructure.Web</Name>

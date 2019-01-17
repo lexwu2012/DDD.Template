@@ -19,6 +19,7 @@ using DDD.Infrastructure.Domain.CustomAttributes;
 using DDD.Infrastructure.Domain.DbHelper;
 using DDD.Infrastructure.Domain.Repositories;
 using DDD.Infrastructure.Ioc.Dependency;
+using DDD.Infrastructure.Logger;
 using Oracle.ManagedDataAccess.Client;
 
 namespace DDD.Domain.Core.DbContextRelate
@@ -177,6 +178,8 @@ namespace DDD.Domain.Core.DbContextRelate
 
         protected void InitializeDbContext()
         {
+            SetInjection();
+
             ((IObjectContextAdapter)this)
                 .ObjectContext
                 .ObjectStateManager
@@ -240,6 +243,15 @@ namespace DDD.Domain.Core.DbContextRelate
         {
             //todo: 从session里面拿UserId
             return null;
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void SetInjection()
+        {
+            Logger = LogHelper.Logger;
         }
 
         #endregion

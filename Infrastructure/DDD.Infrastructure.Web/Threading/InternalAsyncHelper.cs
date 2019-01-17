@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DDD.Infrastructure.Logger;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -56,6 +57,14 @@ namespace DDD.Infrastructure.Web.Threading
                    .Invoke(null, new object[] { actualReturnValue, action, finalAction });
         }
 
+        public static object CallAwaitTaskWithFinallyAndGetResult(Type taskReturnType, object actualReturnValue, Action<Exception> finalAction)
+        {
+            return typeof(InternalAsyncHelper)
+                   .GetMethod("AwaitTaskWithFinallyAndGetResult", BindingFlags.Public | BindingFlags.Static)
+                   .MakeGenericMethod(taskReturnType)
+                   .Invoke(null, new object[] { actualReturnValue, finalAction });
+        }
+
         public static async Task<T> AwaitTaskWithPostActionAndFinallyAndGetResult<T>(Task<T> actualReturnValue, Func<Task> postAction, Action<Exception> finalAction)
         {
             Exception exception = null;
@@ -65,6 +74,26 @@ namespace DDD.Infrastructure.Web.Threading
                 var result = await actualReturnValue;
                 await postAction();
                 return result;
+            }
+            catch (Exception ex)
+            {
+                exception = ex;
+                LogHelper.LogException(ex);
+                throw;
+            }
+            finally
+            {
+                finalAction(exception);
+            }
+        }
+
+        public static async Task<T> AwaitTaskWithFinallyAndGetResult<T>(Task<T> actualReturnValue, Action<Exception> finalAction)
+        {
+            Exception exception = null;
+
+            try
+            {
+                return await actualReturnValue;
             }
             catch (Exception ex)
             {
