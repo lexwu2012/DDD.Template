@@ -101,6 +101,7 @@
     <Compile Include="CustomAttributes\EnableValidationAttribute.cs" />
     <Compile Include="CustomAttributes\QueryAttribute.cs" />
     <Compile Include="Helper\JArrayHelper.cs" />
+    <Compile Include="IInfrastructureWebModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Query\IQuery.cs" />
     <Compile Include="Query\Query.cs" />

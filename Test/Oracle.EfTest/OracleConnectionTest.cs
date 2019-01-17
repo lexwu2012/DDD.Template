@@ -33,7 +33,7 @@ namespace Oracle.EfTest
         [Fact]
         public void UpdateSpecifyData()
         {
-            _autoMapperInitializer.Initial();
+            _autoMapperInitializer.Initialize();
             var result = _checkoffAutoAcpAppService.UpdateCheckoffAutoAcp(1196780);
 
             result.Success.ShouldBeTrue();

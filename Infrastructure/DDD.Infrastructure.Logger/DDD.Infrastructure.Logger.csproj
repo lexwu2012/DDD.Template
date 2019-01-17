@@ -65,6 +65,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IHasLogSeverity.cs" />
+    <Compile Include="IInfrastructureLoggerModule.cs" />
     <Compile Include="LoggerExtensions.cs" />
     <Compile Include="LogHelper.cs" />
     <Compile Include="LogSeverity.cs" />

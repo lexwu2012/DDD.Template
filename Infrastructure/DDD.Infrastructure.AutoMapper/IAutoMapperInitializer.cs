@@ -9,6 +9,6 @@ namespace DDD.Infrastructure.AutoMapper
 {
     public interface IAutoMapperInitializer : ISingletonDependency
     {
-        void Initial();
+        void Initialize();
     }
 }

@@ -40,9 +40,7 @@ namespace DDD.Domain.Core.Uow
 
         public TDbContext GetDbContext()
         {
-            if (null != _currentUnitOfWorkProvider.Current)
-                return _currentUnitOfWorkProvider.Current.GetDbContext<TDbContext>();
-            return null;
+            return _currentUnitOfWorkProvider.Current?.GetDbContext<TDbContext>();
         }
     }
 }

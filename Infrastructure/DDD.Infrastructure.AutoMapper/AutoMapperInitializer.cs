@@ -21,7 +21,7 @@ namespace DDD.Infrastructure.AutoMapper
             _typeFinder = typeFinder;
         }
 
-        public void Initial()
+        public void Initialize()
         {
 
             var list = new List<Action<IMapperConfigurationExpression>>();

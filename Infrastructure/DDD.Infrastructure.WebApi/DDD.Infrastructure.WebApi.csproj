@@ -107,7 +107,10 @@
     <Compile Include="Api\Exceptions\ApiExceptionFilter.cs" />
     <Compile Include="Api\Extension\ModelStateExtensions.cs" />
     <Compile Include="Api\Extension\WebApiExtensions.cs" />
+    <Compile Include="Api\Helper\CliamProperties.cs" />
+    <Compile Include="Api\Helper\TokenHelper.cs" />
     <Compile Include="Api\Log\HttpMessageLogHandler.cs" />
+    <Compile Include="Api\TokenSecretKey.cs" />
     <Compile Include="Api\Validation\ApiValidationFilter.cs" />
     <Compile Include="Api\WindsorDependencyResolver.cs" />
     <Compile Include="Api\MediaTypeConstant.cs" />
@@ -128,6 +131,10 @@
     <ProjectReference Include="..\DDD.Infrastructure.Domain\DDD.Infrastructure.Domain.csproj">
       <Project>{7C5E4721-D51A-49F8-8A5B-D03CF4BA32E1}</Project>
       <Name>DDD.Infrastructure.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DDD.Infrastructure.Logger\DDD.Infrastructure.Logger.csproj">
+      <Project>{194732D4-482E-461E-8697-5679C54E6EF8}</Project>
+      <Name>DDD.Infrastructure.Logger</Name>
     </ProjectReference>
     <ProjectReference Include="..\DDD.Infrastructure.Web\DDD.Infrastructure.Web.csproj">
       <Project>{808D7042-E3C1-430D-ACD4-9ACCABE96303}</Project>
