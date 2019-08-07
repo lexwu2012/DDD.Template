@@ -19,6 +19,10 @@ namespace DDD.Infrastructure.Domain.Uow
             _unitOfWorkManager = unitOfWorkManager;
         }
 
+        /// <summary>
+        /// 被拦截后的需要处理的内容
+        /// </summary>
+        /// <param name="invocation"></param>
         public void Intercept(IInvocation invocation)
         {
             MethodInfo method;
@@ -39,21 +43,14 @@ namespace DDD.Infrastructure.Domain.Uow
             }
 
 
-            PerformUow(invocation, unitOfWorkAttr.CreateOptions());
-            //var options = unitOfWorkAttr.CreateOptions();
-            //using (var uow = _unitOfWorkManager.Begin(options))
-            //{
-            //    invocation.Proceed();
-            //    uow.Complete();
-            //}
-
-            //using (var ts = new TransactionScope())//创建一个事务范围对象
-            //{
-            //    invocation.Proceed();//执行被拦截的方法
-            //    ts.Complete();//事务完成
-            //}
+            PerformUow(invocation, unitOfWorkAttr.CreateOptions());           
         }
 
+        /// <summary>
+        /// 根据同步异步开启对应的事务
+        /// </summary>
+        /// <param name="invocation"></param>
+        /// <param name="options"></param>
         private void PerformUow(IInvocation invocation, UnitOfWorkOptions options)
         {
             if (invocation.Method.IsAsync())

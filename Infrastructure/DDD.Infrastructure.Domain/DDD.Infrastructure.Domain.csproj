@@ -152,6 +152,7 @@
     <Compile Include="Uow\UnitOfWorkBase.cs" />
     <Compile Include="Uow\UnitOfWorkDefaultOptions.cs" />
     <Compile Include="Uow\UnitOfWorkDefaultOptionsExtensions.cs" />
+    <Compile Include="Uow\UnitOfWorkFailedEventArgs.cs" />
     <Compile Include="Uow\UnitOfWorkHelper.cs" />
     <Compile Include="Uow\UnitOfWorkInterceptor.cs" />
     <Compile Include="Uow\UnitOfWorkManager.cs" />

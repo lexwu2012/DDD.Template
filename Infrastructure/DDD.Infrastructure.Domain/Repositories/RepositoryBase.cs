@@ -26,7 +26,6 @@ namespace DDD.Infrastructure.Domain.Repositories
 
         #endregion
 
-
         public virtual IQueryable<TEntity> GetAllIncluding(params Expression<Func<TEntity, object>>[] propertySelectors)
         {
             return GetAll();

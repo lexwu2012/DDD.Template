@@ -4,7 +4,6 @@ using System.Web.Http;
 using DDD.WebApi;
 using Swashbuckle.Application;
 
-[assembly: PreApplicationStartMethod(typeof(SwaggerConfig), "Register")]
 
 namespace DDD.WebApi
 {

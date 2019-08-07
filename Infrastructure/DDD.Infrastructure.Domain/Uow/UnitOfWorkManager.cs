@@ -4,7 +4,7 @@ using DDD.Infrastructure.Ioc.Dependency;
 namespace DDD.Infrastructure.Domain.Uow
 {
     /// <summary>
-    /// uow管理器，对外提供uow方法
+    /// facade模式，对外提供uow方法
     /// </summary>
     public class UnitOfWorkManager : IUnitOfWorkManager, ITransientDependency
     {
@@ -44,17 +44,40 @@ namespace DDD.Infrastructure.Domain.Uow
         {
             options.FillDefaultsForNonProvidedOptions(_defaultOptions);
 
+            //检查是否已经存开启了第一个事务
             var outerUow = _currentUnitOfWorkProvider.Current;
 
+            //如果当前已经存在第一个事务，则返回InnerUnitOfWorkCompleteHandle，这个方法的Complete方法不会做事务的提交，只是一个uow链式嵌套
             if (options.Scope == TransactionScopeOption.Required && outerUow != null)
             {
                 return new InnerUnitOfWorkCompleteHandle();
             }
 
+            //解析第一个UnitOfWork
             var uow = _iocResolver.Resolve<IUnitOfWork>();
 
+            //注册IUnitOfWork提交后事务后的提交委托（把当前的uow设置为null）
+            uow.Completed += (sender, args) =>
+            {
+                _currentUnitOfWorkProvider.Current = null;
+            };
+
+            //注册IUnitOfWork提交后事务后的失败委托（把当前的uow设置为null）
+            uow.Failed += (sender, args) =>
+            {
+                _currentUnitOfWorkProvider.Current = null;
+            };
+
+            //注册IUnitOfWork提交后事务后的释放委托（把当前的uow设置为释放）
+            uow.Disposed += (sender, args) =>
+            {
+                _iocResolver.Release(uow);
+            };
+
+            //开启第一个真正的TransactionScope事务
             uow.Begin(options);
 
+            //设置当前请求的uow不为空
             _currentUnitOfWorkProvider.Current = uow;
 
             return uow;

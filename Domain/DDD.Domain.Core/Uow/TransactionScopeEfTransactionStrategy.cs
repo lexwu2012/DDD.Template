@@ -34,6 +34,7 @@ namespace DDD.Domain.Core.Uow
         {
             Options = options;
 
+            //开启真正的TransactionScope事务
             StartTransaction();
         }
 
@@ -47,9 +48,12 @@ namespace DDD.Domain.Core.Uow
                 return;
             }
 
+            //事务提交
             CurrentTransaction.Complete();
 
+            //手动释放Transaction
             CurrentTransaction.Dispose();
+
             CurrentTransaction = null;
         }
 

@@ -16,8 +16,13 @@ namespace DDD.Infrastructure.Domain.Uow
             set { SetCurrentUow(value); }
         }
 
+        //使用AsyncLocal异步上下文确保同一次请求能获取相同的uow
         private static readonly AsyncLocal<LocalUowWrapper> AsyncLocalUow = new AsyncLocal<LocalUowWrapper>();
 
+        /// <summary>
+        /// 获取当前
+        /// </summary>
+        /// <returns></returns>
         private static IUnitOfWork GetCurrentUow()
         {
             var uow = AsyncLocalUow.Value?.UnitOfWork;

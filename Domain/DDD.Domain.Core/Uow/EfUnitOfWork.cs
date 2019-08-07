@@ -13,6 +13,9 @@ using DDD.Infrastructure.Ioc.Dependency;
 
 namespace DDD.Domain.Core.Uow
 {
+    /// <summary>
+    /// EF的工作单元
+    /// </summary>
     public class EfUnitOfWork : UnitOfWorkBase, ITransientDependency
     {
         public DbContext DbContext { get; set; }
@@ -29,7 +32,7 @@ namespace DDD.Domain.Core.Uow
         private readonly IEfTransactionStrategy _transactionStrategy;
 
         /// <summary>
-        /// cotr
+        /// ctor
         /// </summary>
         /// <param name="defaultOptions"></param>
         /// <param name="iocResolver"></param>
@@ -88,67 +91,26 @@ namespace DDD.Domain.Core.Uow
                 //初始化TransactionScopeEfTransactionStrategy的事务
                 _transactionStrategy.InitOptions(Options);
             }
-
-            //if (Options.IsTransactional == true)
-            //{
-            //    if (CurrentTransaction != null)
-            //    {
-            //        return;
-            //    }
-            //    TransactionOptions transactionOptions;
-
-            //    //oracle只支持ReadCommitted和Serializable
-            //    if (DbConnectionHelper.DbCatagory == DBType.Oracle.ToString())
-            //    {
-            //        transactionOptions = new TransactionOptions
-            //        {
-            //            IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadCommitted),
-            //        };                    
-            //    }
-            //    else
-            //    {
-            //        transactionOptions = new TransactionOptions
-            //        {
-            //            IsolationLevel = Options.IsolationLevel.GetValueOrDefault(IsolationLevel.ReadUncommitted),
-            //        };
-            //    }
-
-
-            //    if (Options.Timeout.HasValue)
-            //    {
-            //        transactionOptions.Timeout = Options.Timeout.Value;
-            //    }
-
-            //    CurrentTransaction = new TransactionScope(
-            //        Options.Scope.GetValueOrDefault(TransactionScopeOption.Required),
-            //        transactionOptions,
-            //        Options.AsyncFlowOption.GetValueOrDefault(TransactionScopeAsyncFlowOption.Enabled)
-            //    );
-
-            //    //这里应该解析出来的是TransactionScopeEfTransactionStrategy
-            //    //_transactionStrategy.InitOptions(Options);
-            //}
-
         }
 
         /// <summary>
-        /// 保存数据并且提交事务
+        /// 同步保存数据并且提交事务
         /// </summary>
         protected override void CompleteUow()
         {
             SaveChanges();
 
-            if (CurrentTransaction == null)
+            if (Options.IsTransactional == true)
             {
-                return;
+                //TransactionScopeEfTransactionStrategy
+                _transactionStrategy.Commit();
             }
-
-            CurrentTransaction.Complete();
-
-            CurrentTransaction.Dispose();
-            CurrentTransaction = null;
         }
 
+        /// <summary>
+        /// 异步保存数据并且提交事务
+        /// </summary>
+        /// <returns></returns>
         protected override async Task CompleteUowAsync()
         {
             await SaveChangesAsync();
@@ -159,15 +121,21 @@ namespace DDD.Domain.Core.Uow
             }
         }
 
+        /// <summary>
+        /// 同步提交EF的事务
+        /// </summary>
         public override void SaveChanges()
         {
-            //DbContext.SaveChanges();
             foreach (var dbContext in ActiveDbContexts.Values.ToImmutableList())
             {
                 dbContext.SaveChanges();
             }
         }
 
+        /// <summary>
+        /// 异步提交EF的事务
+        /// </summary>
+        /// <returns></returns>
         public override async Task SaveChangesAsync()
         {
             foreach (var dbContext in ActiveDbContexts.Values.ToImmutableList())
@@ -176,6 +144,11 @@ namespace DDD.Domain.Core.Uow
             }
         }
 
+        /// <summary>
+        /// 基于当前uow获取dbcontext
+        /// </summary>
+        /// <typeparam name="TDbContext"></typeparam>
+        /// <returns></returns>
         public virtual TDbContext GetOrCreateDbContext<TDbContext>()
             where TDbContext : DbContext
         {

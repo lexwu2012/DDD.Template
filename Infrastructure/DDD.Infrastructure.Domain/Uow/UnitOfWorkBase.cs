@@ -1,6 +1,7 @@
 ﻿using DDD.Infrastructure.Domain.Events.Extensions;
 using System;
 using System.Threading.Tasks;
+using Castle.Core;
 
 namespace DDD.Infrastructure.Domain.Uow
 {
@@ -15,6 +16,8 @@ namespace DDD.Infrastructure.Domain.Uow
         private Exception _exception;
 
         public event EventHandler Completed;
+        public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
+        public event EventHandler Disposed;
 
         protected IUnitOfWorkDefaultOptions DefaultOptions { get; }
 
@@ -30,6 +33,7 @@ namespace DDD.Infrastructure.Domain.Uow
 
         public bool IsDisposed { get; private set; }
 
+        [DoNotWire]
         public IUnitOfWork Outer { get; set; }
 
         protected UnitOfWorkBase(
@@ -70,12 +74,18 @@ namespace DDD.Infrastructure.Domain.Uow
             BeginUow();
         }
 
+        /// <summary>
+        /// 同步事务完成动作（提交事务）
+        /// </summary>
         public void Complete()
         {
             try
             {
+                //提交事务
                 CompleteUow();
                 _succeed = true;
+                //释放当前的uow
+                OnCompleted();
             }
             catch (Exception ex)
             {
@@ -83,7 +93,10 @@ namespace DDD.Infrastructure.Domain.Uow
                 throw;
             }
         }
-
+        /// <summary>
+        /// 异步事务完成动作（提交事务）
+        /// </summary>
+        /// <returns></returns>
         public async Task CompleteAsync()
         {
             try
@@ -99,6 +112,9 @@ namespace DDD.Infrastructure.Domain.Uow
             }
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
         public void Dispose()
         {
             if (!_isBeginCalledBefore || IsDisposed)
@@ -127,6 +143,9 @@ namespace DDD.Infrastructure.Domain.Uow
             return ConnectionStringResolver.GetNameOrConnectionString(ref schema);
         }
 
+        /// <summary>
+        /// 提交事务后的一个后续动作（释放资源）
+        /// </summary>
         protected virtual void OnCompleted()
         {
             Completed.InvokeSafely(this);

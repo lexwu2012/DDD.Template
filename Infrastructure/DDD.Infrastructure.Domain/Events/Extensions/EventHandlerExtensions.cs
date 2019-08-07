@@ -12,7 +12,7 @@ namespace DDD.Infrastructure.Domain.Events.Extensions
     public static class EventHandlerExtensions
     {
         /// <summary>
-        /// Raises given event safely with given arguments.
+        /// 执行委托方法
         /// </summary>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="sender">Source of the event</param>
@@ -22,7 +22,7 @@ namespace DDD.Infrastructure.Domain.Events.Extensions
         }
 
         /// <summary>
-        /// Raises given event safely with given arguments.
+        /// 执行委托方法
         /// </summary>
         /// <param name="eventHandler">The event handler</param>
         /// <param name="sender">Source of the event</param>
@@ -34,6 +34,7 @@ namespace DDD.Infrastructure.Domain.Events.Extensions
                 return;
             }
 
+            //执行委托方法
             eventHandler(sender, e);
         }       
     }
