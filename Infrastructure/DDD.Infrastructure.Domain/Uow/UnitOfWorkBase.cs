@@ -93,6 +93,7 @@ namespace DDD.Infrastructure.Domain.Uow
                 throw;
             }
         }
+
         /// <summary>
         /// 异步事务完成动作（提交事务）
         /// </summary>
@@ -103,6 +104,7 @@ namespace DDD.Infrastructure.Domain.Uow
             {
                 await CompleteUowAsync();
                 _succeed = true;
+                //事务提交后的释放动作
                 OnCompleted();
             }
             catch (Exception ex)

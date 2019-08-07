@@ -6,7 +6,7 @@ using DDD.Infrastructure.Web.Threading;
 namespace DDD.Infrastructure.Domain.Uow
 {
     /// <summary>
-    /// uow拦截器
+    /// uow拦截器，描述被拦截后的方法动作
     /// </summary>
     public class UnitOfWorkInterceptor: IInterceptor
     {
@@ -35,6 +35,7 @@ namespace DDD.Infrastructure.Domain.Uow
                 method = invocation.GetConcreteMethod();
             }
 
+            //检测该方法是否释放满足约定的拦截（ServiceBase,UnitOfWorkAttribute）
             var unitOfWorkAttr = _unitOfWorkOptions.GetUnitOfWorkAttributeOrNull(method);
             if (unitOfWorkAttr == null || unitOfWorkAttr.IsDisabled)
             {
@@ -42,7 +43,7 @@ namespace DDD.Infrastructure.Domain.Uow
                 return;
             }
 
-
+            //区分同步和异步方法的事务开启和事务提交
             PerformUow(invocation, unitOfWorkAttr.CreateOptions());           
         }
 
@@ -55,10 +56,12 @@ namespace DDD.Infrastructure.Domain.Uow
         {
             if (invocation.Method.IsAsync())
             {
+                //异步方法
                 PerformAsyncUow(invocation, options);
             }
             else
             {
+                //同步方法
                 PerformSyncUow(invocation, options);
             }
         }
@@ -73,6 +76,7 @@ namespace DDD.Infrastructure.Domain.Uow
             using (var uow = _unitOfWorkManager.Begin(options))
             {
                 invocation.Proceed();
+                //直接提交
                 uow.Complete();
             }
         }
@@ -84,6 +88,7 @@ namespace DDD.Infrastructure.Domain.Uow
         /// <param name="options"></param>
         private void PerformAsyncUow(IInvocation invocation, UnitOfWorkOptions options)
         {
+            //注意异步方法和同步方法开启的差异，没有使用using
             var uow = _unitOfWorkManager.Begin(options);
 
             try
@@ -96,6 +101,7 @@ namespace DDD.Infrastructure.Domain.Uow
                 throw;
             }
 
+            //根据返回结果进行事务提交
             if (invocation.Method.ReturnType == typeof(Task))
             {
                 invocation.ReturnValue = InternalAsyncHelper.AwaitTaskWithPostActionAndFinally(
