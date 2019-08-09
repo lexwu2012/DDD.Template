@@ -147,7 +147,7 @@
     <Compile Include="Uow\IUnitOfWorkCompleteHandle.cs" />
     <Compile Include="Uow\IUnitOfWorkDefaultOptions.cs" />
     <Compile Include="Uow\IUnitOfWorkManager.cs" />
-    <Compile Include="Uow\LocalCurrentUnitOfWorkProvider.cs" />
+    <Compile Include="Uow\AsyncLocalCurrentUnitOfWorkProvider.cs" />
     <Compile Include="Uow\UnitOfWorkAttribute.cs" />
     <Compile Include="Uow\UnitOfWorkBase.cs" />
     <Compile Include="Uow\UnitOfWorkDefaultOptions.cs" />

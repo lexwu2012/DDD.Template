@@ -7,7 +7,7 @@ namespace DDD.Infrastructure.Domain.Uow
     /// <summary>
     /// 获取当前线程里的uow
     /// </summary>
-    public class LocalCurrentUnitOfWorkProvider : ICurrentUnitOfWorkProvider, ITransientDependency
+    public class AsyncLocalCurrentUnitOfWorkProvider : ICurrentUnitOfWorkProvider, ITransientDependency
     {
         [DoNotWire]
         public IUnitOfWork Current
@@ -38,36 +38,13 @@ namespace DDD.Infrastructure.Domain.Uow
             }
 
             return uow;
-
-            ////获取当前工作单元key
-            //var unitOfWorkKey = CallContext.LogicalGetData(ContextKey) as string;
-            //if (unitOfWorkKey == null)
-            //{
-            //    return null;
-            //}
-
-            //IUnitOfWork unitOfWork;
-            //if (!UnitOfWorkDictionary.TryGetValue(unitOfWorkKey, out unitOfWork))
-            //{//如果根据key获取不到当前工作单元，那么就从当前线程集合（CallContext）中释放key
-            //    CallContext.FreeNamedDataSlot(ContextKey);
-            //    return null;
-            //}
-
-            //if (unitOfWork.IsDisposed)
-            //{//如果当前工作单元已经dispose，那么就从工作单元集合中移除，并将key从当前线程集合（CallContext）中释放
-            //    logger.Warn("There is a unitOfWorkKey in CallContext but the UOW was disposed!");
-            //    UnitOfWorkDictionary.TryRemove(unitOfWorkKey, out unitOfWork);
-            //    CallContext.FreeNamedDataSlot(ContextKey);
-            //    return null;
-            //}
-
-            //return unitOfWork;
         }
 
         private static void SetCurrentUow(IUnitOfWork value)
         {
             lock (AsyncLocalUow)
             {
+                //设置当前的AsyncLocalUow为null（即一个完整的事务提交后需要设置）
                 if (value == null)
                 {
                     if (AsyncLocalUow.Value == null)

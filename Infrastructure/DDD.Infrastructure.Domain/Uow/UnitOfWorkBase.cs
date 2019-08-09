@@ -15,9 +15,13 @@ namespace DDD.Infrastructure.Domain.Uow
 
         private Exception _exception;
 
+        #region EventHandler（这里用来执行资源释放）
+
         public event EventHandler Completed;
         public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
         public event EventHandler Disposed;
+
+        #endregion
 
         protected IUnitOfWorkDefaultOptions DefaultOptions { get; }
 
@@ -64,18 +68,23 @@ namespace DDD.Infrastructure.Domain.Uow
             IsCommitted = false;
         }
 
+        /// <summary>
+        /// 开启真正事务
+        /// </summary>
+        /// <param name="options"></param>
         public virtual void Begin(UnitOfWorkOptions options)
         {
-            //告知已经进入事务中，且对释放有影响
+            //告知已经进入事务中
             PreventMultipleBegin();
 
-            Options = options; 
-            
+            Options = options;
+
+            //让子类开启真正事务
             BeginUow();
         }
 
         /// <summary>
-        /// 同步事务完成动作（提交事务）
+        /// 同步方法真正的提交事务
         /// </summary>
         public void Complete()
         {
@@ -84,7 +93,7 @@ namespace DDD.Infrastructure.Domain.Uow
                 //提交事务
                 CompleteUow();
                 _succeed = true;
-                //释放当前的uow
+                //提交完事务后的后续动作（释放当前的uow）
                 OnCompleted();
             }
             catch (Exception ex)
@@ -95,16 +104,17 @@ namespace DDD.Infrastructure.Domain.Uow
         }
 
         /// <summary>
-        /// 异步事务完成动作（提交事务）
+        /// 异步方法真正的提交事务
         /// </summary>
         /// <returns></returns>
         public async Task CompleteAsync()
         {
             try
             {
+                //提交事务
                 await CompleteUowAsync();
                 _succeed = true;
-                //事务提交后的释放动作
+                //提交完事务后的后续动作（释放当前的uow，在UnitOfWorkManager开启第一个uow时指定了Completed事件（委托），将Current设为null）
                 OnCompleted();
             }
             catch (Exception ex)
@@ -115,7 +125,7 @@ namespace DDD.Infrastructure.Domain.Uow
         }
 
         /// <summary>
-        /// 
+        /// 事务的真正释放方法，由于这个方法重写了IDisposable，所以在using之后会调用这个方法
         /// </summary>
         public void Dispose()
         {
@@ -128,11 +138,15 @@ namespace DDD.Infrastructure.Domain.Uow
 
             if (!_succeed)
             {
+                //这里应该使用领域事件来触发抛出
                 throw _exception;
             }
             
-
+            //在子类释放dbcontext
             DisposeUow();
+
+            //释放uow
+            OnDisposed();
         }
 
         protected virtual string ResolveConnectionString()
@@ -146,13 +160,24 @@ namespace DDD.Infrastructure.Domain.Uow
         }
 
         /// <summary>
-        /// 提交事务后的一个后续动作（释放资源）
+        /// 提交事务后的一个后续动作（Current置为空）
         /// </summary>
         protected virtual void OnCompleted()
         {
             Completed.InvokeSafely(this);
         }
 
+        /// <summary>
+        /// 释放资源
+        /// </summary>
+        protected virtual void OnDisposed()
+        {
+            Disposed.InvokeSafely(this);
+        }
+
+        /// <summary>
+        /// 避免多线程开启多个真正事务
+        /// </summary>
         private void PreventMultipleBegin()
         {
             if (_isBeginCalledBefore)
@@ -162,6 +187,8 @@ namespace DDD.Infrastructure.Domain.Uow
 
             _isBeginCalledBefore = true;
         }
+
+        #region abstract methods
 
         /// <summary>
         /// 让子类实现自己的完成动作
@@ -192,5 +219,8 @@ namespace DDD.Infrastructure.Domain.Uow
         /// 让子类实现自己的完成动作
         /// </summary>
         public abstract Task SaveChangesAsync();
+
+        #endregion
+
     }
 }

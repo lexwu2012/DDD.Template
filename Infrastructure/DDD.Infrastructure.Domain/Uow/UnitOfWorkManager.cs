@@ -44,7 +44,7 @@ namespace DDD.Infrastructure.Domain.Uow
         {
             options.FillDefaultsForNonProvidedOptions(_defaultOptions);
 
-            //检查是否已经存开启了第一个事务
+            //检查是否已经存开启了第一个工作单元，有的话获取当前的第一个工作单元
             var outerUow = _currentUnitOfWorkProvider.Current;
 
             //如果当前已经存在第一个事务，则返回InnerUnitOfWorkCompleteHandle，这个方法的Complete方法不会做事务的提交，只是一个uow链式嵌套
