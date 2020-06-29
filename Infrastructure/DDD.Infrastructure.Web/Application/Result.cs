@@ -141,6 +141,13 @@ namespace DDD.Infrastructure.Web.Application
         /// <summary>
         /// 返回结果
         /// </summary>
+        public Result()
+        {
+        }
+
+        /// <summary>
+        /// 返回结果
+        /// </summary>
         public Result(TData data)
             : base(ResultCode.Ok)
         {

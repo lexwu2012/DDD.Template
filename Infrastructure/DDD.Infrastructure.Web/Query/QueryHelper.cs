@@ -79,7 +79,7 @@ namespace DDD.Infrastructure.Web.Query
         /// 根据条件组装查询表达式
         /// </summary>
         /// <typeparam name="TEntity">要查询的实体类型</typeparam>
-        public static Expression<Func<TEntity, bool>> GetQueryExpression<TEntity>(this IQuery<TEntity> query)
+        public static Expression<Func<TEntity, bool>> GenerateExpression<TEntity>(this IQuery<TEntity> query)
             where TEntity : class
         {
             if (query == null) return null;

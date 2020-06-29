@@ -14,6 +14,10 @@ namespace DDD.Infrastructure.Domain.Events
         private readonly IIocResolver _iocResolver;
         private IEventBus _eventBus;
 
+        public EventBusInstaller()
+        {
+        }
+
         public EventBusInstaller(IIocResolver iocResolver)
         {
             _iocResolver = iocResolver;

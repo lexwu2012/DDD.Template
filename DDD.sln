@@ -49,6 +49,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.WebApi", "Host\DDD.WebA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Oracle.EfTest", "Test\Oracle.EfTest\Oracle.EfTest.csproj", "{358E1CEE-5541-41DF-B0E7-7E422A9AB013}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DDD.Infrastructure.MongoDb", "Infrastructure\DDD.Infrastructure.MongoDb\DDD.Infrastructure.MongoDb\DDD.Infrastructure.MongoDb.csproj", "{3AAE5611-88BA-49D1-B7CB-6BCE7D1827A4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -123,6 +125,10 @@ Global
 		{358E1CEE-5541-41DF-B0E7-7E422A9AB013}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{358E1CEE-5541-41DF-B0E7-7E422A9AB013}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{358E1CEE-5541-41DF-B0E7-7E422A9AB013}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3AAE5611-88BA-49D1-B7CB-6BCE7D1827A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3AAE5611-88BA-49D1-B7CB-6BCE7D1827A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3AAE5611-88BA-49D1-B7CB-6BCE7D1827A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3AAE5611-88BA-49D1-B7CB-6BCE7D1827A4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +151,7 @@ Global
 		{3AD84A14-1B5D-4C3E-9F25-314F1E8B3358} = {359DB97E-31CF-4C6D-86F5-B3F4F001AD44}
 		{B3B32C4C-9E95-48DA-A20F-5A7DB4718AE1} = {265D9F35-24F6-4AB7-BE3A-7CE78777844D}
 		{358E1CEE-5541-41DF-B0E7-7E422A9AB013} = {359DB97E-31CF-4C6D-86F5-B3F4F001AD44}
+		{3AAE5611-88BA-49D1-B7CB-6BCE7D1827A4} = {7B453A07-4103-469B-88A7-DDBC2D7E7EE4}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {92EECCC1-7602-42C9-B7AE-6BAD1BFEDFA7}

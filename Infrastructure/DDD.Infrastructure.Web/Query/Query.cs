@@ -34,7 +34,7 @@ namespace DDD.Infrastructure.Web.Query
         /// </summary>
         public virtual Expression<Func<TEntity, bool>> GetFilter()
         {
-            return Filter.And(this.GetQueryExpression());
-        }
+            return Filter.And(this.GenerateExpression());
+        }       
     }
 }

@@ -95,6 +95,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Application\IResult.cs" />
+    <Compile Include="Application\Paging\PageInfo.cs" />
+    <Compile Include="Application\Paging\PageResult.cs" />
     <Compile Include="Application\Result.cs" />
     <Compile Include="Application\ResultCode.cs" />
     <Compile Include="CustomAttributes\DisableValidationAttribute.cs" />

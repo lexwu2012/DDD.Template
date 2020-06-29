@@ -4,34 +4,6 @@
         <name>DDD.WebApi</name>
     </assembly>
     <members>
-        <member name="T:DDD.WebApi.Controllers.WechatRepayController">
-            <summary>
-            还款相关接口
-            </summary>
-        </member>
-        <member name="M:DDD.WebApi.Controllers.WechatRepayController.#ctor(DDD.Application.Service.Wechat.Interfaces.IWechatRepayService)">
-            <summary>
-            构造函数
-            </summary>
-        </member>
-        <member name="M:DDD.WebApi.Controllers.WechatRepayController.PayInfo(DDD.Domain.Service.Wechat.Dto.GetPayInfoDto)">
-            <summary>
-            获取还款信息
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DDD.WebApi.Controllers.WechatRepayController.GetTodayAutoCheckoffTotalAsync">
-            <summary>
-            获取当天自动代扣的数量
-            </summary>
-            <returns></returns>
-        </member>
-        <member name="M:DDD.WebApi.Controllers.WechatRepayController.GetConstantData">
-            <summary>
-            获取测试常量
-            </summary>
-            <returns></returns>
-        </member>
         <member name="T:MyWebApi.Controllers.ApiControllerBase">
             <summary>
             

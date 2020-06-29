@@ -52,12 +52,8 @@ namespace DDD.SqlServer.Test
             LocalIocManager.RegisterAssemblyByConvention(typeof(AppServiceBase).Assembly);
             //LocalIocManager.RegisterAssemblyByConvention(typeof(TestBaseWithLocalIocManager).Assembly);
 
-            //LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Common"));
-            LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Core"));
-            LocalIocManager.RegisterAssemblyByConvention(Assembly.Load("DDD.Domain.Service"));
-            //IocManager.Register<IBlogRepository>();
-            //IocManager.Register<IUserRepository>();
-
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IDomainCoreModule).Assembly);
+            LocalIocManager.RegisterAssemblyByConvention(typeof(IDomainServiceModule).Assembly);
         }
 
         public void Dispose()
