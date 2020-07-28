@@ -9,11 +9,10 @@ using DDD.Infrastructure.AutoMapper.Extension;
 using DDD.Infrastructure.Common;
 using DDD.Infrastructure.Common.Extensions;
 using DDD.Infrastructure.Common.Reflection;
-using DDD.Test;
 using Shouldly;
 using Xunit;
 
-namespace DDD.SqlServer.Test.AutoMapper
+namespace DDD.AutoMapper.Test.AutoMapper
 {
     public class AutoMapperTester : TestBaseWithLocalIocManager
     {
@@ -53,7 +52,7 @@ namespace DDD.SqlServer.Test.AutoMapper
                     configurator(mapperConfigurationExpression);
                 }
             };
-            
+
             Mapper.Initialize(action);
 
             var userInput = new AddUserInput
@@ -123,5 +122,17 @@ namespace DDD.SqlServer.Test.AutoMapper
                 }
             });
         }
+    }
+
+    class Model
+    {
+        public string Name { get; set; }
+    }
+
+    [AutoMap(typeof(Model))]
+    class DestModel
+    {
+        [MapFrom(nameof(Model.Name))]
+        public string NameStr { get; set; }
     }
 }

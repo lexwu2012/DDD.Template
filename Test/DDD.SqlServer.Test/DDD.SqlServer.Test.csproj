@@ -145,7 +145,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AutoMapper\AutoMapperTester.cs" />
     <Compile Include="Dependency\Circular_Dependency_Tests.cs" />
     <Compile Include="Dependency\Dependency_Tester.cs" />
     <Compile Include="Dependency\GenericInjection_Tests.cs" />
