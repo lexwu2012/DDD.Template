@@ -11,9 +11,9 @@ using DDD.Infrastructure.Ioc.Dependency;
 using Shouldly;
 using Xunit;
 
-namespace Oracle.EfTest
+namespace DDD.Oracle.Test.EF
 {
-    public class OracleConnectionTest: OracleTestBaseWithLocalIocManager
+    public class OracleConnectionTest : OracleTestBaseWithLocalIocManager
     {
         private readonly IAutoMapperInitializer _autoMapperInitializer;
         private readonly ICheckoffAutoAcpAppService _checkoffAutoAcpAppService;
