@@ -11,7 +11,7 @@ namespace DDD.Infrastructure.Web.CustomAttributes
     /// 查询字段
     /// </summary>
     [AttributeUsage(AttributeTargets.Property, AllowMultiple = true)]
-    public class QueryAttribute : Attribute
+    public class QueryModeAttribute : Attribute
     {
         /// <summary>
         /// 比较方式
@@ -26,7 +26,7 @@ namespace DDD.Infrastructure.Web.CustomAttributes
         /// <summary>
         /// 查询字段
         /// </summary>
-        public QueryAttribute(params string[] propertyPath)
+        public QueryModeAttribute(params string[] propertyPath)
         {
             PropertyPath = propertyPath;
         }
@@ -34,7 +34,7 @@ namespace DDD.Infrastructure.Web.CustomAttributes
         /// <summary>
         /// 查询字段
         /// </summary>
-        public QueryAttribute(QueryCompare compare, params string[] propertyPath)
+        public QueryModeAttribute(QueryCompare compare, params string[] propertyPath)
         {
             PropertyPath = propertyPath;
             Compare = compare;

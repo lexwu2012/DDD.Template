@@ -98,7 +98,7 @@ namespace DDD.Infrastructure.Web.Query
 
                 Expression sub = null;
 
-                foreach (var attribute in property.GetAttributes<QueryAttribute>())
+                foreach (var attribute in property.GetAttributes<QueryModeAttribute>())
                 {
                     var propertyPath = attribute.PropertyPath;
                     if (propertyPath == null || propertyPath.Length == 0)

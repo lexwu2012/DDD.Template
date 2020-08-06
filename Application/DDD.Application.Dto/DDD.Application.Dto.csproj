@@ -51,6 +51,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="User\UserDto.cs" />
+    <Compile Include="User\UserQuery.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Domain\DDD.Infrastructure.Domain.csproj">
@@ -65,15 +67,16 @@
       <Project>{9d4bb42f-628d-4f8d-871c-c3f01ac37466}</Project>
       <Name>DDD.Infrastructure.AutoMapper</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\DDD.Infrastructure.Web\DDD.Infrastructure.Web.csproj">
+      <Project>{808D7042-E3C1-430D-ACD4-9ACCABE96303}</Project>
+      <Name>DDD.Infrastructure.Web</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="UserDto\" />
-    <Folder Include="Wechat\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -9,5 +9,19 @@
             
             </summary>
         </member>
+        <member name="M:MyWebApi.Controllers.UserController.GetUser(DDD.Application.Dto.User.UserQuery)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
+        <member name="M:MyWebApi.Controllers.UserController.GetUsers(DDD.Application.Dto.User.UserQuery)">
+            <summary>
+            
+            </summary>
+            <param name="query"></param>
+            <returns></returns>
+        </member>
     </members>
 </doc>

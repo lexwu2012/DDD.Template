@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using DDD.Application.Dto.User;
 using DDD.Application.Service.User.Interfaces;
 using DDD.Domain.Core;
 using DDD.Domain.Core.DbContextRelate;
@@ -26,19 +27,13 @@ namespace DDD.SqlServer.Test.UserService
         }
 
         [Fact]
-        public void User_Service_Should_Be_Resolve_Correctly()
+        public async Task User_Service_Query_Should_Be_Correctly()
         {
             var userService = LocalIocManager.IocContainer.Resolve<IUserAppService>();
 
-            userService.GetAllUsers().Data.ShouldBeGreaterThanOrEqualTo(4);
-        }
+            var result = await userService.GetUsersAsync<UserDto>(new UserQuery());
 
-        [Fact]
-        public void User_Should_Be_Update_Correctly()
-        {
-            var userService = LocalIocManager.IocContainer.Resolve<IUserAppService>();
-
-            userService.GetAllUsers().Data.ShouldBeGreaterThanOrEqualTo(4);
+            result.Data.Count().ShouldBeGreaterThanOrEqualTo(4);
         }
     }
 }

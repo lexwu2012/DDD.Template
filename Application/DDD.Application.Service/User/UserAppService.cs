@@ -44,30 +44,22 @@ namespace DDD.Application.Service.User
             return Result.FromData(result);
         }
 
-        public Result<UserDto> UpdateSpecifyUser(int id)
-        {
-            var user = _userRepository.GetAll().FirstOrDefault(m => m.Id == id);
-
-            if (null == user)
-                return Result.FromError<UserDto>("没有该用户");
-            
-            return Result.FromData<UserDto>(user.MapTo<UserDto>());
-        }
-
         /// <summary>
         /// 获取单个用户信息
         /// </summary>
-        public async Task<TDto> GetUserAsync<TDto>(IQuery<Domain.Core.Model.User> query)
+        public async Task<Result<TDto>> GetUserAsync<TDto>(IQuery<Domain.Core.Model.User> query)
         {
-            return await _userRepository.AsNoTracking().FirstOrDefaultAsync<Domain.Core.Model.User, TDto>(query);            
+            var data = await _userRepository.AsNoTracking().FirstOrDefaultAsync<Domain.Core.Model.User, TDto>(query);
+            return Result.FromData(data);
         }
 
         /// <summary>
         /// 获取用户信息列表
         /// </summary>
-        public async Task<IList<TDto>> GetAgencySaleTicketClassListAsync<TDto>(IQuery<Domain.Core.Model.User> query)
+        public async Task<Result<List<TDto>>> GetUsersAsync<TDto>(IQuery<Domain.Core.Model.User> query)
         {
-            return await _userRepository.GetAll().ToListAsync<Domain.Core.Model.User, TDto>(query);
+            var data = await _userRepository.GetAll().ToListAsync<Domain.Core.Model.User, TDto>(query);
+            return Result.FromData(data);
         }
     }
 }

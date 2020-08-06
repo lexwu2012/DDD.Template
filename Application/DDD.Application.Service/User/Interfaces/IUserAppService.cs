@@ -12,17 +12,15 @@ namespace DDD.Application.Service.User.Interfaces
         Result<int> AddUser(AddUserInput input);
 
         Result<int> GetAllUsers();
-
-        Result<UserDto> UpdateSpecifyUser(int id);
-
+        
         /// <summary>
         /// 获取单个用户信息
         /// </summary>
-        Task<TDto> GetUserAsync<TDto>(IQuery<Domain.Core.Model.User> query);
-        
+        Task<Result<TDto>> GetUserAsync<TDto>(IQuery<Domain.Core.Model.User> query);
+
         /// <summary>
         /// 获取用户信息列表
         /// </summary>
-        Task<IList<TDto>> GetAgencySaleTicketClassListAsync<TDto>(IQuery<Domain.Core.Model.User> query);
+        Task<Result<List<TDto>>> GetUsersAsync<TDto>(IQuery<Domain.Core.Model.User> query);
     }
 }
