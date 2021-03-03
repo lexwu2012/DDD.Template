@@ -17,6 +17,7 @@ namespace DDD.Infrastructure.Domain.Uow
         /// <param name="iocManager"></param>
         public static void Initialize(IIocManager iocManager)
         {
+            //在程序启动时把所有程序集中满足这些条件的类都注册进来？
             iocManager.IocContainer.Kernel.ComponentRegistered += (key, handler) =>
             {
                 var implementationType = handler.ComponentModel.Implementation.GetTypeInfo();
@@ -33,6 +34,7 @@ namespace DDD.Infrastructure.Domain.Uow
         /// <param name="handler"></param>
         private static void RegisterUnitOfWorkAttribute(TypeInfo implementationType, IHandler handler)
         {
+            //满足条件的类都注册这个拦截器
             if (IsUnitOfWorkType(implementationType) || AnyMethodHasUnitOfWork(implementationType))
             {
                 handler.ComponentModel.Interceptors.Add(new InterceptorReference(typeof(UnitOfWorkInterceptor)));

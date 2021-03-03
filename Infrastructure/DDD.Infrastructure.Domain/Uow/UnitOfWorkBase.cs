@@ -15,7 +15,7 @@ namespace DDD.Infrastructure.Domain.Uow
 
         private Exception _exception;
 
-        #region EventHandler（这里用来执行资源释放）
+        #region EventHandler（这里定义了用来执行资源释放的委托方法）
 
         public event EventHandler Completed;
         public event EventHandler<UnitOfWorkFailedEventArgs> Failed;
@@ -141,8 +141,8 @@ namespace DDD.Infrastructure.Domain.Uow
                 //这里应该使用领域事件来触发抛出
                 throw _exception;
             }
-            
-            //在子类释放dbcontext
+
+            //在子类释放dbcontext，并且执行CurrentTransaction的dispose
             DisposeUow();
 
             //释放uow

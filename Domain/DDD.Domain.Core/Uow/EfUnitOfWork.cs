@@ -214,6 +214,7 @@ namespace DDD.Domain.Core.Uow
 
             if (Options.IsTransactional == true)
             {
+                //释放dbcontext
                 foreach (var dbContext in DbContexts)
                 {
                     IocResolver.Release(dbContext);

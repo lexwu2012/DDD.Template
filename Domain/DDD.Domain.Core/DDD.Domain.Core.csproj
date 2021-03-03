@@ -137,9 +137,6 @@
     <Compile Include="Model\Blog.cs" />
     <Compile Include="Model\Book.cs" />
     <Compile Include="Model\BookHistory.cs" />
-    <Compile Include="Model\CheckoffAutoAcp.cs" />
-    <Compile Include="Model\CheckoffMonitor.cs" />
-    <Compile Include="Model\CheckoffCommand.cs" />
     <Compile Include="Model\Reader.cs" />
     <Compile Include="Model\Reply.cs" />
     <Compile Include="Model\Repositories\BookRepository.cs" />

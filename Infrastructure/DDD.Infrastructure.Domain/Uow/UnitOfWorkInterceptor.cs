@@ -39,6 +39,7 @@ namespace DDD.Infrastructure.Domain.Uow
             var unitOfWorkAttr = _unitOfWorkOptions.GetUnitOfWorkAttributeOrNull(method);
             if (unitOfWorkAttr == null || unitOfWorkAttr.IsDisabled)
             {
+                //没有UnitOfWorkAttribute，直接执行当前方法
                 invocation.Proceed();
                 return;
             }
@@ -75,6 +76,7 @@ namespace DDD.Infrastructure.Domain.Uow
         {
             using (var uow = _unitOfWorkManager.Begin(options))
             {
+                //如果在执行方法的过程中再次拦截到满足拦截条件的方法，则再次执行上面的Intercept，这样就形成了嵌套事务
                 invocation.Proceed();
                 //直接提交
                 uow.Complete();
@@ -112,6 +114,7 @@ namespace DDD.Infrastructure.Domain.Uow
             }
             else
             {
+                //返回泛型的Task<T>外带参数
                 invocation.ReturnValue = InternalAsyncHelper.CallAwaitTaskWithPostActionAndFinallyAndGetResult(
                     invocation.Method.ReturnType.GenericTypeArguments[0],
                     invocation.ReturnValue,

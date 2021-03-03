@@ -19,12 +19,14 @@ namespace DDD.Infrastructure.Domain.Uow
                 return attrs[0];
             }
 
+            //获取当前执行方法的UnitOfWorkAttribute
             attrs = methodInfo.DeclaringType.GetTypeInfo().GetCustomAttributes(true).OfType<UnitOfWorkAttribute>().ToArray();
             if (attrs.Length > 0)
             {
                 return attrs[0];
             }
 
+            //如果是IRepository，IApplicationService，IDomainService的实现类，则都加上UnitOfWorkAttribute
             if (unitOfWorkDefaultOptions.IsConventionalUowClass(methodInfo.DeclaringType))
             {
                 return new UnitOfWorkAttribute(); //Default

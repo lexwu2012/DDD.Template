@@ -1,0 +1,812 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{EDF5D964-4C0F-4F19-B674-58A38A5E5401}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ThemePark.Application</RootNamespace>
+    <AssemblyName>ThemePark.Application</AssemblyName>
+    <TargetFrameworkVersion>v4.6.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\ThemePark.Application.XML</DocumentationFile>
+    <UseVSHostingProcess>true</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\ThemePark.Application.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Abp, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Abp.2.3.0\lib\net46\Abp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.AutoMapper, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Abp.AutoMapper.2.3.0\lib\net46\Abp.AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.EntityFramework, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Abp.EntityFramework.2.3.0\lib\net46\Abp.EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.EntityFramework.Common, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Abp.EntityFramework.Common.2.3.0\lib\net46\Abp.EntityFramework.Common.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Abp.RedisCache, Version=2.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Abp.RedisCache.2.3.0\lib\net46\Abp.RedisCache.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="AutoMapper, Version=6.1.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\AutoMapper.6.1.1\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Core.4.0.0\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Castle.Windsor.4.0.0\lib\net45\Castle.Windsor.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="D5ScannerFPC">
+      <HintPath>..\..\Libs\TxwFinger\64\D5ScannerFPC.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.DynamicFilters, Version=2.10.0.0, Culture=neutral, PublicKeyToken=146423a1b8d60775, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.DynamicFilters.2.10.0\lib\net40\EntityFramework.DynamicFilters.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="JetBrains.Annotations, Version=11.0.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\JetBrains.Annotations.11.0.0\lib\net20\JetBrains.Annotations.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.Identity.Core.2.2.1\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Concurrent, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.Concurrent.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Nito.AsyncEx.Enlightenment, Version=4.0.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Nito.AsyncEx.4.0.1\lib\net45\Nito.AsyncEx.Enlightenment.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="StackExchange.Redis.StrongName, Version=1.2.6.0, Culture=neutral, PublicKeyToken=c219ff1ca8c2ce46, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\StackExchange.Redis.StrongName.1.2.6\lib\net46\StackExchange.Redis.StrongName.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Collections.Immutable, Version=1.2.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Collections.Immutable.1.3.1\lib\portable-net45+win8+wp8+wpa81\System.Collections.Immutable.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Linq.Dynamic, Version=1.0.6132.35681, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.1.0.7\lib\net40\System.Linq.Dynamic.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Linq.Dynamic.Core, Version=0.0.0.0, Culture=neutral, PublicKeyToken=0f07ec44de6ac832, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\System.Linq.Dynamic.Core.1.0.7.6\lib\net46\System.Linq.Dynamic.Core.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting, Version=5.2.3.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml" />
+    <Reference Include="ThoughtWorks.QRCode, Version=1.0.4778.30637, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\ThoughtWorks.QRCode.1.1.0\lib\ThoughtWorks.QRCode.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="TopSdk, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\Libs\Ali\TopSdk.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Agencies\AgencyAccountAppService.cs" />
+    <Compile Include="Agencies\AgencyTypeAppService.cs" />
+    <Compile Include="Agencies\Dto\AccountDto.cs" />
+    <Compile Include="Agencies\Dto\AccountMoneyDto.cs" />
+    <Compile Include="Agencies\Dto\AccountOpDto.cs" />
+    <Compile Include="Agencies\Dto\AccountOpInput.cs" />
+    <Compile Include="Agencies\Dto\AccountParkAreaDto.cs" />
+    <Compile Include="Agencies\Dto\AccountPreDto.cs" />
+    <Compile Include="Agencies\Dto\AccountUpdateInput.cs" />
+    <Compile Include="Agencies\Dto\AddParkAgencyInput.cs" />
+    <Compile Include="Agencies\Dto\AgencyAccountDto.cs" />
+    <Compile Include="Agencies\Dto\AgencyCombineDto.cs" />
+    <Compile Include="Agencies\Dto\AgencyOutput.cs" />
+    <Compile Include="Agencies\Dto\AgencyPreAccountDto.cs" />
+    <Compile Include="Agencies\Dto\AgencyTypeDto.cs" />
+    <Compile Include="Agencies\Dto\AgencyTypeOutTicketTypeDto.cs" />
+    <Compile Include="Agencies\Dto\AgencyTypeOutTicketTypeInput.cs" />
+    <Compile Include="Agencies\Dto\AccountDepositInput.cs" />
+    <Compile Include="Agencies\Dto\AgencyTypeWithDefaultType.cs" />
+    <Compile Include="Agencies\Dto\GetAgencyBalanceInput.cs" />
+    <Compile Include="Agencies\Dto\ParkAgencyDto.cs" />
+    <Compile Include="Agencies\Dto\GroupTypeInput.cs" />
+    <Compile Include="Agencies\Dto\PreAccountInput.cs" />
+    <Compile Include="Agencies\Dto\PreDepositAccountDto.cs" />
+    <Compile Include="Agencies\Dto\GetAccountOpRecord.cs" />
+    <Compile Include="Agencies\Dto\UpdateAgencyInput.cs" />
+    <Compile Include="Agencies\Dto\UpdateParkAgencyInput.cs" />
+    <Compile Include="Agencies\GroupTypeAppService.cs" />
+    <Compile Include="Agencies\Dto\AddAgencyInput.cs" />
+    <Compile Include="Agencies\Dto\AgencyDto.cs" />
+    <Compile Include="Agencies\Interfaces\IAgencyAccountAppService.cs" />
+    <Compile Include="Agencies\Interfaces\IAgencyAppService.cs" />
+    <Compile Include="Agencies\Interfaces\IAgencyTypeAppService.cs" />
+    <Compile Include="Agencies\Interfaces\IGroupTypeAppService.cs" />
+    <Compile Include="Agencies\AgencyAppService.cs" />
+    <Compile Include="Agencies\Interfaces\IParkAgencyAppService.cs" />
+    <Compile Include="Agencies\ParkAgencyAppService.cs" />
+    <Compile Include="Agencies\PreDepositApiHelp.cs" />
+    <Compile Include="AgentTicket\AgencyRuleAppService.cs" />
+    <Compile Include="AgentTicket\AgencySaleTicketClassAppService.cs" />
+    <Compile Include="AgentTicket\Dto\AddGuideCustInput.cs" />
+    <Compile Include="AgentTicket\Dto\AddAgencyReserveInput.cs" />
+    <Compile Include="AgentTicket\Dto\AddGroupTypeTicketClassInput.cs" />
+    <Compile Include="AgentTicket\Dto\AddTOBodyInput.cs" />
+    <Compile Include="AgentTicket\Dto\AddTravelTicketInput.cs" />
+    <Compile Include="AgentTicket\Dto\AgencyRuleDto.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassCheckExistedDto.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassDto.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassGetTicketClassDto.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassOrderDto.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassSaveNewInput.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketTypeDto.cs" />
+    <Compile Include="AgentTicket\Dto\CentreOrderEditInput.cs" />
+    <Compile Include="AgentTicket\Dto\ConfirmOrderInput.cs" />
+    <Compile Include="AgentTicket\Dto\DriverCustomerDto.cs" />
+    <Compile Include="AgentTicket\Dto\GetAgencySaleTicketByWindowInput.cs" />
+    <Compile Include="AgentTicket\Dto\GetOrderDetailInput.cs" />
+    <Compile Include="AgentTicket\Dto\GroupInfoEditInput.cs" />
+    <Compile Include="AgentTicket\Dto\GroupInfoConfirmDto.cs" />
+    <Compile Include="AgentTicket\Dto\OTASearchOrderDto.cs" />
+    <Compile Include="AgentTicket\Dto\PreAccountDeductMoneyDto.cs" />
+    <Compile Include="AgentTicket\Dto\SaveWebTicketInput.cs" />
+    <Compile Include="AgentTicket\Dto\TOBodyPreDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOHeaderPreDetailDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOHeaderPreDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOHeaderPreEditInput.cs" />
+    <Compile Include="AgentTicket\Dto\TravelSearchOrderDto.cs" />
+    <Compile Include="AgentTicket\Dto\TravelTOBodyEditInput.cs" />
+    <Compile Include="AgentTicket\Dto\UpdateAgencySaleTicketClassTemplateInput.cs" />
+    <Compile Include="AgentTicket\Dto\UpdateTemplate4AgencySaleTicketClassInput.cs" />
+    <Compile Include="AgentTicket\Dto\GetWebTicketOrderDto.cs" />
+    <Compile Include="AgentTicket\Interfaces\IAgencyRuleAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IAgencySaleTicketClassAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IAgencySaleTicketClassTemplateAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IAgencyTypeTicketRuleAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ICustomerAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IGroupInfoAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IGroupMembersAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IGroupTypeTicketClassAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IGuideCustomerAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\IParkAgencyTypeGroupTypeAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOBodyAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOBodyPreAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOHeaderAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOModifyAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOMssageAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITORefundAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOTicketAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOVoucherAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITravelOrderConfirmAppService.cs" />
+    <Compile Include="AgentTicket\Interfaces\ITOHeaderPreAppService.cs" />
+    <Compile Include="AgentTicket\PrePaymentSettingsProvider.cs" />
+    <Compile Include="AgentTicket\TOBodyPreAppService.cs" />
+    <Compile Include="AgentTicket\TOHeaderPreAppService.cs" />
+    <Compile Include="AgentTicket\TravelSettingsProvider.cs" />
+    <Compile Include="AgentTicket\WebTicketApiHelp.cs" />
+    <Compile Include="AliBusiness\AccessTokenSettingProvider.cs" />
+    <Compile Include="AliBusiness\Dto\AliParamsCollection.cs" />
+    <Compile Include="AliBusiness\Dto\FetchFtOrderDetailDto.cs" />
+    <Compile Include="AliBusiness\Dto\FtOrderDetailDto.cs" />
+    <Compile Include="AliBusiness\Dto\FtTokenEntity.cs" />
+    <Compile Include="AliBusiness\Dto\OrderConsumeArgs.cs" />
+    <Compile Include="AliBusiness\Dto\OrderSendToFtDataArgs.cs" />
+    <Compile Include="AliBusiness\Dto\OrderTicketReturnDto.cs" />
+    <Compile Include="AliBusiness\Dto\ReturnResultEntity.cs" />
+    <Compile Include="AliBusiness\Dto\IAliBaseDataModel.cs" />
+    <Compile Include="AliBusiness\Enum\OrderStatus.cs" />
+    <Compile Include="AliBusiness\Enum\TradeStatus.cs" />
+    <Compile Include="AliBusiness\Helper\AliBusinessHelper.cs" />
+    <Compile Include="AliBusiness\Helper\ConsumeTicketJob.cs" />
+    <Compile Include="AliBusiness\Helper\ConsumeTicketWorkManager.cs" />
+    <Compile Include="AliBusiness\Helper\PostDataJob.cs" />
+    <Compile Include="AliBusiness\Helper\PostOrderToFangteWorkerManager.cs" />
+    <Compile Include="AliBusiness\IdCardModifyAppService.cs" />
+    <Compile Include="AliBusiness\Interfaces\IIdCardModifyAppService.cs" />
+    <Compile Include="AliBusiness\Interfaces\IMobileModifyAppService.cs" />
+    <Compile Include="AliBusiness\Interfaces\IRefundAppService.cs" />
+    <Compile Include="AliBusiness\Interfaces\IResendAppService.cs" />
+    <Compile Include="AliBusiness\Interfaces\ISendAppService.cs" />
+    <Compile Include="AliBusiness\Interfaces\ISuitAppService.cs" />
+    <Compile Include="AliBusiness\MobileModifyAppService.cs" />
+    <Compile Include="AliBusiness\RefundAppService.cs" />
+    <Compile Include="AliBusiness\ResendAppService.cs" />
+    <Compile Include="AliBusiness\SendAppService.cs" />
+    <Compile Include="AliBusiness\SuitAppService.cs" />
+    <Compile Include="Authorization\SettingChangedHandler.cs" />
+    <Compile Include="Authorization\UserChangedHandler.cs" />
+    <Compile Include="Authorization\RoleChangedHandler.cs" />
+    <Compile Include="BasicData\Dto\AddConfigInput.cs" />
+    <Compile Include="BasicData\Dto\AddPrintTemplateInput.cs" />
+    <Compile Include="BasicData\Dto\AddTerminalInput.cs" />
+    <Compile Include="BasicData\Dto\AgencyPricePrintSetInput.cs" />
+    <Compile Include="BasicData\Dto\AgencyValidDaySetInput.cs" />
+    <Compile Include="BasicData\Dto\GetPrintPriceSetsDto.cs" />
+    <Compile Include="BasicData\Dto\GetPrintValidDaysSetsDto.cs" />
+    <Compile Include="BasicData\Dto\GetAllFileNamesDto.cs" />
+    <Compile Include="BasicData\Dto\GetPrintParamsConfigDto.cs" />
+    <Compile Include="BasicData\Dto\GetPrintTicketDto.cs" />
+    <Compile Include="BasicData\Dto\GetTemplateDto.cs" />
+    <Compile Include="BasicData\Dto\GetTemplateModel.cs" />
+    <Compile Include="BasicData\Dto\GetTerninalIdInput.cs" />
+    <Compile Include="BasicData\Dto\InvoiceCodeDto.cs" />
+    <Compile Include="BasicData\Dto\InvoiceCodeInput.cs" />
+    <Compile Include="BasicData\Dto\InvoiceCodeSaleDto.cs" />
+    <Compile Include="BasicData\Dto\PricePrintSetInput.cs" />
+    <Compile Include="BasicData\Dto\SearchAgencyValidDaySetDto.cs" />
+    <Compile Include="BasicData\Dto\SearchAgencyValidDaySetInput.cs" />
+    <Compile Include="BasicData\Dto\SearchGroupPriceSetDto.cs" />
+    <Compile Include="BasicData\Dto\SearchGroupPrintSetInput.cs" />
+    <Compile Include="BasicData\Dto\SearchPrintConfigDto.cs" />
+    <Compile Include="BasicData\Dto\SearchPrintConfigInput.cs" />
+    <Compile Include="BasicData\Dto\SearchTerminalInput.cs" />
+    <Compile Include="BasicData\Dto\TerminalDto.cs" />
+    <Compile Include="BasicData\Dto\UpdatePrintConfig.cs" />
+    <Compile Include="BasicData\Dto\UpdatePrintTemplateInput.cs" />
+    <Compile Include="BasicData\Dto\UpdateTerminalInput.cs" />
+    <Compile Include="BasicData\Dto\ValidDaysPrintSetInput.cs" />
+    <Compile Include="BasicData\Interfaces\IInvoiceCodeAppService.cs" />
+    <Compile Include="BasicData\Interfaces\IPrintTemplateAppService.cs" />
+    <Compile Include="BasicData\InvoiceCodeAppService.cs" />
+    <Compile Include="BasicTicketType\Dto\TicketClassOutTicketTypeInput.cs" />
+    <Compile Include="DataSync\CenterDataSyncManager.cs" />
+    <Compile Include="DataSync\DataSyncManager.cs" />
+    <Compile Include="DataSync\Interfaces\ICenterDataSyncManager.cs" />
+    <Compile Include="DataSync\Interfaces\IDataSyncManager.cs" />
+    <Compile Include="DataSync\Interfaces\IParkDataSyncManager.cs" />
+    <Compile Include="DataSync\ParkDataSyncManager.cs" />
+    <Compile Include="DataSync\Jobs\ApiDataSyncJob.cs" />
+    <Compile Include="BasicTicketType\Dto\TicketTypeSortInput.cs" />
+    <Compile Include="DataSync\Jobs\CenterTableDataDownloadJob.cs" />
+    <Compile Include="DataSync\DataSyncEventData.cs" />
+    <Compile Include="DataSync\DataSyncHandler.cs" />
+    <Compile Include="DataSync\DataSyncMulYearCardAppService.cs" />
+    <Compile Include="DataSync\Dto\AccountDataSyncDto.cs" />
+    <Compile Include="DataSync\Dto\OrderCancelConfirmDto.cs" />
+    <Compile Include="DataSync\Dto\ChangePasswordDto.cs" />
+    <Compile Include="DataSync\Dto\FreezeOrderDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardActiveDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardFillDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardInitDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardLossDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardRenewDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardReturnDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardSaleDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardUnLossDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardUpdateDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardVoucherReturnDto.cs" />
+    <Compile Include="DataSync\Dto\MulYearCardVoucherSaleDto.cs" />
+    <Compile Include="DataSync\Dto\OtherTicketSendDto.cs" />
+    <Compile Include="DataSync\Dto\SumParkInfoDto.cs" />
+    <Compile Include="BasicData\PrintTemplateAppService.cs" />
+    <Compile Include="DataSync\Dto\MultiTicketPhotoRemoveDto.cs" />
+    <Compile Include="DataSync\Dto\TicketCheckCacheDto.cs" />
+    <Compile Include="DataSync\Interfaces\IDataSyncMulYearCardAppService.cs" />
+    <Compile Include="InPark\Dto\TicketInParkDto.cs" />
+    <Compile Include="InPark\Dto\UserDto.cs" />
+    <Compile Include="InPark\Dto\VisitorInParkDto.cs" />
+    <Compile Include="InPark\Interfaces\ITicketInParkAppService.cs" />
+    <Compile Include="InPark\TicketInParkAppService.cs" />
+    <Compile Include="Message\Dto\MessageReceiveDto.cs" />
+    <Compile Include="Message\Dto\MessageSendDto.cs" />
+    <Compile Include="Message\Dto\MessageTokenDto.cs" />
+    <Compile Include="Message\ISmsAppService.cs" />
+    <Compile Include="Message\SendMessageSettingsProvider.cs" />
+    <Compile Include="Message\SmsAppService.cs" />
+    <Compile Include="OrderTrack\Dto\TakeTicketTrackInput.cs" />
+    <Compile Include="OrderTrack\Interface\IVendorTicketTrackAppService.cs" />
+    <Compile Include="OrderTrack\VendorTicketTrackAppService.cs" />
+    <Compile Include="Order\Dto\OrderDetailDto.cs" />
+    <Compile Include="Order\Dto\TicketDetailDto.cs" />
+    <Compile Include="Order\Dto\TOBodyDetailDto.cs" />
+    <Compile Include="Order\Dto\TOBodyPreDetailDto.cs" />
+    <Compile Include="Order\Interfaces\IOrderDetailAppService.cs" />
+    <Compile Include="Order\Interfaces\IOrderFreezonAppService.cs" />
+    <Compile Include="Order\OrderDetailAppService.cs" />
+    <Compile Include="Order\OrderFreezonAppService.cs" />
+    <Compile Include="OTA\DTO\ECardDetailInput.cs" />
+    <Compile Include="OTA\DTO\OTACancelOrderInput.cs" />
+    <Compile Include="OTA\DTO\OTACheckPidDto.cs" />
+    <Compile Include="OTA\DTO\OTADetailInput.cs" />
+    <Compile Include="OTA\DTO\OTAModifyPidInput.cs" />
+    <Compile Include="OTA\DTO\OTAModifyPlandateInput.cs" />
+    <Compile Include="OTA\DTO\OTAOrderDto.cs" />
+    <Compile Include="OTA\DTO\OTAOrderInput.cs" />
+    <Compile Include="OTA\DTO\OTAOrderDetailDto.cs" />
+    <Compile Include="OTA\DTO\OTAOrderDetailInput.cs" />
+    <Compile Include="AgentTicket\Dto\CreateVoucherByTOBody.cs" />
+    <Compile Include="AgentTicket\Dto\CustomerInput.cs" />
+    <Compile Include="AgentTicket\Dto\GroupInfoInput.cs" />
+    <Compile Include="AgentTicket\Dto\GroupMemberDto.cs" />
+    <Compile Include="AgentTicket\Dto\GroupMemberInput.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassTemplateUpdateInput4Save.cs" />
+    <Compile Include="AgentTicket\Dto\GuideCustomerDto.cs" />
+    <Compile Include="AgentTicket\Dto\ToTicketInput.cs" />
+    <Compile Include="AgentTicket\Dto\UpdateTOHeadInput.cs" />
+    <Compile Include="AgentTicket\Dto\UpdateGroupTypeTicketClassInput.cs" />
+    <Compile Include="AgentTicket\Dto\UpdateToBodyInput.cs" />
+    <Compile Include="AgentTicket\GuideCustomerAppService.cs" />
+    <Compile Include="AgentTicket\AgencySaleTicketClassTemplateAppService.cs" />
+    <Compile Include="AgentTicket\ParkAgencyTypeGroupTypeAppService.cs" />
+    <Compile Include="AgentTicket\CustomerAppService.cs" />
+    <Compile Include="AgentTicket\Dto\AgencySaleTicketClassTemplateDto.cs" />
+    <Compile Include="AgentTicket\Dto\GetParkAgencyTypeGroupTypeDto.cs" />
+    <Compile Include="AgentTicket\Dto\AgencyTypeTicketRuleDto.cs" />
+    <Compile Include="AgentTicket\Dto\CustomerDto.cs" />
+    <Compile Include="AgentTicket\Dto\GetCustomerPageInput.cs" />
+    <Compile Include="AgentTicket\Dto\GroupInfoDto.cs" />
+    <Compile Include="AgentTicket\Dto\GroupMembersDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOBodyDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOHeaderDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOModifyDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOMessageDto.cs" />
+    <Compile Include="AgentTicket\Dto\TORefundDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOTicketDto.cs" />
+    <Compile Include="AgentTicket\Dto\TOVoucherDto.cs" />
+    <Compile Include="AgentTicket\Dto\TravelOrderConfirmDto.cs" />
+    <Compile Include="AgentTicket\GroupInfoAppService.cs" />
+    <Compile Include="AgentTicket\GroupMembersAppService.cs" />
+    <Compile Include="AgentTicket\GroupTypeTicketClassAppService.cs" />
+    <Compile Include="AgentTicket\Dto\AddAgencyRuleInputDto.cs" />
+    <Compile Include="AgentTicket\TOBodyAppService.cs" />
+    <Compile Include="AgentTicket\TOHeaderAppService.cs" />
+    <Compile Include="AgentTicket\TOMssageAppService.cs" />
+    <Compile Include="AgentTicket\TORefundAppService.cs" />
+    <Compile Include="AgentTicket\TOTicketAppService.cs" />
+    <Compile Include="AgentTicket\TOVoucherAppService.cs" />
+    <Compile Include="AgentTicket\TravelOrderConfirmAppService.cs" />
+    <Compile Include="Authorization\IPermissionAppService.cs" />
+    <Compile Include="Authorization\PermissionAppService.cs" />
+    <Compile Include="BasicData\AddCommonEntity.cs" />
+    <Compile Include="BasicData\CityAppService.cs" />
+    <Compile Include="BasicData\DriverCustomerAppService.cs" />
+    <Compile Include="BasicData\Dto\AddDriverCustomerInput.cs" />
+    <Compile Include="BasicData\Dto\DriverCustomerDto.cs" />
+    <Compile Include="BasicData\Dto\GetCityPageInput.cs" />
+    <Compile Include="BasicData\AddressAppService.cs" />
+    <Compile Include="BasicData\Interfaces\AddressAppService.cs" />
+    <Compile Include="BasicData\Interfaces\ICityAppService.cs" />
+    <Compile Include="BasicData\Dto\InParkRuleInput.cs" />
+    <Compile Include="BasicData\Interfaces\IDriverCustomerAppService.cs" />
+    <Compile Include="BasicData\Interfaces\IInParkRuleAppService.cs" />
+    <Compile Include="BasicData\InParkRuleAppService.cs" />
+    <Compile Include="BasicData\Interfaces\ITerminalAppService.cs" />
+    <Compile Include="BasicData\Interfaces\IParkAreaAppService.cs" />
+    <Compile Include="BasicData\ParkCodeProvider.cs" />
+    <Compile Include="BasicData\ParkAreaAppService.cs" />
+    <Compile Include="BasicData\TerminalCodeProvider.cs" />
+    <Compile Include="BasicData\TerminalAppService.cs" />
+    <Compile Include="BasicTicketType\Dto\AddMultiTicketClassParkInput.cs" />
+    <Compile Include="BasicTicketType\Dto\AgencySaleTicketClassUpdateInput.cs" />
+    <Compile Include="BasicTicketType\Dto\ParkSaleTicketClassYearCardDto.cs" />
+    <Compile Include="BasicTicketType\Dto\TicketTypeAddNewInput.cs" />
+    <Compile Include="BasicTicketType\Dto\ParkSaleTicketClass4ParkDto.cs" />
+    <Compile Include="BasicTicketType\Dto\ParkSaleTicketClassSaveNewInput.cs" />
+    <Compile Include="BasicTicketType\Dto\UpdateTicketClassInput.cs" />
+    <Compile Include="CardManagement\CardActivationAppService.cs" />
+    <Compile Include="CardManagement\Dto\AccurateSearchModel.cs" />
+    <Compile Include="CardManagement\Dto\CardRequisitionInput.cs" />
+    <Compile Include="CardManagement\Dto\IcBasicInfoDetailDto.cs" />
+    <Compile Include="CardManagement\Interfaces\ICardActivationAppService.cs" />
+    <Compile Include="CardManagement\Dto\IcBasicInfoInput.cs" />
+    <Compile Include="CardManagement\Interfaces\ISaleCardAppService.cs" />
+    <Compile Include="CardManagement\SaleCardAppService.cs" />
+    <Compile Include="DataSync\Interfaces\IDataSyncMultiTicketAppService.cs" />
+    <Compile Include="DataSync\Interfaces\IDataSyncOrderAppService.cs" />
+    <Compile Include="DataSync\Dto\SyncParkSaveNewInput.cs" />
+    <Compile Include="DataSync\Dto\SyncParkUpdateInput.cs" />
+    <Compile Include="DataSync\Dto\SyncTableSaveNewInput.cs" />
+    <Compile Include="DataSync\Dto\SyncTableUpdateInput.cs" />
+    <Compile Include="InPark\Dto\EnterBillInput.cs" />
+    <Compile Include="InPark\Dto\InParkBillDto.cs" />
+    <Compile Include="InPark\Dto\SearchInParkBillModel.cs" />
+    <Compile Include="InPark\EnterBillService.cs" />
+    <Compile Include="InPark\EnterBillSettingsProvider.cs" />
+    <Compile Include="InPark\Interfaces\IEnterBillService.cs" />
+    <Compile Include="OTA\DTO\OTAPayOrderDto.cs" />
+    <Compile Include="OTA\DTO\OTASearchByPhoneDto.cs" />
+    <Compile Include="OTA\DTO\OTAValidate.cs" />
+    <Compile Include="OTA\DTO\PayOrderInput.cs" />
+    <Compile Include="OTA\DTO\OTAPreOrderDto.cs" />
+    <Compile Include="OTA\IOTAAppService.cs" />
+    <Compile Include="OTA\IQRCodeAppService.cs" />
+    <Compile Include="OTA\OTAAppService.cs" />
+    <Compile Include="OTA\IOTADataSync.cs" />
+    <Compile Include="OTA\OTADataSync.cs" />
+    <Compile Include="OTA\DTO\OTACheckPidInput.cs" />
+    <Compile Include="OTA\DTO\TokenGenerateInput.cs" />
+    <Compile Include="OTA\DTO\TokenGenerateOutput.cs" />
+    <Compile Include="OTA\QRCodeAppService.cs" />
+    <Compile Include="OTA\SendMessageJob.cs" />
+    <Compile Include="OTA\V1\IV1OTAApiService.cs" />
+    <Compile Include="OTA\V1\V1OTASettingsProvider.cs" />
+    <Compile Include="ReEnter\Dto\ReEnterEnrollRuleDto.cs" />
+    <Compile Include="ReEnter\Dto\ReEnterEnrollRuleInput.cs" />
+    <Compile Include="ReEnter\Dto\ReEnterTicketRullDto.cs" />
+    <Compile Include="ReEnter\Dto\ReEnterTicketRullInputs.cs" />
+    <Compile Include="ReEnter\Interfaces\IReEnterEnrollRuleService.cs" />
+    <Compile Include="ReEnter\ReEnterEnrollRuleService.cs" />
+    <Compile Include="SaleCard\Dto\ECardDetailDto.cs" />
+    <Compile Include="SaleCard\Dto\FingerDataDto.cs" />
+    <Compile Include="SaleCard\Dto\ListVipVoucherDto.cs" />
+    <Compile Include="SaleCard\Dto\SaveYearCardVoucherDto.cs" />
+    <Compile Include="SaleCard\Dto\TradeInfoDto.cs" />
+    <Compile Include="SaleCard\Dto\UserIcDto.cs" />
+    <Compile Include="SaleCard\Dto\UserICECardDto.cs" />
+    <Compile Include="SaleCard\Dto\VipCardCustomerDto.cs" />
+    <Compile Include="SaleCard\Dto\VipCardRenewalSetDto.cs" />
+    <Compile Include="SaleCard\Dto\VipCardSaleInfo.cs" />
+    <Compile Include="SaleCard\Dto\YearCardRenewalSetInput.cs" />
+    <Compile Include="SaleCard\MulYearCardVoucherSale.cs" />
+    <Compile Include="SaleTicekt\Dto\AddVendorTicketInput.cs" />
+    <Compile Include="SaleTicekt\Dto\GetOtherParkVendorTicketOrderInput.cs" />
+    <Compile Include="SaleTicekt\Dto\GetSaleDetailDto.cs" />
+    <Compile Include="SaleTicekt\Dto\GetVendorTicketTrackInput.cs" />
+    <Compile Include="SaleTicekt\Dto\GetVendorTicketOrderInput.cs" />
+    <Compile Include="SaleTicekt\Dto\GroupTicketDto.cs" />
+    <Compile Include="SaleTicekt\Dto\NonGroupTicketDto.cs" />
+    <Compile Include="SaleTicekt\Dto\OtherNonGroupTicketDto.cs" />
+    <Compile Include="SaleTicekt\Dto\PayTypeChangeInput.cs" />
+    <Compile Include="SaleTicekt\Dto\RePrintTicketModel.cs" />
+    <Compile Include="SaleTicekt\Dto\SaleGroupTicketDto.cs" />
+    <Compile Include="SaleTicekt\Dto\SearchVendorInput.cs" />
+    <Compile Include="SaleTicekt\Dto\UpdateVendorSetInput.cs" />
+    <Compile Include="SaleTicekt\Dto\VendorSetDto.cs" />
+    <Compile Include="SaleTicekt\Dto\VendorSetInput.cs" />
+    <Compile Include="SaleTicekt\Dto\VendorTicketTrackDto.cs" />
+    <Compile Include="SaleTicekt\Dto\WebOrderTicket.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IOtherNonGroupTicketAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IPayTypeChangeAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IVendorSetAppService.cs" />
+    <Compile Include="SaleTicekt\OtherNonGroupTicketAppService.cs" />
+    <Compile Include="SaleTicekt\PayTypeChangeAppService.cs" />
+    <Compile Include="SaleTicekt\TicketSettingsProvider.cs" />
+    <Compile Include="SaleTicekt\Dto\AddGroupTicketAsyncInput.cs" />
+    <Compile Include="SaleTicekt\Dto\FareAdjustmentSumInfo.cs" />
+    <Compile Include="SaleTicekt\Dto\GroupSaleInfo.cs" />
+    <Compile Include="SaleTicekt\Dto\InParkJobInput.cs" />
+    <Compile Include="SaleTicekt\Dto\NonGroupSaleInfo.cs" />
+    <Compile Include="SaleTicekt\Dto\OtherNonGroupTicketInput.cs" />
+    <Compile Include="SaleTicekt\Dto\SaveOtherNonGroupTicketInput.cs" />
+    <Compile Include="SaleTicekt\Dto\TicketTemplateContent.cs" />
+    <Compile Include="SaleTicekt\Dto\TOTicketSaleInfo.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IVendorTicketAppService.cs" />
+    <Compile Include="SaleTicekt\VendorTicketAppService.cs" />
+    <Compile Include="SaleTicekt\VendorSetAppServicecs.cs" />
+    <Compile Include="Service References\entinfoServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="SaleTicekt\Dto\TicketRefundDetailDto.cs" />
+    <Compile Include="Users\Dto\UpdateUserInput.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckCacheStrategy.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckECardStrategy.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckFingerStrategy.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckLeftTicketStrategy.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckStrategyBase.cs" />
+    <Compile Include="VerifyTicket\CheckTicketAppService.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckPIDStrategy.cs" />
+    <Compile Include="VerifyTicket\TicketCheckData.cs" />
+    <Compile Include="VerifyTicket\CheckTicketManager.cs" />
+    <Compile Include="VerifyTicket\Interfaces\Finger\FingerCache.cs" />
+    <Compile Include="VerifyTicket\Interfaces\Finger\FingerService.cs" />
+    <Compile Include="VerifyTicket\Interfaces\Finger\ReEnterEnrollDto.cs" />
+    <Compile Include="VerifyTicket\Interfaces\Finger\TxwFPClass.cs" />
+    <Compile Include="VerifyTicket\Interfaces\ICheckTicketAppService.cs" />
+    <Compile Include="DataSync\DataSyncSettingsProvider.cs" />
+    <Compile Include="DataSync\DataSyncAppService.cs" />
+    <Compile Include="DataSync\DataSyncMultiTicketAppService.cs" />
+    <Compile Include="DataSync\DataSyncOrderAppService.cs" />
+    <Compile Include="DataSync\Dto\DataSyncInput.cs" />
+    <Compile Include="DataSync\Dto\DataSyncOutput.cs" />
+    <Compile Include="DataSync\Dto\MultiTicketCancelDto.cs" />
+    <Compile Include="DataSync\Dto\MultiTicketEnrollDto.cs" />
+    <Compile Include="DataSync\Dto\MultiTicketInparkDto.cs" />
+    <Compile Include="DataSync\Dto\MultiTicketSendDto.cs" />
+    <Compile Include="DataSync\Dto\OrderBodyDto.cs" />
+    <Compile Include="DataSync\Dto\OrderConsumeDto.cs" />
+    <Compile Include="DataSync\Dto\OrderModifyDto.cs" />
+    <Compile Include="DataSync\Dto\OrderSendDto.cs" />
+    <Compile Include="DataSync\FtpWeb.cs" />
+    <Compile Include="DataSync\GZipHelper.cs" />
+    <Compile Include="DataSync\Interfaces\IDataSyncAppService.cs" />
+    <Compile Include="DataSync\Interfaces\ISyncLogAppService.cs" />
+    <Compile Include="DataSync\Interfaces\ISyncParkAppService.cs" />
+    <Compile Include="DataSync\Interfaces\ISyncTableAppService.cs" />
+    <Compile Include="BasicTicketType\Dto\ParkSaleTicketClassInput.cs" />
+    <Compile Include="BasicTicketType\Dto\ParkSaleTicketClassDto.cs" />
+    <Compile Include="BasicTicketType\Interfaces\IParkSaleTicketClassAppService.cs" />
+    <Compile Include="BasicTicketType\ParkSaleTicketClassAppService.cs" />
+    <Compile Include="BasicData\Dto\GetParkPageInput.cs" />
+    <Compile Include="BasicData\Interfaces\IParkAppService.cs" />
+    <Compile Include="BasicData\ParkAppService.cs" />
+    <Compile Include="DataSync\SyncLogAppService.cs" />
+    <Compile Include="DataSync\SyncParkAppService.cs" />
+    <Compile Include="DataSync\SyncTableAppService.cs" />
+    <Compile Include="DataSync\Dto\TablesUpdateFileDto.cs" />
+    <Compile Include="Notice\Dto\AddNoticeInput.cs" />
+    <Compile Include="Notice\Dto\NoticeDto.cs" />
+    <Compile Include="Notice\Dto\NoticeTypeDto.cs" />
+    <Compile Include="Notice\Dto\NoticeTypeInput.cs" />
+    <Compile Include="Notice\Dto\UpdateNoticeInput.cs" />
+    <Compile Include="Notice\Interfaces\INoticeAppService.cs" />
+    <Compile Include="Notice\Interfaces\INoticeTypeAppService.cs" />
+    <Compile Include="Notice\NoticeAppService.cs" />
+    <Compile Include="Notice\NoticeTypeAppServicecs.cs" />
+    <Compile Include="Authorization\IRoleAppService.cs" />
+    <Compile Include="Authorization\RoleAppService.cs" />
+    <Compile Include="Payment\Dto\PaymentData.cs" />
+    <Compile Include="Payment\Dto\PaymentDataJsonConverter.cs" />
+    <Compile Include="Payment\Dto\PaymentOrderQueryResponse.cs" />
+    <Compile Include="Payment\Dto\PaymentPartnerScanCodePayData.cs" />
+    <Compile Include="Payment\Dto\PaymentRequest.cs" />
+    <Compile Include="Payment\Dto\PaymentResult.cs" />
+    <Compile Include="Payment\Dto\PaymentResultCode.cs" />
+    <Compile Include="Payment\Dto\PaymentUnifedOrderData.cs" />
+    <Compile Include="Payment\Dto\PaymentPayMode.cs" />
+    <Compile Include="Payment\Dto\PaymentPayPlatform.cs" />
+    <Compile Include="Payment\Dto\PaymentOrderStatus.cs" />
+    <Compile Include="Payment\Dto\PaymentUnifiedOrderResponse.cs" />
+    <Compile Include="Payment\Dto\SortedKeyValueData.cs" />
+    <Compile Include="Payment\Dto\StringDataJsonConverter.cs" />
+    <Compile Include="Payment\IPaymentApiService.cs" />
+    <Compile Include="Payment\PaymentPartner.cs" />
+    <Compile Include="Payment\PaymentSettingsProvider.cs" />
+    <Compile Include="SaleCard\Dto\CardInfoInput.cs" />
+    <Compile Include="SaleCard\Dto\CustomerInput.cs" />
+    <Compile Include="SaleCard\Dto\FillCardInput.cs" />
+    <Compile Include="SaleCard\Dto\IcBasicInfoDto.cs" />
+    <Compile Include="SaleCard\Dto\ICKindDto.cs" />
+    <Compile Include="SaleCard\Dto\ListVipCardDto.cs" />
+    <Compile Include="SaleCard\Dto\SearchVipCardModel.cs" />
+    <Compile Include="SaleCard\Dto\VIPCardBasicInput.cs" />
+    <Compile Include="SaleCard\Dto\VIPCardDetailDto.cs" />
+    <Compile Include="SaleCard\Dto\VIPCardDto.cs" />
+    <Compile Include="SaleCard\Dto\VipCardInput.cs" />
+    <Compile Include="SaleCard\Dto\VIPVoucherDto.cs" />
+    <Compile Include="SaleCard\Dto\VIPVoucherInput.cs" />
+    <Compile Include="SaleCard\Dto\YearCardContent.cs" />
+    <Compile Include="SaleCard\Interfaces\IVIPCardAppService.cs" />
+    <Compile Include="SaleCard\SaleCardSettingsProvider.cs" />
+    <Compile Include="SaleCard\VIPCardAppService.cs" />
+    <Compile Include="SaleTicekt\Dto\ExcessFareInvalidDto.cs" />
+    <Compile Include="SaleTicekt\Dto\FareAdjustmentAddNewInput.cs" />
+    <Compile Include="SaleTicekt\Dto\FareAdjustmentDto.cs" />
+    <Compile Include="SaleTicekt\Dto\FareAdjustmentTicketContent.cs" />
+    <Compile Include="SaleTicekt\Dto\GroupTicket4RePrintDto.cs" />
+    <Compile Include="SaleTicekt\Dto\GroupTicketDetailDto.cs" />
+    <Compile Include="SaleTicekt\Dto\GroupTicketInput.cs" />
+    <Compile Include="SaleTicekt\Dto\ITicketPayCheck.cs" />
+    <Compile Include="SaleTicekt\Dto\GroupTicketUpdateForNewInput.cs" />
+    <Compile Include="SaleTicekt\Dto\InvoiceInput.cs" />
+    <Compile Include="SaleTicekt\Dto\ITicketInfo.cs" />
+    <Compile Include="SaleTicekt\Dto\NonGroupTicketDetailDto.cs" />
+    <Compile Include="SaleTicekt\Dto\SaveNonGroupTicketDto.cs" />
+    <Compile Include="SaleTicekt\Dto\TicketContent.cs" />
+    <Compile Include="SaleTicekt\Dto\TicketStatusModel.cs" />
+    <Compile Include="SaleTicekt\Dto\RefundTicketInput.cs" />
+    <Compile Include="SaleTicekt\Dto\RePrintTicketAddInput.cs" />
+    <Compile Include="SaleTicekt\Dto\SaleTicketClassNameFromNonGroupTicket.cs" />
+    <Compile Include="SaleTicekt\Dto\NonGroupTicketInput.cs" />
+    <Compile Include="SaleTicekt\Dto\ReprintTicketPageList.cs" />
+    <Compile Include="SaleTicekt\ExcessFareInvalidAppService.cs" />
+    <Compile Include="SaleTicekt\FareAdjustmentAppService.cs" />
+    <Compile Include="SaleTicekt\GroupTicketAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IExcessFareInvalidAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IFareAdjustmentAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IGroupTicketAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IInvoiceAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\INonGroupTicketAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IPrintTicketAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\ITicketRefundAppService.cs" />
+    <Compile Include="SaleTicekt\Interfaces\IRePrintTicketAppService.cs" />
+    <Compile Include="SaleTicekt\InvoiceAppService.cs" />
+    <Compile Include="SaleTicekt\NonGroupTicketAppService.cs" />
+    <Compile Include="SaleTicekt\PrintTicketAppService.cs" />
+    <Compile Include="SaleTicekt\RePrintTicketAppService.cs" />
+    <Compile Include="SaleTicekt\TicketRefundAppService.cs" />
+    <Compile Include="Sessions\Dto\GetCurrentLoginInformationsOutput.cs" />
+    <Compile Include="Sessions\Dto\UserLoginInfoDto.cs" />
+    <Compile Include="Sessions\ISessionAppService.cs" />
+    <Compile Include="Sessions\SessionAppService.cs" />
+    <Compile Include="ThemeParkApplicationModule.cs" />
+    <Compile Include="ThemeParkAppServiceBase.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="BasicTicketType\Dto\AddTicketClassInput.cs" />
+    <Compile Include="BasicTicketType\Interfaces\ITicketClassAppService.cs" />
+    <Compile Include="BasicTicketType\TicketClassAppService.cs" />
+    <Compile Include="BasicTicketType\Interfaces\ITicketTypeAppService.cs" />
+    <Compile Include="BasicTicketType\TicketTypeAppService.cs" />
+    <Compile Include="Trade\Dto\TradeInfoDetailDto.cs" />
+    <Compile Include="Trade\Dto\TradeInfoDetailInput.cs" />
+    <Compile Include="Trade\Dto\TradeInfoDto.cs" />
+    <Compile Include="Trade\Dto\TradeInfoInput.cs" />
+    <Compile Include="Trade\Interfaces\ITradeInfoAppService.cs" />
+    <Compile Include="Trade\TradeInfoAppService.cs" />
+    <Compile Include="Users\AgencyUserAppService.cs" />
+    <Compile Include="Users\Dto\UpdateAgencyPswInput.cs" />
+    <Compile Include="Users\Dto\UpdatePhoneInput.cs" />
+    <Compile Include="Users\Interfaces\IAgencyUserAppService.cs" />
+    <Compile Include="Users\IUserAppService.cs" />
+    <Compile Include="Users\UserAppService.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckBarcodeStrategy.cs" />
+    <Compile Include="VerifyTicket\Interfaces\ICheckTicketManager.cs" />
+    <Compile Include="VerifyTicket\Strategy\CheckQRCodeStrategy.cs" />
+    <Compile Include="VerifyTicket\Strategy\ICheckStrategy.cs" />
+    <Compile Include="VerifyTicket\TicketClassCacheItem.cs" />
+    <Compile Include="VerifyTicket\TicketTracker.cs" />
+    <Compile Include="VerifyTicket\VerifyTicketHelper.cs" />
+    <Compile Include="VerifyTicket\WriteInParkJob.cs" />
+    <Compile Include="VerifyTicket\Interfaces\Finger\ZKFPClass.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\CommonTicketInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\InparkBillInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\ManageCardInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\MultiTicketInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\MultiYearCardInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\SecondTicketInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\VIPCardInPark.cs" />
+    <Compile Include="VerifyTicket\WriteInPark\WriteInParkHelper.cs" />
+    <Compile Include="WeChat\GetOpenIdInput.cs" />
+    <Compile Include="WeChat\IWeChatAppService.cs" />
+    <Compile Include="WeChat\OpenIdResult.cs" />
+    <Compile Include="WeChat\WeChatAppletDto.cs" />
+    <Compile Include="WeChat\WeChatAppService.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <Compile Include="VerifyTicket\Strategy\CheckICNoStrategy.cs" />
+    <None Include="Service References\entinfoServiceReference\ThemePark.Application.entinfoServiceReference.MOBody.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\entinfoServiceReference\ThemePark.Application.entinfoServiceReference.RegistryInfo.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\entinfoServiceReference\ThemePark.Application.entinfoServiceReference.RegistryInfo2.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\entinfoServiceReference\webservice.wsdl" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Infrastructure\ThemePark.AliPartner\ThemePark.AliPartner.csproj">
+      <Project>{776eb9ae-1104-41e8-a200-e9ee377fcb96}</Project>
+      <Name>ThemePark.AliPartner</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\ThemePark.Common\ThemePark.Common.csproj">
+      <Project>{12C35E64-60E6-48AB-990C-0DE8DBB41315}</Project>
+      <Name>ThemePark.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\ThemePark.FaceClient\ThemePark.FaceClient.csproj">
+      <Project>{1755ca5f-d07c-48ed-b05b-a9e3f0d58e95}</Project>
+      <Name>ThemePark.FaceClient</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\ThemePark.Infrastructure.Web.Api\ThemePark.Infrastructure.Web.Api.csproj">
+      <Project>{503F0DA2-7F39-4A71-A1B2-FB7F2079B845}</Project>
+      <Name>ThemePark.Infrastructure.Web.Api</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\ThemePark.Infrastructure.Web\ThemePark.Infrastructure.Web.csproj">
+      <Project>{CC9D1B31-65BE-4823-8DD6-D1F5BB8148FC}</Project>
+      <Name>ThemePark.Infrastructure.Web</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThemePark.ApplicationDto\ThemePark.ApplicationDto.csproj">
+      <Project>{C48CCD08-FD8E-468F-8444-616B5F2B0D11}</Project>
+      <Name>ThemePark.ApplicationDto</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\ThemePark.Core\ThemePark.Core.csproj">
+      <Project>{17298ea0-af73-4f30-b6f1-2066100d7d74}</Project>
+      <Name>ThemePark.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Core\ThemePark.EntityFramework\ThemePark.EntityFramework.csproj">
+      <Project>{3979F157-DEB0-4878-AB1D-4CEF6B5A1300}</Project>
+      <Name>ThemePark.EntityFramework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Infrastructure\ThemePark.Infrastructure\ThemePark.Infrastructure.csproj">
+      <Project>{8B3CAF9A-10C3-4D19-817F-1F93E6A61A8D}</Project>
+      <Name>ThemePark.Infrastructure</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\ThemePark.CheckTicketDto\ThemePark.CheckTicketDto.csproj">
+      <Project>{167a294b-40e0-4cb4-b4e8-81c0af20433b}</Project>
+      <Name>ThemePark.CheckTicketDto</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="VerifyTicket\Dto\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadataStorage Include="Service References\entinfoServiceReference\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\entinfoServiceReference\webservice.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\entinfoServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\entinfoServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\entinfoServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Import Project="..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
